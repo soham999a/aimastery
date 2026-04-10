@@ -1,3 +1,5 @@
+import FadeIn from "@/components/ui/FadeIn";
+
 const icons: Record<string, () => JSX.Element> = {
   Cpu:    () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>,
   Globe:  () => <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>,
@@ -35,16 +37,18 @@ export default function Features() {
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(300px,1fr))", gap: 20 }}>
-          {FEATURES.map((f) => {
+          {FEATURES.map((f, i) => {
             const Icon = icons[f.key];
             return (
-              <div key={f.title} className="card" style={{ padding: 28, borderRadius: 18, border: "1px solid var(--border)", background: "var(--bg-card)" }}>
-                <div style={{ width: 46, height: 46, borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", background: "var(--icon-bg)", marginBottom: 18, color: f.accent }}>
-                  <Icon />
+              <FadeIn key={f.title} delay={i * 0.08} direction="up">
+                <div className="card" style={{ padding: 28, borderRadius: 18, border: "1px solid var(--border)", background: "var(--bg-card)", height: "100%" }}>
+                  <div style={{ width: 46, height: 46, borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", background: "var(--icon-bg)", marginBottom: 18, color: f.accent }}>
+                    <Icon />
+                  </div>
+                  <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "1rem", color: "var(--text-h)", marginBottom: 8 }}>{f.title}</h3>
+                  <p style={{ color: "var(--text-body)", fontSize: "0.875rem", lineHeight: 1.7 }}>{f.description}</p>
                 </div>
-                <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 600, fontSize: "1rem", color: "var(--text-h)", marginBottom: 8 }}>{f.title}</h3>
-                <p style={{ color: "var(--text-body)", fontSize: "0.875rem", lineHeight: 1.7 }}>{f.description}</p>
-              </div>
+              </FadeIn>
             );
           })}
         </div>

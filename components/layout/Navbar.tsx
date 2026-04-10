@@ -36,6 +36,7 @@ const LogoIcon = () => (
 
 const NAV_LINKS = [
   { label: "Courses", href: "/courses" },
+  { label: "Workshop", href: "/workshop" },
   { label: "Pricing", href: "/#pricing" },
   { label: "About", href: "/#about" },
 ];

@@ -1,3 +1,5 @@
+import FadeIn from "@/components/ui/FadeIn";
+
 const StarIcon = () => <svg width="13" height="13" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" strokeWidth="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
 const QuoteIcon = () => <svg width="26" height="26" viewBox="0 0 24 24" fill="rgba(37,99,235,0.2)"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>;
 const StarSm = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
@@ -42,23 +44,25 @@ export default function Testimonials() {
 
         {/* Cards */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))", gap: 20 }}>
-          {TESTIMONIALS.map((t) => (
-            <div key={t.name} className="card" style={{ padding: 26, borderRadius: 18, display: "flex", flexDirection: "column", border: "1px solid var(--border-card)", background: "var(--bg-card)" }}>
-              <QuoteIcon />
-              <div style={{ display: "flex", gap: 2, margin: "14px 0 12px" }}>
-                {Array.from({ length: t.rating }).map((_, i) => <StarIcon key={i} />)}
-              </div>
-              <p style={{ fontSize: "0.875rem", color: "var(--text-body)", lineHeight: 1.7, flex: 1, marginBottom: 20 }}>"{t.text}"</p>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, paddingTop: 16, borderTop: "1px solid var(--divider)" }}>
-                <div style={{ width: 42, height: 42, borderRadius: "50%", flexShrink: 0, background: `linear-gradient(135deg,${t.grad[0]},${t.grad[1]})`, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 13, fontWeight: 700 }}>
-                  {t.initials}
+          {TESTIMONIALS.map((t, i) => (
+            <FadeIn key={t.name} delay={i * 0.1} direction="up">
+              <div className="card" style={{ padding: 26, borderRadius: 18, display: "flex", flexDirection: "column", border: "1px solid var(--border-card)", background: "var(--bg-card)", height: "100%" }}>
+                <QuoteIcon />
+                <div style={{ display: "flex", gap: 2, margin: "14px 0 12px" }}>
+                  {Array.from({ length: t.rating }).map((_, i) => <StarIcon key={i} />)}
                 </div>
-                <div>
-                  <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text-h)" }}>{t.name}</div>
-                  <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{t.role} · {t.company}</div>
+                <p style={{ fontSize: "0.875rem", color: "var(--text-body)", lineHeight: 1.7, flex: 1, marginBottom: 20 }}>"{t.text}"</p>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, paddingTop: 16, borderTop: "1px solid var(--divider)" }}>
+                  <div style={{ width: 42, height: 42, borderRadius: "50%", flexShrink: 0, background: `linear-gradient(135deg,${t.grad[0]},${t.grad[1]})`, display: "flex", alignItems: "center", justifyContent: "center", color: "#fff", fontSize: 13, fontWeight: 700 }}>
+                    {t.initials}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: "0.875rem", fontWeight: 600, color: "var(--text-h)" }}>{t.name}</div>
+                    <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{t.role} · {t.company}</div>
+                  </div>
                 </div>
               </div>
-            </div>
+            </FadeIn>
           ))}
         </div>
       </div>

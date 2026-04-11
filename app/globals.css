@@ -3,11 +3,11 @@
 /* ── Design tokens ── */
 :root {
   --bg-base:     #060912;
-  --bg-surface:  #0c1120;
-  --bg-card:     #111827;
+  --bg-surface:  #0b0f1e;
+  --bg-card:     #0f1629;
   --bg-input:    rgba(255,255,255,0.06);
-  --border:      rgba(255,255,255,0.09);
-  --border-card: rgba(255,255,255,0.09);
+  --border:      rgba(255,255,255,0.08);
+  --border-card: rgba(255,255,255,0.08);
   --text-h:      #f1f5f9;
   --text-body:   #94a3b8;
   --text-muted:  #64748b;
@@ -15,14 +15,14 @@
   --brand:       #2563eb;
   --brand-dark:  #1d4ed8;
   --pill-bg:     rgba(255,255,255,0.05);
-  --pill-border: rgba(255,255,255,0.09);
+  --pill-border: rgba(255,255,255,0.08);
   --pill-text:   #94a3b8;
   --stat-bg:     rgba(255,255,255,0.03);
   --divider:     rgba(255,255,255,0.06);
   --icon-bg:     rgba(255,255,255,0.07);
-  --btn-ghost-border: rgba(255,255,255,0.12);
+  --btn-ghost-border: rgba(255,255,255,0.1);
   --btn-ghost-text:   #cbd5e1;
-  --btn-ghost-bg:     rgba(255,255,255,0.05);
+  --btn-ghost-bg:     rgba(255,255,255,0.04);
 }
 
 html.light {
@@ -132,3 +132,30 @@ body {
   .auth-card { padding: 24px; }
   .stats-4col { grid-template-columns: repeat(2,1fr) !important; }
 }
+
+/* Shimmer animation for skeletons */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .dashboard-layout { flex-direction: column !important; }
+  .dashboard-sidebar { width: 100% !important; height: auto !important; position: relative !important; flex-direction: row !important; flex-wrap: wrap !important; padding: 12px !important; }
+  .dashboard-main { margin-left: 0 !important; }
+  .hide-mobile { display: none !important; }
+  .stats-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .course-grid { grid-template-columns: 1fr !important; }
+}
+
+/* Button micro-interactions */
+.btn-primary {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 12px 32px rgba(37,99,235,0.45); }
+.btn-primary:active { transform: translateY(0); }
+
+/* Card micro-interactions */
+.card { transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(37,99,235,0.12); border-color: rgba(37,99,235,0.3) !important; }

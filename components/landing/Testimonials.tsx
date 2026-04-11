@@ -34,11 +34,13 @@ export default function Testimonials() {
 
         {/* Stats */}
         <div className="stats-4col" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, marginBottom: 52 }}>
-          {STATS.map((s) => (
-            <div key={s.label} style={{ textAlign: "center", padding: "22px 12px", borderRadius: 16, border: "1px solid var(--border)", background: "var(--stat-bg)" }}>
-              <div style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.75rem", color: "var(--text-h)", marginBottom: 4 }}>{s.value}</div>
-              <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{s.label}</div>
-            </div>
+          {STATS.map((s, i) => (
+            <FadeIn key={s.label} delay={i * 0.1} direction="none">
+              <div style={{ textAlign: "center", padding: "22px 12px", borderRadius: 16, border: "1px solid var(--border)", background: "var(--stat-bg)" }}>
+                <div style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.75rem", color: "var(--text-h)", marginBottom: 4 }}>{s.value}</div>
+                <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{s.label}</div>
+              </div>
+            </FadeIn>
           ))}
         </div>
 

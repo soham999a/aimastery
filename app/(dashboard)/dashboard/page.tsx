@@ -168,7 +168,7 @@ function CoursesTab() {
                 <p style={{color:'var(--text-faint)',fontSize:11,marginBottom:2}}>Up next</p>
                 <p style={{color:'var(--text-body)',fontSize:12}}>{c.next}</p>
               </div>
-              <Link href={'/courses/'+c.id} style={{textDecoration:'none'}}>
+              <Link href={'/courses/'+c.id+'/learn'} style={{textDecoration:'none'}}>
                 <button style={{width:'100%',padding:'10px',borderRadius:10,background:'var(--brand)',color:'#fff',border:'none',cursor:'pointer',fontSize:13,fontWeight:600,display:'flex',alignItems:'center',justifyContent:'center',gap:8}}>
                   <PlaySvg/> Resume Course
                 </button>

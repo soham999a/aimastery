@@ -232,6 +232,9 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                   >
                     {enrolling ? "Processing..." : "Enroll Now"}
                   </button>
+                  <Link href={`/courses/${course.id}/learn`} style={{ display: "block", textAlign: "center", padding: "11px", borderRadius: 12, border: "1px solid var(--border)", color: "var(--text-body)", textDecoration: "none", fontSize: 13, fontWeight: 500, marginBottom: 10 }}>
+                    Preview Course
+                  </Link>
 
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, fontSize: 12, color: "var(--text-muted)", marginBottom: 20 }}>
                     <ShieldIcon /> 30-day money-back guarantee

@@ -1,0 +1,127 @@
+﻿import os
+
+# ── Dynamic OG metadata for course pages ──
+og_code = '''import type { Metadata } from "next";
+import { getCourseById } from "@/lib/courses";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const course = getCourseById(slug);
+  if (!course) return { title: "Course Not Found" };
+  return {
+    title: `${course.title} | AI Mastery`,
+    description: course.description,
+    keywords: [course.title, course.instructor, course.category, "AI course", "online learning", "India"],
+    openGraph: {
+      title: course.title,
+      description: course.description,
+      type: "website",
+      images: [{ url: `/api/og?title=${encodeURIComponent(course.title)}&instructor=${encodeURIComponent(course.instructor)}&price=${course.price}`, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: course.title,
+      description: course.description,
+    },
+  };
+}
+'''
+
+# Read current course detail page and prepend metadata export
+detail_path = "ar-ai-mastery/app/courses/[slug]/page.tsx"
+with open(detail_path, "r", encoding="utf-8") as f:
+    current = f.read()
+
+if "generateMetadata" not in current:
+    with open(detail_path, "w", encoding="utf-8") as f:
+        f.write(og_code + "\n" + current)
+    print("OG metadata added to course detail page")
+else:
+    print("already has metadata")
+
+# ── OG image API route ──
+os.makedirs("ar-ai-mastery/app/api/og", exist_ok=True)
+og_route = '''import { ImageResponse } from "next/og";
+import { NextRequest } from "next/server";
+
+export const runtime = "edge";
+
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const title = searchParams.get("title") ?? "AI Mastery Course";
+  const instructor = searchParams.get("instructor") ?? "Expert Instructor";
+  const price = searchParams.get("price") ?? "2999";
+
+  return new ImageResponse(
+    (
+      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 80px", background: "linear-gradient(135deg, #060912 0%, #0f1629 100%)", fontFamily: "sans-serif" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
+          <div style={{ width: 40, height: 40, borderRadius: 10, background: "linear-gradient(135deg,#2563eb,#06b6d4)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <span style={{ color: "#fff", fontSize: 20, fontWeight: 700 }}>A</span>
+          </div>
+          <span style={{ color: "#60a5fa", fontSize: 18, fontWeight: 700 }}>AI Mastery</span>
+        </div>
+        <h1 style={{ fontSize: 52, fontWeight: 900, color: "#f1f5f9", lineHeight: 1.1, marginBottom: 20, maxWidth: 900 }}>{title}</h1>
+        <p style={{ fontSize: 24, color: "#64748b", marginBottom: 32 }}>by {instructor}</p>
+        <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
+          <span style={{ fontSize: 36, fontWeight: 900, color: "#2563eb" }}>Rs.{parseInt(price).toLocaleString()}</span>
+          <span style={{ padding: "8px 20px", borderRadius: 999, background: "rgba(37,99,235,0.2)", border: "1px solid rgba(37,99,235,0.4)", color: "#60a5fa", fontSize: 16, fontWeight: 600 }}>Enroll Now</span>
+        </div>
+      </div>
+    ),
+    { width: 1200, height: 630 }
+  );
+}
+'''
+with open("ar-ai-mastery/app/api/og/route.tsx", "w", encoding="utf-8") as f:
+    f.write(og_route)
+print("OG image route done")
+
+# ── Email API with Resend ──
+os.makedirs("ar-ai-mastery/app/api/email", exist_ok=True)
+email_route = '''import { NextRequest, NextResponse } from "next/server";
+
+export async function POST(req: NextRequest) {
+  try {
+    const { to, subject, type, data } = await req.json();
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) return NextResponse.json({ error: "Email not configured" }, { status: 503 });
+
+    const templates: Record<string, string> = {
+      welcome: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:40px 24px;background:#060912;color:#f1f5f9">
+        <h1 style="color:#2563eb;font-size:28px;margin-bottom:8px">Welcome to AI Mastery!</h1>
+        <p style="color:#94a3b8;font-size:16px;line-height:1.6">Hi ${data?.name ?? "there"},</p>
+        <p style="color:#94a3b8;font-size:16px;line-height:1.6">Your account is ready. Start exploring 200+ courses in AI, ML, and more.</p>
+        <a href="${process.env.NEXT_PUBLIC_APP_URL}/courses" style="display:inline-block;margin-top:24px;padding:12px 28px;background:#2563eb;color:#fff;border-radius:10px;text-decoration:none;font-weight:700">Browse Courses</a>
+      </div>`,
+      enrollment: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:40px 24px;background:#060912;color:#f1f5f9">
+        <h1 style="color:#4ade80;font-size:28px;margin-bottom:8px">Enrollment Confirmed!</h1>
+        <p style="color:#94a3b8;font-size:16px;line-height:1.6">You are now enrolled in <strong style="color:#f1f5f9">${data?.courseName}</strong>.</p>
+        <a href="${process.env.NEXT_PUBLIC_APP_URL}/dashboard" style="display:inline-block;margin-top:24px;padding:12px 28px;background:#2563eb;color:#fff;border-radius:10px;text-decoration:none;font-weight:700">Go to Dashboard</a>
+      </div>`,
+      workshop: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:40px 24px;background:#060912;color:#f1f5f9">
+        <h1 style="color:#ef4444;font-size:28px;margin-bottom:8px">You are Registered!</h1>
+        <p style="color:#94a3b8;font-size:16px;line-height:1.6">Hi ${data?.name ?? "there"}, your spot for the FREE AI Workshop is confirmed.</p>
+        <p style="color:#94a3b8;font-size:16px;line-height:1.6">We will send you the workshop link 30 minutes before it starts.</p>
+      </div>`,
+    };
+
+    const html = templates[type] ?? templates.welcome;
+
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ from: "AI Mastery <noreply@aimastery.in>", to, subject, html }),
+    });
+
+    if (!res.ok) throw new Error(await res.text());
+    return NextResponse.json({ success: true });
+  } catch (err: any) {
+    console.error("Email error:", err);
+    return NextResponse.json({ error: "Email failed" }, { status: 500 });
+  }
+}
+'''
+with open("ar-ai-mastery/app/api/email/route.ts", "w", encoding="utf-8") as f:
+    f.write(email_route)
+print("email route done")

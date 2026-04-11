@@ -1,4 +1,7 @@
-"use client";
+﻿import os
+
+# ── 2. URL state for course search ──
+courses_page = '''"use client";
 import { useState, useMemo, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
@@ -138,3 +141,7 @@ export default function CoursesPage() {
     </>
   );
 }
+'''
+with open("ar-ai-mastery/app/courses/page.tsx", "w", encoding="utf-8") as f:
+    f.write(courses_page)
+print("courses page with URL state done")

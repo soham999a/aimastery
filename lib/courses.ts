@@ -18,6 +18,10 @@ export interface Course {
   description: string;
   outcomes: string[];
   curriculum: { section: string; lessons: number; duration: string }[];
+  classroomLink: string;       // Google Classroom invite link
+  classroomCode: string;       // Google Classroom class code
+  nextLiveSession?: string;    // ISO date string of next live session
+  liveSessionLink?: string;    // Google Meet link for live session
 }
 
 export const ALL_COURSES: Course[] = [
@@ -38,6 +42,10 @@ export const ALL_COURSES: Course[] = [
     emoji: "🥽",
     gradientFrom: "#1d4ed8",
     gradientTo: "#06b6d4",
+    classroomLink: "https://classroom.google.com/c/REPLACE_AR_FUNDAMENTALS",
+    classroomCode: "REPLACE_CODE",
+    nextLiveSession: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString(),
+    liveSessionLink: "https://meet.google.com/replace-ar-fund",
     description: "Master the fundamentals of Augmented Reality from scratch. Build real AR applications using industry-standard tools and frameworks. By the end, you'll have a portfolio of AR projects ready to showcase.",
     outcomes: [
       "Understand core AR concepts and frameworks",
@@ -72,6 +80,10 @@ export const ALL_COURSES: Course[] = [
     emoji: "🤖",
     gradientFrom: "#7c3aed",
     gradientTo: "#ec4899",
+    classroomLink: "https://classroom.google.com/c/REPLACE_AI_ML_BOOTCAMP",
+    classroomCode: "REPLACE_CODE",
+    nextLiveSession: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString(),
+    liveSessionLink: "https://meet.google.com/replace-ai-ml",
     description: "The most comprehensive AI & ML bootcamp available. Go from Python basics to deploying production ML models. Covers supervised, unsupervised, and reinforcement learning with real-world projects.",
     outcomes: [
       "Master Python for data science and ML",
@@ -107,6 +119,10 @@ export const ALL_COURSES: Course[] = [
     emoji: "✨",
     gradientFrom: "#059669",
     gradientTo: "#06b6d4",
+    classroomLink: "https://classroom.google.com/c/REPLACE_GENERATIVE_AI",
+    classroomCode: "REPLACE_CODE",
+    nextLiveSession: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString(),
+    liveSessionLink: "https://meet.google.com/replace-gen-ai",
     description: "Dive deep into the world of generative AI. Understand how GPT, DALL-E, Stable Diffusion, and other cutting-edge models work. Build your own generative applications and fine-tune models.",
     outcomes: [
       "Understand transformer architecture and attention",
@@ -140,6 +156,10 @@ export const ALL_COURSES: Course[] = [
     emoji: "🎮",
     gradientFrom: "#dc2626",
     gradientTo: "#f59e0b",
+    classroomLink: "https://classroom.google.com/c/REPLACE_UNITY_AR",
+    classroomCode: "REPLACE_CODE",
+    nextLiveSession: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+    liveSessionLink: "https://meet.google.com/replace-unity-ar",
     description: "Build professional AR games and experiences with Unity. Master AR Foundation, ARKit, ARCore, and Vuforia. Create immersive AR apps that work across iOS and Android.",
     outcomes: [
       "Master Unity AR Foundation framework",
@@ -174,6 +194,10 @@ export const ALL_COURSES: Course[] = [
     emoji: "👁️",
     gradientFrom: "#0891b2",
     gradientTo: "#7c3aed",
+    classroomLink: "https://classroom.google.com/c/REPLACE_COMPUTER_VISION",
+    classroomCode: "REPLACE_CODE",
+    nextLiveSession: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(),
+    liveSessionLink: "https://meet.google.com/replace-cv",
     description: "Master computer vision from fundamentals to advanced deep learning. Build real-world applications including face recognition, object detection, and video analysis using OpenCV and PyTorch.",
     outcomes: [
       "Master OpenCV for image processing",
@@ -207,6 +231,10 @@ export const ALL_COURSES: Course[] = [
     emoji: "🌐",
     gradientFrom: "#0066ff",
     gradientTo: "#8b5cf6",
+    classroomLink: "https://classroom.google.com/c/REPLACE_WEBAR",
+    classroomCode: "REPLACE_CODE",
+    nextLiveSession: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toISOString(),
+    liveSessionLink: "https://meet.google.com/replace-webar",
     description: "Build AR experiences that run directly in the browser — no app download required. Master A-Frame, Three.js, and WebXR to create stunning AR for e-commerce, marketing, and education.",
     outcomes: [
       "Build AR with A-Frame and Three.js",

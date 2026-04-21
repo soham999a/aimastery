@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins, Inter } from "next/font/google";
 import Providers from "@/components/Providers";
+import ErrorBoundary from "@/components/ui/ErrorBoundary";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -37,7 +39,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable} ${inter.variable}`} suppressHydrationWarning>
-        <Providers>{children}</Providers>
+        <Providers>
+          <ErrorBoundary>
+            {children}
+          </ErrorBoundary>
+        </Providers>
+        <Analytics />
       </body>
     </html>
   );

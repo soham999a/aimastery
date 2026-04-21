@@ -10,6 +10,10 @@ import { getCourseById } from "@/lib/courses";
 import { initiateRazorpayPayment } from "@/lib/razorpay";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { doc, updateDoc, arrayUnion, addDoc, collection, getDoc } from "firebase/firestore";
+import { db } from "@/lib/firebase";
+import CourseReviews from "@/components/ui/CourseReviews";
 
 const StarIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" strokeWidth="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
 const UsersIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
@@ -31,6 +35,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
   const [openSection, setOpenSection] = useState<number | null>(0);
   const [enrolling, setEnrolling] = useState(false);
   const [enrollError, setEnrollError] = useState("");
+  const [enrolled, setEnrolled] = useState(false);
 
   if (!course) return notFound();
 
@@ -49,12 +54,44 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
         order,
         { name: user.displayName ?? "", email: user.email ?? "" },
         async (response) => {
-          await fetch("/api/payment/verify", {
+          // Verify payment
+          const verifyRes = await fetch("/api/payment/verify", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ...response, courseId: course!.id, userId: user.uid }),
+            body: JSON.stringify({ ...response, courseId: course!.id, userId: user!.uid }),
           });
-          router.push("/dashboard");
+          const verifyData = await verifyRes.json();
+
+          if (verifyData.verified) {
+            // Write enrollment to Firestore
+            await updateDoc(doc(db, "users", user!.uid), {
+              enrolledCourses: arrayUnion(course!.id),
+            });
+            // Write enrollment record
+            await addDoc(collection(db, "enrollments"), {
+              userId: user!.uid,
+              courseId: course!.id,
+              courseName: course!.title,
+              paymentId: response.razorpay_payment_id,
+              enrolledAt: new Date().toISOString(),
+              status: "active",
+            });
+            setEnrolled(true);
+            // Send enrollment email
+            fetch("/api/email", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                to: user!.email,
+                subject: `You are enrolled in ${course!.title}!`,
+                type: "enrollment",
+                data: { courseName: course!.title, name: user!.displayName },
+              }),
+            }).catch(() => {});
+            router.push(`/courses/${course!.id}/classroom`);
+          } else {
+            setEnrollError("Payment verification failed. Contact support.");
+          }
         }
       );
     } catch {
@@ -235,7 +272,10 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                   <Link href={`/courses/${course.id}/learn`} style={{ display: "block", textAlign: "center", padding: "11px", borderRadius: 12, border: "1px solid var(--border)", color: "var(--text-body)", textDecoration: "none", fontSize: 13, fontWeight: 500, marginBottom: 10 }}>
                     Preview Course
                   </Link>
-
+                  <Link href={`/courses/${course.id}/classroom`} style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "11px", borderRadius: 12, border: "1px solid rgba(26,115,232,0.4)", background: "rgba(26,115,232,0.06)", color: "#1a73e8", textDecoration: "none", fontSize: 13, fontWeight: 600, marginBottom: 10 }}>
+                    <svg width="14" height="14" viewBox="0 0 48 48" fill="none"><path d="M24 12L36 18V30L24 36L12 30V18L24 12Z" stroke="#1a73e8" strokeWidth="2.5" fill="none"/><circle cx="24" cy="24" r="4" fill="#1a73e8"/></svg>
+                    Open Google Classroom
+                  </Link>
                   <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 6, fontSize: 12, color: "var(--text-muted)", marginBottom: 20 }}>
                     <ShieldIcon /> 30-day money-back guarantee
                   </div>
@@ -272,6 +312,13 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                 </div>
               </div>
             </div>
+
+            {/* Reviews section - full width below the grid */}
+          </div>
+
+          {/* Reviews */}
+          <div style={{ marginTop: 40, paddingTop: 40, borderTop: "1px solid var(--border)" }}>
+            <CourseReviews courseId={course.id} />
           </div>
         </div>
       </main>

@@ -6,8 +6,9 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 import { db, auth } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
+import ReferralWidget from "@/components/ui/ReferralWidget";
 
-interface UserData { name:string; email:string; enrolledCourses:string[]; subscriptionTier:string; createdAt:string; }
+interface UserData { name:string; email:string; enrolledCourses:string[]; subscriptionTier:string; createdAt:string; isDemo?:boolean; }
 type Tab = "overview"|"courses"|"profile"|"settings";
 
 const ENROLLED = [
@@ -53,7 +54,7 @@ const AwardSvg = () => <svg width='20' height='20' viewBox='0 0 24 24' fill='non
 const ClockSvg = () => <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><circle cx='12' cy='12' r='10'/><polyline points='12 6 12 12 16 14'/></svg>;
 const FlameSvg = () => <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'><path d='M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z'/></svg>;
 
-function OverviewTab({firstName}:{firstName:string}) {
+function OverviewTab({firstName, userData}:{firstName:string; userData: UserData | null}) {
   const avg = Math.round(ENROLLED.reduce((s,c)=>s+c.progress,0)/ENROLLED.length);
   const stats = [
     {label:'Enrolled',value:ENROLLED.length,icon:<BookSvg/>,color:'#2563eb'},
@@ -65,6 +66,12 @@ function OverviewTab({firstName}:{firstName:string}) {
     <div style={{display:'flex',gap:24,alignItems:'flex-start'}}>
       <div style={{flex:1,minWidth:0,display:'flex',flexDirection:'column',gap:20}}>
         <div style={{borderRadius:20,background:'linear-gradient(135deg,#1e3a8a 0%,#312e81 50%,#1e1b4b 100%)',padding:'28px 32px',position:'relative',overflow:'hidden',border:'1px solid rgba(99,102,241,0.3)'}}>
+          {userData?.isDemo && (
+            <div style={{position:'absolute',top:0,left:0,right:0,background:'linear-gradient(90deg,rgba(245,158,11,0.9),rgba(234,88,12,0.9))',padding:'8px 16px',display:'flex',alignItems:'center',justifyContent:'center',gap:8,fontSize:12,fontWeight:700,color:'#fff',zIndex:10}}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              DEMO MODE — You are viewing a demo account with full access to all features
+            </div>
+          )}
           <div style={{position:'absolute',top:-40,right:-40,width:200,height:200,borderRadius:'50%',background:'rgba(99,102,241,0.12)',pointerEvents:'none'}} />
           <p style={{color:'rgba(199,210,254,0.8)',fontSize:13,marginBottom:6,fontWeight:500}}>Welcome back</p>
           <h1 style={{color:'#fff',fontSize:26,fontWeight:700,marginBottom:8}}>Good to see you, {firstName}</h1>
@@ -173,6 +180,12 @@ function CoursesTab() {
                   <PlaySvg/> Resume Course
                 </button>
               </Link>
+              <Link href={'/courses/'+c.id+'/classroom'} style={{textDecoration:'none',marginTop:8,display:'block'}}>
+                <button style={{width:'100%',padding:'9px',borderRadius:10,background:'rgba(26,115,232,0.1)',color:'#1a73e8',border:'1px solid rgba(26,115,232,0.3)',cursor:'pointer',fontSize:12,fontWeight:600,display:'flex',alignItems:'center',justifyContent:'center',gap:6}}>
+                  <svg width='13' height='13' viewBox='0 0 48 48' fill='none'><path d='M24 12L36 18V30L24 36L12 30V18L24 12Z' stroke='#1a73e8' strokeWidth='2.5' fill='none'/><circle cx='24' cy='24' r='4' fill='#1a73e8'/></svg>
+                  Google Classroom
+                </button>
+              </Link>
             </div>
           </div>
         ))}
@@ -258,6 +271,9 @@ function SettingsTab() {
   return (
     <div style={{maxWidth:580}}>
       <h2 style={{color:'var(--text-h)',fontSize:20,fontWeight:700,marginBottom:24}}>Settings</h2>
+      <div style={{marginBottom:16}}>
+        <ReferralWidget/>
+      </div>
       <div style={{background:'var(--bg-card)',border:'1px solid var(--border)',borderRadius:20,padding:24,marginBottom:16}}>
         <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:18}}>
           <span style={{color:'var(--brand)'}}><BellSvg/></span>
@@ -369,7 +385,7 @@ export default function DashboardPage() {
           <h1 style={{color:'var(--text-h)',fontSize:22,fontWeight:700,marginBottom:2}}>{navItems.find(n=>n.id===tab)?.label}</h1>
           <p style={{color:'var(--text-muted)',fontSize:13}}>{tabTitles[tab]}</p>
         </div>
-        {tab==='overview'&&<OverviewTab firstName={firstName}/>}
+        {tab==='overview'&&<OverviewTab firstName={firstName} userData={userData}/>}
         {tab==='courses'&&<CoursesTab/>}
         {tab==='profile'&&<ProfileTab userData={userData} user={user}/>}
         {tab==='settings'&&<SettingsTab/>}

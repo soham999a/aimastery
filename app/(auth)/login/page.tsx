@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
+const DEMO_EMAIL = "demo@aimastery.in";
+const DEMO_PASSWORD = "Demo@2025";
+
 const LogoIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
     <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
@@ -43,6 +46,27 @@ export default function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [demoLoading, setDemoLoading] = useState(false);
+
+  async function handleDemo() {
+    setDemoLoading(true);
+    setError("");
+    try {
+      await signIn(DEMO_EMAIL, DEMO_PASSWORD);
+      router.push("/dashboard");
+    } catch {
+      // Demo account might not exist yet, try to create it first
+      try {
+        await fetch("/api/setup-demo", { method: "POST" });
+        await signIn(DEMO_EMAIL, DEMO_PASSWORD);
+        router.push("/dashboard");
+      } catch {
+        setError("Demo account unavailable. Please try again.");
+      }
+    } finally {
+      setDemoLoading(false);
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -144,6 +168,32 @@ export default function LoginPage() {
               </svg>
               Continue with Google
             </button>
+
+            {/* Demo Account Button */}
+            <div style={{ position: "relative", margin: "16px 0 0" }}>
+              <div style={{ height: 1, background: "var(--border)", marginBottom: 16 }} />
+              <button
+                onClick={handleDemo}
+                disabled={demoLoading}
+                style={{
+                  width: "100%", padding: "13px", borderRadius: 12,
+                  background: "linear-gradient(135deg,rgba(37,99,235,0.15),rgba(124,58,237,0.15))",
+                  border: "1px solid rgba(37,99,235,0.35)",
+                  color: "#60a5fa", cursor: demoLoading ? "not-allowed" : "pointer",
+                  fontSize: 14, fontWeight: 700, fontFamily: "Poppins, sans-serif",
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+                  opacity: demoLoading ? 0.7 : 1, transition: "all 0.2s",
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/>
+                </svg>
+                {demoLoading ? "Loading Demo..." : "Try Demo Account (Full Access)"}
+              </button>
+              <p style={{ textAlign: "center", fontSize: 11, color: "var(--text-muted)", marginTop: 8 }}>
+                See the full platform — all courses, classroom, dashboard
+              </p>
+            </div>
 
             <p style={{ textAlign: "center", fontSize: 13, color: "var(--text-muted)", marginTop: 20 }}>
               Don't have an account?{" "}

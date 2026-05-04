@@ -105,19 +105,39 @@ export default function Navbar() {
 
         {/* Right actions */}
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          {/* Theme toggle */}
+          {/* Theme toggle — premium switch */}
           {mounted && (
             <button
               onClick={() => setTheme(isDark ? "light" : "dark")}
               aria-label="Toggle theme"
               style={{
-                width: 36, height: 36, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center",
-                background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.05)",
-                border: isDark ? "1px solid rgba(255,255,255,0.1)" : "1px solid rgba(0,0,0,0.1)",
-                color: textColor, cursor: "pointer", transition: "all 0.18s",
+                width: 52, height: 28, borderRadius: 999, border: "none", cursor: "pointer",
+                background: isDark
+                  ? "linear-gradient(135deg,#1e3a8a,#2563eb)"
+                  : "linear-gradient(135deg,#fbbf24,#f59e0b)",
+                position: "relative", transition: "background 0.4s ease",
+                boxShadow: isDark
+                  ? "0 0 12px rgba(37,99,235,0.4), inset 0 1px 0 rgba(255,255,255,0.1)"
+                  : "0 0 12px rgba(251,191,36,0.4), inset 0 1px 0 rgba(255,255,255,0.3)",
+                flexShrink: 0,
               }}
             >
-              {isDark ? <SunIcon /> : <MoonIcon />}
+              {/* Sliding circle */}
+              <span style={{
+                position: "absolute",
+                top: 3,
+                left: isDark ? 27 : 3,
+                width: 22, height: 22, borderRadius: "50%",
+                background: "#fff",
+                transition: "left 0.3s cubic-bezier(0.34,1.56,0.64,1)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                boxShadow: "0 2px 6px rgba(0,0,0,0.25)",
+              }}>
+                {isDark
+                  ? <svg width="12" height="12" viewBox="0 0 24 24" fill="#1e3a8a"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                  : <svg width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round"/><line x1="12" y1="21" x2="12" y2="23" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round"/><line x1="1" y1="12" x2="3" y2="12" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round"/><line x1="21" y1="12" x2="23" y2="12" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round"/></svg>
+                }
+              </span>
             </button>
           )}
 

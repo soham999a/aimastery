@@ -1,4 +1,6 @@
-export interface Course {
+﻿import os
+
+courses_code = '''export interface Course {
   id: string;
   title: string;
   instructor: string;
@@ -270,3 +272,8 @@ export const ALL_COURSES: Course[] = [
 export function getCourseById(id: string): Course | undefined {
   return ALL_COURSES.find((c) => c.id === id);
 }
+'''
+
+with open("ar-ai-mastery/lib/courses.ts", "w", encoding="utf-8") as f:
+    f.write(courses_code)
+print("courses done", len(courses_code))

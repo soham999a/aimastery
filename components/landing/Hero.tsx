@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 
@@ -12,13 +12,13 @@ const BookIcon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="non
 const StarIcon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" strokeWidth="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
 const CheckIcon = () => <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>;
 
-const SUBJECTS = ["Artificial Intelligence","Machine Learning","Deep Learning","Computer Vision","Generative AI","Data Science","NLP","Augmented Reality"];
+const SUBJECTS = ["AI Foundation", "Prompt Engineering", "Data Analytics", "Power BI", "Python", "AI Agents", "Voice AI & RAG", "Workflow Automation", "Resume with AI", "Make Money with AI"];
 const STATS = [
-  { Icon: UsersIcon, value: "50,000+", label: "Students" },
-  { Icon: BookIcon, value: "200+", label: "Courses" },
-  { Icon: StarIcon, value: "4.9/5", label: "Rating" },
+  { Icon: UsersIcon, value: "27", label: "Core Modules" },
+  { Icon: BookIcon, value: "8+", label: "Courses" },
+  { Icon: StarIcon, value: "100%", label: "Practical" },
 ];
-const TRUST = ["Google","Microsoft","Amazon","Infosys","TCS","Wipro"];
+const TRUST = ["ChatGPT", "Claude", "Gemini", "Power BI", "Python", "n8n", "Make", "Canva"];
 
 // Particle network canvas animation
 function ParticleCanvas({ isDark }: { isDark: boolean }) {
@@ -126,7 +126,12 @@ function ParticleCanvas({ isDark }: { isDark: boolean }) {
 
 export default function Hero() {
   const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme !== "light";
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
+
+  // Use dark as default until mounted to avoid hydration mismatch
+  const isDark = !mounted || resolvedTheme !== "light";
 
   return (
     <section style={{
@@ -152,13 +157,13 @@ export default function Hero() {
         <div style={{
           display: "inline-flex", alignItems: "center", gap: 8, padding: "7px 16px",
           borderRadius: 999,
-          border: isDark ? "1px solid rgba(37,99,235,0.4)" : "1px solid rgba(37,99,235,0.25)",
-          background: isDark ? "rgba(37,99,235,0.1)" : "rgba(37,99,235,0.06)",
+          border: isDark ? "1px solid rgba(217,119,6,0.4)" : "1px solid rgba(217,119,6,0.3)",
+          background: isDark ? "rgba(217,119,6,0.1)" : "rgba(217,119,6,0.07)",
           marginBottom: 28,
         }}>
           <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#4ade80", display: "inline-block", boxShadow: "0 0 8px #4ade80" }} />
-          <span style={{ fontSize: 13, fontWeight: 500, color: isDark ? "#93c5fd" : "#1d4ed8" }}>
-            India's Premier AI & Tech Education Platform
+          <span style={{ fontSize: 13, fontWeight: 500, color: isDark ? "#fcd34d" : "#b45309" }}>
+            School / College Partnership Programme · 2026-27
           </span>
         </div>
 
@@ -169,16 +174,16 @@ export default function Hero() {
           color: isDark ? "#ffffff" : "#0f172a",
           margin: "0 auto 20px", maxWidth: 820,
         }}>
-          One Platform.<br />
-          <span className="gt-blue">Every Subject</span> You Need.
+          Empowering Tomorrow's Leaders<br />
+          with <span className="gt-blue">AI & Industry Skills</span>
         </h1>
 
         <p style={{
           fontSize: "1.05rem",
           color: isDark ? "#94a3b8" : "#475569",
-          maxWidth: 560, margin: "0 auto 16px", lineHeight: 1.75,
+          maxWidth: 600, margin: "0 auto 16px", lineHeight: 1.75,
         }}>
-          AI Mastery is India's most comprehensive tech education platform — covering AI, Machine Learning, Computer Vision, Generative AI, and beyond.
+          A complete, hands-on AI education programme designed exclusively for students. We bring the future into your classroom — no infrastructure needed.
         </p>
 
         {/* Subject pills */}
@@ -244,7 +249,7 @@ export default function Hero() {
 
         {/* Trust */}
         <p style={{ fontSize: 11, color: isDark ? "#334155" : "#94a3b8", textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 14 }}>
-          Learners from top companies
+          Tools we cover
         </p>
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 20 }}>
           {TRUST.map((c) => (

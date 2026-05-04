@@ -86,8 +86,7 @@ export default function Navbar() {
             <LogoIcon />
           </div>
           <span style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1.05rem", color: isDark ? "#f1f5f9" : "#0f172a" }}>
-            AI <span className="gt-blue">Mastery</span>
-          </span>
+            YesDo <span className="gt-blue">Edutech</span>          </span>
         </Link>
 
         {/* Desktop links */}

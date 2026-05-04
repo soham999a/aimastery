@@ -16,7 +16,7 @@ const ENROLLED = [
   {id:"ai-ml-bootcamp",title:"AI and ML Bootcamp",instructor:"Prof. Raj Patel",progress:30,total:48,done:14,gFrom:"#3b0764",gTo:"#831843",next:"Deep Learning Neural Networks Part 2"},
 ];
 const RECOMMENDED = [
-  {id:"generative-ai",title:"Generative AI Mastery",level:"Advanced",price:5999},
+  {id:"generative-ai",title:"Generative YesDo Edutech",level:"Advanced",price:5999},
   {id:"computer-vision",title:"Computer Vision with OpenCV",level:"Intermediate",price:3999},
 ];
 
@@ -352,7 +352,7 @@ export default function DashboardPage() {
             <div style={{width:30,height:30,borderRadius:8,background:'linear-gradient(135deg,#2563eb,#7c3aed)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
               <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='#fff' strokeWidth='2.5' strokeLinecap='round' strokeLinejoin='round'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>
             </div>
-            <span style={{color:'var(--text-h)',fontSize:14,fontWeight:700,letterSpacing:'-0.3px'}}>AI Mastery</span>
+            <span style={{color:'var(--text-h)',fontSize:14,fontWeight:700,letterSpacing:'-0.3px'}}>YesDo Edutech</span>
           </Link>
         </div>
         <div style={{padding:'16px 20px',borderBottom:'1px solid var(--border)'}}>

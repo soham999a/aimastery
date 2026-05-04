@@ -96,11 +96,11 @@ export default function Footer() {
                 <LogoIcon />
               </div>
               <span style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1.05rem", color: "#f1f5f9" }}>
-                AI <span className="gt-blue">Mastery</span>
+                YesDo <span className="gt-blue">Edutech</span>
               </span>
             </Link>
             <p style={{ fontSize: "0.875rem", color: "var(--text-body)", lineHeight: 1.7, maxWidth: 280, marginBottom: 24 }}>
-              India's most comprehensive platform for AR, AI, and emerging tech education. From beginners to enterprise teams.
+              India's premier AI & Industry Skills Training platform for school and college students. Based in Kolkata, West Bengal. contact@yesdo.co.in | +91 78900 18776
             </p>
             <div style={{ display: "flex", gap: 8 }}>
               {SOCIALS.map(({ label, Icon, href }) => (
@@ -135,8 +135,8 @@ export default function Footer() {
         </div>
 
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 24, display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
-          <p style={{ fontSize: 12, color: "var(--text-faint)" }}>© 2025 AI Mastery. All rights reserved.</p>
-          <p style={{ fontSize: 12, color: "var(--text-faint)" }}>Made in India for the world.</p>
+          <p style={{ fontSize: 12, color: "var(--text-faint)" }}>© 2026 YesDo Edutech Pvt Ltd. All rights reserved.</p>
+          <p style={{ fontSize: 12, color: "var(--text-faint)" }}>Empowering India's next generation with AI & Industry Skills.</p>
         </div>
       </div>
     </footer>

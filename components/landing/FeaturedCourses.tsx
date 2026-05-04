@@ -36,9 +36,9 @@ const GenAIIcon = () => (
 );
 
 const COURSES = [
-  { id: "ar-fundamentals", title: "AR Fundamentals: Build Your First AR App", instructor: "Dr. Sarah Chen", level: "Beginner", duration: "12 hours", students: 8420, rating: 4.9, price: 2999, tag: "Bestseller", tagColor: "#06b6d4", gradFrom: "#1e3a8a", gradTo: "#0e7490", Icon: AIIcon },
-  { id: "ai-ml-bootcamp", title: "AI & Machine Learning Bootcamp", instructor: "Prof. Raj Patel", level: "Intermediate", duration: "40 hours", students: 12300, rating: 4.8, price: 4999, tag: "Top Rated", tagColor: "#a78bfa", gradFrom: "#3b0764", gradTo: "#831843", Icon: MLIcon },
-  { id: "generative-ai", title: "Generative AI: From GPT to Diffusion Models", instructor: "Alex Rivera", level: "Advanced", duration: "28 hours", students: 5600, rating: 4.9, price: 5999, tag: "New", tagColor: "#34d399", gradFrom: "#064e3b", gradTo: "#0e7490", Icon: GenAIIcon },
+  { id: "ai-mastery-complete", title: "AI Mastery Complete Course — 27 Modules", instructor: "YesDo Edutech Faculty", level: "Beginner", duration: "27 modules", students: 1200, rating: 4.9, price: 10000, tag: "Flagship", tagColor: "#d97706", gradFrom: "#1e3a8a", gradTo: "#d97706", Icon: AIIcon },
+  { id: "learn-ai-python", title: "Learn AI using Python", instructor: "YesDo Edutech Faculty", level: "Intermediate", duration: "40 hours", students: 480, rating: 4.8, price: 8000, tag: "Popular", tagColor: "#a78bfa", gradFrom: "#065f46", gradTo: "#1d4ed8", Icon: MLIcon },
+  { id: "data-analytics", title: "Data Analytics + Business Analytics", instructor: "YesDo Edutech Faculty", level: "Beginner", duration: "35 hours", students: 620, rating: 4.8, price: 7500, tag: "In Demand", tagColor: "#34d399", gradFrom: "#7c3aed", gradTo: "#0891b2", Icon: GenAIIcon },
 ];
 
 export default function FeaturedCourses() {

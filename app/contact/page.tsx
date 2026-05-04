@@ -6,9 +6,9 @@ import Footer from "@/components/layout/Footer";
 import { Mail, MessageSquare, Phone, MapPin, Send, Loader2, CheckCircle } from "lucide-react";
 
 const CONTACT_INFO = [
-  { icon: Mail, label: "Email", value: "hello@araimastery.com", href: "mailto:hello@araimastery.com" },
-  { icon: Phone, label: "Phone", value: "+91 98765 43210", href: "tel:+919876543210" },
-  { icon: MapPin, label: "Location", value: "Bangalore, India", href: "#" },
+  { icon: Mail, label: "Email", value: "contact@yesdo.co.in", href: "mailto:contact@yesdo.co.in" },
+  { icon: Phone, label: "Phone", value: "+91 78900 18776", href: "tel:+919876543210" },
+  { icon: MapPin, label: "Location", value: "Kolkata, West Bengal", href: "#" },
 ];
 
 export default function ContactPage() {
@@ -90,7 +90,7 @@ export default function ContactPage() {
                   Training 10+ people? Get custom pricing, dedicated support, and a tailored curriculum.
                 </p>
                 <p className="text-xs font-medium" style={{ color: "#60a5fa" }}>
-                  enterprise@araimastery.com
+                  contact@yesdo.co.in
                 </p>
               </div>
             </div>

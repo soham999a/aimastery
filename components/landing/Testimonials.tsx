@@ -12,10 +12,10 @@ const TESTIMONIALS = [
 ];
 
 const STATS = [
-  { value: "50,000+", label: "Active Learners" },
-  { value: "94%", label: "Completion Rate" },
-  { value: "4.9 / 5", label: "Average Rating" },
-  { value: "87%", label: "Career Advancement" },
+  { value: "27", label: "Core Modules" },
+  { value: "100%", label: "Practical Learning" },
+  { value: "Rs. 10K", label: "Flagship Fee" },
+  { value: "8+", label: "Courses Offered" },
 ];
 
 export default function Testimonials() {
@@ -27,9 +27,9 @@ export default function Testimonials() {
             <StarSm /> Student Stories
           </div>
           <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "2.25rem", fontWeight: 800, color: "var(--text-h)", marginBottom: 12 }}>
-            Trusted by <span className="gt-blue">50,000+</span> learners
+            What Our <span className="gt-blue">Students Say</span>
           </h2>
-          <p style={{ color: "var(--text-body)", maxWidth: 440, margin: "0 auto", fontSize: "0.95rem" }}>Real outcomes from real students across India and beyond.</p>
+          <p style={{ color: "var(--text-body)", maxWidth: 440, margin: "0 auto", fontSize: "0.95rem" }}>Real outcomes from real students across Kolkata and beyond.</p>
         </div>
 
         {/* Stats */}

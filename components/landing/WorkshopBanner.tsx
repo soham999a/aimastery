@@ -34,9 +34,9 @@ export default function WorkshopBanner() {
               <span style={{ fontSize: 12, fontWeight: 600, color: "#fca5a5" }}>FREE Live Workshop</span>
             </div>
             <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.5rem", color: "#fff", marginBottom: 6 }}>
-              Join 50,000+ Professionals — Learn AI in 3 Hours
+              School / College Partnership — 2026-27
             </h3>
-            <p style={{ color: "rgba(255,255,255,0.7)", fontSize: 14 }}>No coding required. Practical AI workflows you can use from day one.</p>
+            <p style={{ color: "rgba(255,255,255,0.7)", fontSize: 14 }}>Zero infrastructure. Expert delivery. Strong student outcomes. Early partners get priority scheduling.</p>
           </div>
           <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 12 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -46,7 +46,7 @@ export default function WorkshopBanner() {
               ))}
             </div>
             <Link href="/workshop" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 24px", borderRadius: 10, background: "#fff", color: "#b91c1c", fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: 14, textDecoration: "none", boxShadow: "0 8px 24px rgba(0,0,0,0.2)" }}>
-              Register Free Now →
+              Partner With Us →
             </Link>
           </div>
         </div>

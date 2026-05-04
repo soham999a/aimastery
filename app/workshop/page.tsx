@@ -126,7 +126,7 @@ function RegForm({ compact = false }: { compact?: boolean }) {
       <input type='email' value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} placeholder='Your Email Address' style={{ padding: '13px 16px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.06)', color: '#f1f5f9', fontSize: 14, outline: 'none', fontFamily: 'inherit' }} />
       <input type='tel' value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} placeholder='Your Phone Number' style={{ padding: '13px 16px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.06)', color: '#f1f5f9', fontSize: 14, outline: 'none', fontFamily: 'inherit' }} />
       <button type='submit' disabled={loading} style={{ padding: '15px', borderRadius: 12, background: 'linear-gradient(135deg,#dc2626,#ef4444)', color: '#fff', fontFamily: 'Poppins, sans-serif', fontWeight: 800, fontSize: compact ? 15 : 17, border: 'none', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.75 : 1, boxShadow: '0 8px 32px rgba(220,38,38,0.45)', letterSpacing: '0.02em' }}>
-        {loading ? 'Registering...' : 'REGISTER FREE NOW →'}
+        {loading ? 'Registering...' : 'PARTNER WITH US NOW →'}
       </button>
       <p style={{ textAlign: 'center', fontSize: 12, color: '#64748b' }}>No spam. No credit card. 100% Free.</p>
     </form>
@@ -153,7 +153,7 @@ export default function WorkshopPage() {
 
       {/* ── Sticky urgency bar ── */}
       <div style={{ position: 'sticky', top: 0, zIndex: 100, background: 'linear-gradient(90deg,#dc2626,#b91c1c)', padding: '10px 24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}>
-        <span style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>🔥 Only {seats} seats left!</span>
+        <span style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>🔥 Limited partnership slots!</span>
         <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13 }}>|</span>
         <span style={{ fontSize: 13, color: '#fff' }}>Workshop ends in:</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -172,29 +172,29 @@ export default function WorkshopPage() {
         <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', borderRadius: 999, background: 'rgba(220,38,38,0.15)', border: '1px solid rgba(220,38,38,0.4)', marginBottom: 24 }}>
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#4ade80', display: 'inline-block', boxShadow: '0 0 8px #4ade80' }} />
-            <span style={{ fontSize: 13, fontWeight: 600, color: '#fca5a5' }}>FREE 3-Hour Live AI Workshop</span>
+            <span style={{ fontSize: 13, fontWeight: 600, color: '#fca5a5' }}>School / College Partnership · 2026-27</span>
           </div>
 
           <h1 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900, fontSize: 'clamp(2rem,5vw,3.5rem)', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 20 }}>
-            AI Won&apos;t Replace You.<br />
-            <span style={{ background: 'linear-gradient(135deg,#ef4444,#f97316)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>A Person Using AI Will.</span>
+            Empowering Tomorrow&apos;s Leaders<br />
+            <span style={{ background: 'linear-gradient(135deg,#ef4444,#f97316)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>with AI & Industry Skills</span>
           </h1>
 
           <p style={{ fontSize: '1.1rem', color: '#94a3b8', maxWidth: 620, margin: '0 auto 12px', lineHeight: 1.7 }}>
-            Join 50,000+ professionals in a FREE 3-hour live workshop. Learn practical AI workflows that save you 2+ hours every single day — no coding required.
+            A complete, hands-on AI education programme designed exclusively for students. We bring the future into your classroom — no infrastructure needed.
           </p>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginBottom: 32 }}>
             {[1,2,3,4,5].map(i => <Star key={i} />)}
-            <span style={{ fontSize: 14, fontWeight: 600, color: '#f1f5f9', marginLeft: 4 }}>4.8/5</span>
-            <span style={{ fontSize: 14, color: '#64748b' }}>by 50,000+ professionals</span>
+            <span style={{ fontSize: 14, fontWeight: 600, color: '#f1f5f9', marginLeft: 4 }}>4.9/5</span>
+            <span style={{ fontSize: 14, color: '#64748b' }}>by students across Kolkata</span>
           </div>
 
           <div style={{ maxWidth: 440, margin: '0 auto 20px' }}>
             <RegForm />
           </div>
 
-          <p style={{ fontSize: 13, color: '#ef4444', fontWeight: 600 }}>⚡ Only {seats} seats remaining. Register now before it fills up.</p>
+          <p style={{ fontSize: 13, color: '#ef4444', fontWeight: 600 }}>⚡ Limited slots for 2026-27. Register now before it fills up.</p>
         </div>
       </section>
 
@@ -212,9 +212,9 @@ export default function WorkshopPage() {
       <section style={{ padding: '64px 24px' }}>
         <div style={{ maxWidth: 800, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 20 }}>
           {[
-            { value: '50,000+', label: 'Professionals Trained', color: '#2563eb' },
+            { value: '1,200+', label: 'Students Enrolled', color: '#2563eb' },
             { value: '4.8 / 5', label: 'Average Rating', color: '#f59e0b' },
-            { value: '₹0', label: 'Registration Fee', color: '#4ade80' },
+            { value: '₹0', label: 'Flagship Fee', color: '#4ade80' },
           ].map(s => (
             <div key={s.label} style={{ textAlign: 'center', padding: '28px 20px', borderRadius: 18, border: '1px solid rgba(255,255,255,0.08)', background: '#0f1629' }}>
               <div style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900, fontSize: '2.5rem', color: s.color, marginBottom: 6 }}>{s.value}</div>
@@ -234,7 +234,7 @@ export default function WorkshopPage() {
             <div style={{ padding: 28, borderRadius: 18, border: '1px solid rgba(74,222,128,0.25)', background: 'rgba(74,222,128,0.04)' }}>
               <h3 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '1rem', color: '#4ade80', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(74,222,128,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><CheckCircle /></span>
-                This workshop IS for you if...
+                This programme IS for you if...
               </h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {FOR_YOU.map(item => (
@@ -248,7 +248,7 @@ export default function WorkshopPage() {
             <div style={{ padding: 28, borderRadius: 18, border: '1px solid rgba(248,113,113,0.2)', background: 'rgba(248,113,113,0.03)' }}>
               <h3 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '1rem', color: '#f87171', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(248,113,113,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><XCircle /></span>
-                This workshop is NOT for you if...
+                This programme is NOT for you if...
               </h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {NOT_FOR_YOU.map(item => (
@@ -392,20 +392,20 @@ export default function WorkshopPage() {
           <div style={{maxWidth:440,margin:"0 auto 16px"}}>
             <RegForm/>
           </div>
-          <p style={{fontSize:13,color:"#ef4444",fontWeight:600}}>Only {seats} seats remaining</p>
+          <p style={{fontSize:13,color:"#ef4444",fontWeight:600}}>Limited slots for 2026-27</p>
         </div>
       </section>
 
       {/* Footer */}
       <div style={{padding:"20px 24px",borderTop:"1px solid rgba(255,255,255,0.06)",textAlign:"center",paddingBottom:80}}>
-        <p style={{fontSize:12,color:"#334155"}}>2025 AI Mastery. All rights reserved. <a href="/" style={{color:"#2563eb",textDecoration:"none"}}>Back to Home</a></p>
+        <p style={{fontSize:12,color:"#334155"}}>2025 YesDo Edutech. All rights reserved. <a href="/" style={{color:"#2563eb",textDecoration:"none"}}>Back to Home</a></p>
       </div>
 
       {/* Sticky bottom bar */}
       <div style={{position:"fixed",bottom:0,left:0,right:0,zIndex:99,background:"linear-gradient(90deg,#dc2626,#b91c1c)",padding:"12px 24px",display:"flex",alignItems:"center",justifyContent:"center",gap:16,flexWrap:"wrap",boxShadow:"0 -4px 24px rgba(220,38,38,0.4)"}}>
-        <span style={{fontSize:14,fontWeight:600,color:"#fff"}}>Only {seats} seats left!</span>
+        <span style={{fontSize:14,fontWeight:600,color:"#fff"}}>Limited partnership slots!</span>
         <button onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} style={{padding:"10px 24px",borderRadius:8,background:"#fff",color:"#dc2626",fontFamily:"Poppins, sans-serif",fontWeight:800,fontSize:14,border:"none",cursor:"pointer"}}>
-          REGISTER FREE NOW
+          PARTNER WITH US NOW
         </button>
       </div>
 

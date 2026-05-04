@@ -85,13 +85,13 @@ export default function SignupPage() {
                 <LogoIcon />
               </div>
               <span style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1.2rem", color: "var(--text-main)" }}>
-                AI <span className="gt-blue">Mastery</span>
+                YesDo <span className="gt-blue">Edutech</span>
               </span>
             </Link>
             <h1 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.6rem", color: "var(--text-main)", marginBottom: 6 }}>
               Create your account
             </h1>
-            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>Start your AI learning journey today</p>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>Start your AI & Industry Skills journey today</p>
           </div>
 
           <div className="auth-card">

@@ -17,21 +17,21 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AI Mastery | India's Premier Tech Education Platform",
+  title: "YesDo Edutech | Empowering Tomorrow's Leaders with AI & Industry Skills",
   description:
-    "AI Mastery is India's most comprehensive platform for AI, Machine Learning, Computer Vision, Generative AI, and emerging tech. Learn from industry experts, build real projects, earn certifications.",
-  keywords: ["AI", "Machine Learning", "Deep Learning", "Computer Vision", "Generative AI", "Online Courses", "EdTech India", "AI courses India"],
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://aimastery.vercel.app"),
+    "YesDo Edutech is India's premier AI & Industry Skills Training platform for school and college students. 27-module AI Mastery Course, 100% practical, Rs. 10,000 flagship fee. Based in Kolkata.",
+  keywords: ["YesDo Edutech", "AI courses India", "AI Mastery", "Kolkata edtech", "AI for students", "Machine Learning", "Data Analytics", "Python", "Power BI"],
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://yesdo.co.in"),
   openGraph: {
-    title: "AI Mastery | India's Premier Tech Education Platform",
-    description: "India's most comprehensive AI & tech education platform. 200+ courses, 50,000+ students.",
+    title: "YesDo Edutech | AI & Industry Skills for Students",
+    description: "27-module AI Mastery Course. 100% Practical. Rs. 10,000. Kolkata, India.",
     type: "website",
-    images: [{ url: "/api/og?title=AI+Mastery&instructor=Expert+Instructors&price=0", width: 1200, height: 630 }],
+    images: [{ url: "/api/og?title=YesDo+Edutech&instructor=AI+%26+Industry+Skills&price=10000", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Mastery",
-    description: "India's Premier AI & Tech Education Platform",
+    title: "YesDo Edutech",
+    description: "Empowering Tomorrow's Leaders with AI & Industry Skills",
   },
 };
 

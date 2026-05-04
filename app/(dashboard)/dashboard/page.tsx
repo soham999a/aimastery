@@ -349,8 +349,8 @@ export default function DashboardPage() {
       <aside style={{width:240,flexShrink:0,position:'fixed',top:0,left:0,height:'100vh',background:'var(--bg-surface)',borderRight:'1px solid var(--border)',display:'flex',flexDirection:'column',zIndex:50,overflowY:'auto'}}>
         <div style={{padding:'22px 20px 18px',borderBottom:'1px solid var(--border)'}}>
           <Link href='/' style={{textDecoration:'none',display:'flex',alignItems:'center',gap:10}}>
-            <div style={{width:30,height:30,borderRadius:8,background:'linear-gradient(135deg,#2563eb,#7c3aed)',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
-              <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='#fff' strokeWidth='2.5' strokeLinecap='round' strokeLinejoin='round'><polygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'/></svg>
+            <div style={{width:30,height:30,borderRadius:8,background:'transparent',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
+              <img src='/logo.png' alt='YesDo Edutech' style={{width:24,height:24,objectFit:'contain'}}/>
             </div>
             <span style={{color:'var(--text-h)',fontSize:14,fontWeight:700,letterSpacing:'-0.3px'}}>YesDo Edutech</span>
           </Link>

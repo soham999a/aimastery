@@ -82,7 +82,7 @@ export default function SignupPage() {
           <div style={{ textAlign: "center", marginBottom: 28 }}>
             <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: 10, textDecoration: "none", marginBottom: 18 }}>
               <div style={{ width: 42, height: 42, borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(135deg, #2563eb, #06b6d4)", boxShadow: "0 4px 16px rgba(37,99,235,0.4)" }}>
-                <LogoIcon />
+                <img src="/logo.png" alt="YesDo Edutech" style={{ width: 42, height: 42, borderRadius: 10, objectFit: "contain" }} />
               </div>
               <span style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1.2rem", color: "var(--text-main)" }}>
                 YesDo <span className="gt-blue">Edutech</span>

@@ -33,6 +33,11 @@ export const metadata: Metadata = {
     title: "YesDo Edutech",
     description: "Empowering Tomorrow's Leaders with AI & Industry Skills",
   },
+  icons: {
+    icon: [{ url: "/logo.png", type: "image/png" }],
+    apple: [{ url: "/logo.png" }],
+    shortcut: "/logo.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

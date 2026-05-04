@@ -78,15 +78,14 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-          <div style={{
-            width: 36, height: 36, borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center",
-            background: "linear-gradient(135deg, #2563eb, #06b6d4)",
-            boxShadow: "0 4px 14px rgba(37,99,235,0.45)",
-          }}>
-            <LogoIcon />
-          </div>
+          <img
+            src="/logo.png"
+            alt="YesDo Edutech"
+            style={{ width: 40, height: 40, borderRadius: 8, objectFit: "contain" }}
+          />
           <span style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1.05rem", color: isDark ? "#f1f5f9" : "#0f172a" }}>
-            YesDo <span className="gt-blue">Edutech</span>          </span>
+            YesDo <span className="gt-blue">Edutech</span>
+          </span>
         </Link>
 
         {/* Desktop links */}

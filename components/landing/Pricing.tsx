@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import PaymentModal from "@/components/ui/PaymentModal";
 
 const CheckIcon = ({ color = "#2563eb" }: { color?: string }) => <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>;
 const ZapIcon = ({ color = "currentColor" }: { color?: string }) => <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
@@ -16,6 +17,7 @@ const PLANS = [
 
 export default function Pricing() {
   const [annual, setAnnual] = useState(false);
+  const [modalPlan, setModalPlan] = useState<{ name: string; price: number } | null>(null);
 
   return (
     <section id="pricing" style={{ background: "var(--bg-surface)", padding: "96px 0" }}>
@@ -81,15 +83,33 @@ export default function Pricing() {
                   ))}
                 </ul>
 
-                <Link href={plan.href} style={{ display: "block", textAlign: "center", padding: "12px", borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: "none", fontFamily: "Poppins, sans-serif", transition: "all 0.18s", ...(plan.highlight ? { background: "#fff", color: "#1d4ed8" } : { border: "1px solid var(--border)", color: "var(--text-body)", background: "transparent" }) }}>
-                  {plan.cta}
-                </Link>
+                {price !== null ? (
+                  <button
+                    onClick={() => setModalPlan({ name: plan.name, price: price! })}
+                    style={{ width: "100%", display: "block", textAlign: "center", padding: "12px", borderRadius: 10, fontSize: 14, fontWeight: 700, fontFamily: "Poppins, sans-serif", transition: "all 0.18s", cursor: "pointer", border: "none", ...(plan.highlight ? { background: "#fff", color: "#1d4ed8" } : { border: "1px solid var(--border)", color: "var(--text-body)", background: "transparent" }) }}
+                  >
+                    {plan.cta}
+                  </button>
+                ) : (
+                  <Link href={plan.href} style={{ display: "block", textAlign: "center", padding: "12px", borderRadius: 10, fontSize: 14, fontWeight: 700, textDecoration: "none", fontFamily: "Poppins, sans-serif", transition: "all 0.18s", border: "1px solid var(--border)", color: "var(--text-body)", background: "transparent" }}>
+                    {plan.cta}
+                  </Link>
+                )}
               </div>
             );
           })}
         </div>
         <p style={{ textAlign: "center", fontSize: 12, color: "var(--text-faint)", marginTop: 32 }}>All plans include a 30-day money-back guarantee. No questions asked.</p>
       </div>
+
+      {modalPlan && (
+        <PaymentModal
+          isOpen={!!modalPlan}
+          onClose={() => setModalPlan(null)}
+          courseName={modalPlan.name}
+          price={modalPlan.price}
+        />
+      )}
     </section>
   );
 }

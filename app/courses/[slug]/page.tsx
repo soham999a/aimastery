@@ -7,13 +7,11 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/chatbot/ChatWidget";
 import { getCourseById } from "@/lib/courses";
-import { initiateRazorpayPayment } from "@/lib/razorpay";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { doc, updateDoc, arrayUnion, addDoc, collection, getDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
 import CourseReviews from "@/components/ui/CourseReviews";
+import PaymentModal from "@/components/ui/PaymentModal";
 
 const StarIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" strokeWidth="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
 const UsersIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
@@ -33,72 +31,13 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
   const { user } = useAuth();
   const router = useRouter();
   const [openSection, setOpenSection] = useState<number | null>(0);
-  const [enrolling, setEnrolling] = useState(false);
-  const [enrollError, setEnrollError] = useState("");
-  const [enrolled, setEnrolled] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
 
   if (!course) return notFound();
 
-  async function handleEnroll() {
+  function handleEnroll() {
     if (!user) return router.push("/signup");
-    setEnrolling(true);
-    setEnrollError("");
-    try {
-      const res = await fetch("/api/payment/create-order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: course!.price, courseId: course!.id, courseName: course!.title }),
-      });
-      const order = await res.json();
-      await initiateRazorpayPayment(
-        order,
-        { name: user.displayName ?? "", email: user.email ?? "" },
-        async (response) => {
-          // Verify payment
-          const verifyRes = await fetch("/api/payment/verify", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ ...response, courseId: course!.id, userId: user!.uid }),
-          });
-          const verifyData = await verifyRes.json();
-
-          if (verifyData.verified) {
-            // Write enrollment to Firestore
-            await updateDoc(doc(db, "users", user!.uid), {
-              enrolledCourses: arrayUnion(course!.id),
-            });
-            // Write enrollment record
-            await addDoc(collection(db, "enrollments"), {
-              userId: user!.uid,
-              courseId: course!.id,
-              courseName: course!.title,
-              paymentId: response.razorpay_payment_id,
-              enrolledAt: new Date().toISOString(),
-              status: "active",
-            });
-            setEnrolled(true);
-            // Send enrollment email
-            fetch("/api/email", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                to: user!.email,
-                subject: `You are enrolled in ${course!.title}!`,
-                type: "enrollment",
-                data: { courseName: course!.title, name: user!.displayName },
-              }),
-            }).catch(() => {});
-            router.push(`/courses/${course!.id}/classroom`);
-          } else {
-            setEnrollError("Payment verification failed. Contact support.");
-          }
-        }
-      );
-    } catch {
-      setEnrollError("Payment failed. Please try again.");
-    } finally {
-      setEnrolling(false);
-    }
+    setShowPayment(true);
   }
 
   return (
@@ -256,18 +195,11 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                   </div>
                   <p style={{ fontSize: 12, color: "var(--text-muted)", marginBottom: 16 }}>One-time payment · Lifetime access</p>
 
-                  {enrollError && (
-                    <div style={{ padding: "10px 12px", borderRadius: 10, background: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.2)", color: "#f87171", fontSize: 12, marginBottom: 12 }}>
-                      {enrollError}
-                    </div>
-                  )}
-
                   <button
                     onClick={handleEnroll}
-                    disabled={enrolling}
-                    style={{ width: "100%", padding: "13px", borderRadius: 12, background: "#2563eb", color: "#fff", border: "none", cursor: enrolling ? "not-allowed" : "pointer", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14, marginBottom: 10, boxShadow: "0 8px 24px rgba(37,99,235,0.35)", opacity: enrolling ? 0.75 : 1, transition: "opacity 0.2s" }}
+                    style={{ width: "100%", padding: "13px", borderRadius: 12, background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff", border: "none", cursor: "pointer", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14, marginBottom: 10, boxShadow: "0 8px 24px rgba(124,58,237,0.35)", transition: "opacity 0.2s" }}
                   >
-                    {enrolling ? "Processing..." : "Enroll Now"}
+                    Enroll Now — Pay via UPI
                   </button>
                   <Link href={`/courses/${course.id}/learn`} style={{ display: "block", textAlign: "center", padding: "11px", borderRadius: 12, border: "1px solid var(--border)", color: "var(--text-body)", textDecoration: "none", fontSize: 13, fontWeight: 500, marginBottom: 10 }}>
                     Preview Course
@@ -324,6 +256,12 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
       </main>
       <Footer />
       <ChatWidget />
+      <PaymentModal
+        isOpen={showPayment}
+        onClose={() => setShowPayment(false)}
+        courseName={course.title}
+        price={course.price}
+      />
     </>
   );
 }

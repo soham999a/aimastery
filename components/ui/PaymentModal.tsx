@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import Image from "next/image";
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -170,12 +169,12 @@ export default function PaymentModal({ isOpen, onClose, courseName, price }: Pay
               background: "#fff",
               padding: 8,
             }}>
-              <Image
+              <img
                 src="/phonepe-qr.png"
                 alt="PhonePe QR Code - Scan to pay"
                 width={200}
                 height={200}
-                style={{ display: "block", borderRadius: 8 }}
+                style={{ display: "block", borderRadius: 8, width: 200, height: 200, objectFit: "contain" }}
               />
             </div>
 

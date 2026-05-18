@@ -142,6 +142,28 @@ export default function WorkshopPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [seats] = useState(47);
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": FAQS.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": { "@type": "Answer", "text": f.a },
+    })),
+  };
+
+  const eventSchema = {
+    "@context": "https://schema.org",
+    "@type": "EducationEvent",
+    "name": "Free AI & ML Workshop — YesDo Edutech",
+    "description": "Free live workshop on AI, ML, Python, Deep Learning, and AI Tools. School & college partnership programme 2026-27.",
+    "organizer": { "@type": "Organization", "name": "YesDo Edutech", "url": "https://yesdo.co.in" },
+    "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR", "availability": "https://schema.org/InStock" },
+  };
+
   const timerBox = (val: string, label: string) => (
     <div style={{ textAlign: 'center', minWidth: 56 }}>
       <div style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 800, fontSize: '1.8rem', color: '#fff', lineHeight: 1 }}>{val}</div>
@@ -153,6 +175,8 @@ export default function WorkshopPage() {
 
   return (
     <div style={{ background: '#060912', minHeight: '100vh', color: '#f1f5f9', fontFamily: 'Inter, sans-serif' }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }} />
 
       {/* ── Sticky urgency bar ── */}
       <div style={{ position: 'sticky', top: 0, zIndex: 100, background: 'linear-gradient(90deg,#dc2626,#b91c1c)', padding: '10px 24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}>

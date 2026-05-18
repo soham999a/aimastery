@@ -5,6 +5,8 @@ import Footer from "@/components/layout/Footer";
 export const metadata: Metadata = {
   title: "Privacy Policy & Terms | YesDo Edutech",
   description: "YesDo Edutech's privacy policy and terms of service. Learn how we collect, use, and protect your data.",
+  alternates: { canonical: "/privacy" },
+  robots: { index: false, follow: false },
 };
 
 const SECTIONS = [

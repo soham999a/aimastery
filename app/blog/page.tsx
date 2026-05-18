@@ -4,8 +4,14 @@ import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Blog | YesDo Edutech — AI Tips, Tutorials & Industry Insights",
-  description: "Read the latest AI tutorials, career tips, and industry insights from the YesDo Edutech team. Stay ahead in the AI revolution.",
+  title: "Blog | YesDo Edutech — AI & ML Tips, Tutorials & Industry Insights",
+  description: "Read the latest AI & ML tutorials, Python guides, career tips, and industry insights from the YesDo Edutech team. Stay ahead in the AI revolution.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "YesDo Edutech Blog | AI & ML Tutorials",
+    description: "Practical AI & ML guides, Python tutorials, career tips, and the Top 100 AI Tools list. Updated regularly.",
+    type: "website",
+  },
 };
 
 const POSTS = [

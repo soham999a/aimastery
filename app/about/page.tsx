@@ -4,8 +4,14 @@ import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About Us | YesDo Edutech — India's AI Skills Platform",
-  description: "Learn about YesDo Edutech — our mission, team, and why we're building India's most practical AI education platform from Kolkata.",
+  title: "About Us | YesDo Edutech — India's AI & ML Skills Platform",
+  description: "Learn about YesDo Edutech — our mission, team, and why we're building India's most practical AI & ML education platform from Kolkata. 1,200+ students trained.",
+  alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About YesDo Edutech | India's AI & ML Platform",
+    description: "Our mission: make practical AI & ML skills accessible to every student and professional in India. Based in Kolkata.",
+    type: "website",
+  },
 };
 
 const TEAM = [

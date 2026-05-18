@@ -3,12 +3,24 @@
 import { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Mail, MessageSquare, Phone, MapPin, Send, Loader2, CheckCircle } from "lucide-react";
+
+const MailIcon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>;
+const PhoneIcon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>;
+const MapIcon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>;
+const SendIcon = () => <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>;
+const CheckIcon = () => <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>;
 
 const CONTACT_INFO = [
-  { icon: Mail, label: "Email", value: "contact@yesdo.co.in", href: "mailto:contact@yesdo.co.in" },
-  { icon: Phone, label: "Phone", value: "+91 78900 18776", href: "tel:+919876543210" },
-  { icon: MapPin, label: "Location", value: "Kolkata, West Bengal", href: "#" },
+  { Icon: MailIcon, label: "Email", value: "contact@yesdo.co.in", href: "mailto:contact@yesdo.co.in" },
+  { Icon: PhoneIcon, label: "Phone", value: "+91 78900 18776", href: "tel:+917890018776" },
+  { Icon: MapIcon, label: "Location", value: "Kolkata, West Bengal", href: "#" },
+];
+
+const SOCIALS = [
+  { label: "LinkedIn", href: "https://linkedin.com/company/yesdoedutech" },
+  { label: "YouTube", href: "https://youtube.com/@yesdoedutech" },
+  { label: "Instagram", href: "https://instagram.com/yesdoedutech" },
+  { label: "Twitter", href: "https://twitter.com/yesdoedutech" },
 ];
 
 export default function ContactPage() {
@@ -19,168 +31,136 @@ export default function ContactPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    // Simulate send
     await new Promise((r) => setTimeout(r, 1500));
     setLoading(false);
     setSent(true);
   }
 
+  const inputStyle = {
+    width: "100%", padding: "11px 14px", borderRadius: 10,
+    border: "1px solid var(--border)", background: "var(--bg-input)",
+    color: "var(--text-h)", fontSize: 14, outline: "none",
+    fontFamily: "inherit", boxSizing: "border-box" as const,
+  };
+
+  const labelStyle = { display: "block", fontSize: 13, fontWeight: 600, color: "var(--text-body)", marginBottom: 6 };
+
   return (
     <>
       <Navbar />
-      <main className="min-h-screen pt-16" style={{ background: "#0f1117" }}>
+      <main style={{ minHeight: "100vh", paddingTop: 64, background: "var(--bg-base)" }}>
+
         {/* Header */}
-        <div style={{ background: "#0d0f18", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-            <div
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-4"
-              style={{ border: "1px solid rgba(0,102,255,0.3)", background: "rgba(0,102,255,0.06)", color: "#60a5fa" }}
-            >
-              <MessageSquare className="w-4 h-4" />
-              Get in Touch
+        <div style={{ background: "var(--bg-surface)", borderBottom: "1px solid var(--border)", padding: "56px 24px 48px" }}>
+          <div style={{ maxWidth: 600, margin: "0 auto", textAlign: "center" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 16px", borderRadius: 999, border: "1px solid rgba(37,99,235,0.3)", background: "rgba(37,99,235,0.06)", color: "#60a5fa", fontSize: 13, fontWeight: 500, marginBottom: 20 }}>
+              💬 Get in Touch
             </div>
-            <h1
-              className="font-bold mb-4"
-              style={{ fontFamily: "Poppins, sans-serif", fontSize: "clamp(2rem, 5vw, 3.5rem)", color: "#f9fafb" }}
-            >
-              We'd love to <span className="gradient-text-ai">hear from you</span>
+            <h1 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "2.5rem", color: "var(--text-h)", marginBottom: 12, lineHeight: 1.2 }}>
+              We'd love to hear from you
             </h1>
-            <p style={{ color: "#6b7280", maxWidth: 480, margin: "0 auto", fontSize: "1rem" }}>
-              Whether you have a question about courses, pricing, or enterprise plans — our team is ready to help.
+            <p style={{ color: "var(--text-body)", fontSize: "0.95rem", lineHeight: 1.7 }}>
+              Questions about courses, pricing, or school partnerships? Our team usually responds within 24 hours.
             </p>
           </div>
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Contact Info */}
-            <div className="space-y-5">
-              <h2 className="font-semibold text-lg mb-6" style={{ fontFamily: "Poppins, sans-serif", color: "#f9fafb" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "56px 24px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 32, alignItems: "start" }}>
+
+            {/* Left — contact info */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              <h2 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1rem", color: "var(--text-h)", marginBottom: 8 }}>
                 Contact Information
               </h2>
-              {CONTACT_INFO.map(({ icon: Icon, label, value, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  className="flex items-center gap-4 p-4 rounded-2xl card-hover"
-                  style={{ border: "1px solid rgba(255,255,255,0.08)", background: "#1a1d27" }}
-                >
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
-                    style={{ background: "rgba(0,102,255,0.1)" }}
-                  >
-                    <Icon className="w-5 h-5" style={{ color: "#0066ff" }} />
+
+              {CONTACT_INFO.map(({ Icon, label, value, href }) => (
+                <a key={label} href={href} style={{ display: "flex", alignItems: "center", gap: 14, padding: "16px", borderRadius: 14, border: "1px solid var(--border-card)", background: "var(--bg-card)", textDecoration: "none", transition: "border-color 0.18s" }}>
+                  <div style={{ width: 40, height: 40, borderRadius: 10, background: "rgba(37,99,235,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "#2563eb", flexShrink: 0 }}>
+                    <Icon />
                   </div>
                   <div>
-                    <p className="text-xs mb-0.5" style={{ color: "#6b7280" }}>{label}</p>
-                    <p className="text-sm font-medium" style={{ color: "#f9fafb" }}>{value}</p>
+                    <p style={{ fontSize: 11, color: "var(--text-muted)", marginBottom: 2 }}>{label}</p>
+                    <p style={{ fontSize: 14, fontWeight: 600, color: "var(--text-h)" }}>{value}</p>
                   </div>
                 </a>
               ))}
 
-              {/* Enterprise CTA */}
-              <div
-                className="p-5 rounded-2xl mt-6"
-                style={{ background: "linear-gradient(135deg, rgba(0,102,255,0.15), rgba(124,58,237,0.15))", border: "1px solid rgba(0,102,255,0.2)" }}
-              >
-                <h3 className="font-semibold text-sm mb-2" style={{ fontFamily: "Poppins, sans-serif", color: "#f9fafb" }}>
-                  Enterprise Plans
-                </h3>
-                <p className="text-xs leading-relaxed mb-3" style={{ color: "#9ca3af" }}>
-                  Training 10+ people? Get custom pricing, dedicated support, and a tailored curriculum.
+              {/* Social links */}
+              <div style={{ marginTop: 8 }}>
+                <p style={{ fontSize: 13, fontWeight: 600, color: "var(--text-body)", marginBottom: 10 }}>Follow Us</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                  {SOCIALS.map((s) => (
+                    <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" style={{ padding: "6px 14px", borderRadius: 8, border: "1px solid var(--border)", background: "var(--bg-card)", color: "var(--text-muted)", fontSize: 12, fontWeight: 600, textDecoration: "none" }}>
+                      {s.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Enterprise */}
+              <div style={{ marginTop: 8, padding: "20px", borderRadius: 14, background: "linear-gradient(135deg, rgba(37,99,235,0.1), rgba(124,58,237,0.1))", border: "1px solid rgba(37,99,235,0.2)" }}>
+                <p style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "0.9rem", color: "var(--text-h)", marginBottom: 6 }}>School / Enterprise Plans</p>
+                <p style={{ fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6, marginBottom: 10 }}>
+                  Training a batch or partnering with a school? We'll build a custom plan for you.
                 </p>
-                <p className="text-xs font-medium" style={{ color: "#60a5fa" }}>
-                  contact@yesdo.co.in
-                </p>
+                <a href="mailto:contact@yesdo.co.in" style={{ fontSize: 13, fontWeight: 600, color: "#60a5fa", textDecoration: "none" }}>
+                  contact@yesdo.co.in →
+                </a>
               </div>
             </div>
 
-            {/* Form */}
-            <div className="lg:col-span-2">
-              <div
-                className="p-8 rounded-2xl"
-                style={{ border: "1px solid rgba(255,255,255,0.08)", background: "#1a1d27" }}
-              >
-                {sent ? (
-                  <div className="text-center py-12">
-                    <CheckCircle className="w-16 h-16 mx-auto mb-4" style={{ color: "#10b981" }} />
-                    <h3 className="font-bold text-xl mb-2" style={{ fontFamily: "Poppins, sans-serif", color: "#f9fafb" }}>
-                      Message sent!
-                    </h3>
-                    <p style={{ color: "#6b7280" }}>We'll get back to you within 24 hours.</p>
-                    <button
-                      onClick={() => { setSent(false); setForm({ name: "", email: "", subject: "", message: "" }); }}
-                      className="mt-6 px-6 py-2.5 rounded-xl text-sm font-semibold"
-                      style={{ background: "#0066ff", color: "#fff" }}
-                    >
-                      Send another
-                    </button>
+            {/* Right — form */}
+            <div style={{ padding: "36px", borderRadius: 20, border: "1px solid var(--border-card)", background: "var(--bg-card)" }}>
+              {sent ? (
+                <div style={{ textAlign: "center", padding: "48px 24px" }}>
+                  <div style={{ width: 72, height: 72, borderRadius: "50%", background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.25)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+                    <CheckIcon />
                   </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      {[
-                        { key: "name", label: "Full Name", placeholder: "Your name", type: "text" },
-                        { key: "email", label: "Email", placeholder: "you@example.com", type: "email" },
-                      ].map(({ key, label, placeholder, type }) => (
-                        <div key={key}>
-                          <label className="block text-sm font-medium mb-1.5" style={{ color: "#d1d5db" }}>{label}</label>
-                          <input
-                            type={type}
-                            required
-                            placeholder={placeholder}
-                            value={form[key as keyof typeof form]}
-                            onChange={(e) => setForm({ ...form, [key]: e.target.value })}
-                            className="w-full px-4 py-3 rounded-xl text-sm outline-none"
-                            style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "#f9fafb" }}
-                          />
-                        </div>
-                      ))}
-                    </div>
+                  <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.3rem", color: "var(--text-h)", marginBottom: 8 }}>Message sent!</h3>
+                  <p style={{ color: "var(--text-muted)", fontSize: 14, marginBottom: 24 }}>We'll get back to you within 24 hours.</p>
+                  <button
+                    onClick={() => { setSent(false); setForm({ name: "", email: "", subject: "", message: "" }); }}
+                    style={{ padding: "10px 24px", borderRadius: 10, background: "#2563eb", color: "#fff", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer" }}
+                  >
+                    Send another
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+                  <h2 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1.1rem", color: "var(--text-h)", marginBottom: 4 }}>Send us a message</h2>
 
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                     <div>
-                      <label className="block text-sm font-medium mb-1.5" style={{ color: "#d1d5db" }}>Subject</label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="How can we help?"
-                        value={form.subject}
-                        onChange={(e) => setForm({ ...form, subject: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl text-sm outline-none"
-                        style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "#f9fafb" }}
-                      />
+                      <label style={labelStyle}>Full Name</label>
+                      <input type="text" required placeholder="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} style={inputStyle} />
                     </div>
-
                     <div>
-                      <label className="block text-sm font-medium mb-1.5" style={{ color: "#d1d5db" }}>Message</label>
-                      <textarea
-                        required
-                        rows={5}
-                        placeholder="Tell us more..."
-                        value={form.message}
-                        onChange={(e) => setForm({ ...form, message: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl text-sm outline-none resize-none"
-                        style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "#f9fafb" }}
-                      />
+                      <label style={labelStyle}>Email</label>
+                      <input type="email" required placeholder="you@example.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} style={inputStyle} />
                     </div>
+                  </div>
 
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="flex items-center gap-2 px-8 py-3.5 rounded-xl font-bold text-sm text-white transition-all"
-                      style={{
-                        fontFamily: "Poppins, sans-serif",
-                        background: "#0066ff",
-                        boxShadow: "0 8px 24px rgba(0,102,255,0.3)",
-                        opacity: loading ? 0.7 : 1,
-                      }}
-                    >
-                      {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-                      {loading ? "Sending..." : "Send Message"}
-                    </button>
-                  </form>
-                )}
-              </div>
+                  <div>
+                    <label style={labelStyle}>Subject</label>
+                    <input type="text" required placeholder="How can we help?" value={form.subject} onChange={(e) => setForm({ ...form, subject: e.target.value })} style={inputStyle} />
+                  </div>
+
+                  <div>
+                    <label style={labelStyle}>Message</label>
+                    <textarea required rows={5} placeholder="Tell us more..." value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} style={{ ...inputStyle, resize: "none" }} />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "13px 28px", borderRadius: 10, background: "#2563eb", color: "#fff", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14, border: "none", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, boxShadow: "0 8px 24px rgba(37,99,235,0.35)", width: "fit-content" }}
+                  >
+                    <SendIcon />
+                    {loading ? "Sending..." : "Send Message"}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>

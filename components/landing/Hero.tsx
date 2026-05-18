@@ -15,7 +15,7 @@ const CheckIcon = () => <svg width="12" height="12" viewBox="0 0 24 24" fill="no
 const SUBJECTS = ["AI Foundation", "Prompt Engineering", "Data Analytics", "Power BI", "Python", "AI Agents", "Voice AI & RAG", "Workflow Automation", "Resume with AI", "Make Money with AI"];
 const STATS = [
   { Icon: UsersIcon, value: "27", label: "Core Modules" },
-  { Icon: BookIcon, value: "8+", label: "Courses" },
+  { Icon: BookIcon, value: "5000+", label: "Learning Mins" },
   { Icon: StarIcon, value: "100%", label: "Practical" },
 ];
 const TRUST = ["ChatGPT", "Claude", "Gemini", "Power BI", "Python", "n8n", "Make", "Canva"];
@@ -163,7 +163,7 @@ export default function Hero() {
         }}>
           <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#4ade80", display: "inline-block", boxShadow: "0 0 8px #4ade80" }} />
           <span style={{ fontSize: 13, fontWeight: 500, color: isDark ? "#fcd34d" : "#b45309" }}>
-            School / College Partnership Programme · 2026-27
+            India's Most Practical AI Education Platform
           </span>
         </div>
 
@@ -174,16 +174,19 @@ export default function Hero() {
           color: isDark ? "#ffffff" : "#0f172a",
           margin: "0 auto 20px", maxWidth: 820,
         }}>
-          Empowering Tomorrow's Leaders<br />
-          with <span className="gt-blue">AI & Industry Skills</span>
+          Learn AI from the Best.<br />
+          <span className="gt-blue">Build Your Future Today.</span>
         </h1>
 
         <p style={{
           fontSize: "1.05rem",
           color: isDark ? "#94a3b8" : "#475569",
-          maxWidth: 600, margin: "0 auto 16px", lineHeight: 1.75,
+          maxWidth: 600, margin: "0 auto 8px", lineHeight: 1.75,
         }}>
-          A complete, hands-on AI education programme designed exclusively for students. We bring the future into your classroom — no infrastructure needed.
+          India's most practical AI education — 27 modules, 5000+ learning minutes, 100% hands-on. For students, professionals, and schools.
+        </p>
+        <p style={{ fontSize: "0.9rem", color: isDark ? "#64748b" : "#94a3b8", marginBottom: 16 }}>
+          School &amp; College Partnership Programme · 2026-27
         </p>
 
         {/* Subject pills */}
@@ -212,22 +215,17 @@ export default function Hero() {
           }}>
             Explore All Courses <ArrowRight />
           </Link>
-          <button style={{
+          <Link href="/workshop" style={{
             display: "inline-flex", alignItems: "center", gap: 10,
             padding: "13px 28px", borderRadius: 10,
-            border: isDark ? "1px solid rgba(255,255,255,0.12)" : "1px solid rgba(0,0,0,0.1)",
-            background: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.03)",
-            color: isDark ? "#e2e8f0" : "#1e293b",
+            border: isDark ? "1px solid rgba(185,28,28,0.4)" : "1px solid rgba(185,28,28,0.3)",
+            background: isDark ? "rgba(185,28,28,0.1)" : "rgba(185,28,28,0.05)",
+            color: isDark ? "#fca5a5" : "#b91c1c",
             fontFamily: "Poppins, sans-serif", fontWeight: 600,
-            fontSize: 15, cursor: "pointer",
+            fontSize: 15, textDecoration: "none",
           }}>
-            <span style={{
-              width: 30, height: 30, borderRadius: "50%",
-              background: isDark ? "rgba(37,99,235,0.2)" : "rgba(37,99,235,0.1)",
-              display: "flex", alignItems: "center", justifyContent: "center", color: "#2563eb",
-            }}><PlayIcon /></span>
-            Watch Demo
-          </button>
+            Join Workshop — Register Now
+          </Link>
         </div>
 
         {/* Stats */}

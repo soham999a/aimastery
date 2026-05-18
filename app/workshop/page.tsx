@@ -126,7 +126,7 @@ function RegForm({ compact = false }: { compact?: boolean }) {
       <input type='email' value={form.email} onChange={e => setForm(p => ({ ...p, email: e.target.value }))} placeholder='Your Email Address' style={{ padding: '13px 16px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.06)', color: '#f1f5f9', fontSize: 14, outline: 'none', fontFamily: 'inherit' }} />
       <input type='tel' value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} placeholder='Your Phone Number' style={{ padding: '13px 16px', borderRadius: 10, border: '1px solid rgba(255,255,255,0.12)', background: 'rgba(255,255,255,0.06)', color: '#f1f5f9', fontSize: 14, outline: 'none', fontFamily: 'inherit' }} />
       <button type='submit' disabled={loading} style={{ padding: '15px', borderRadius: 12, background: 'linear-gradient(135deg,#dc2626,#ef4444)', color: '#fff', fontFamily: 'Poppins, sans-serif', fontWeight: 800, fontSize: compact ? 15 : 17, border: 'none', cursor: loading ? 'not-allowed' : 'pointer', opacity: loading ? 0.75 : 1, boxShadow: '0 8px 32px rgba(220,38,38,0.45)', letterSpacing: '0.02em' }}>
-        {loading ? 'Registering...' : 'PARTNER WITH US NOW →'}
+        {loading ? 'Registering...' : 'JOIN NOW — REGISTER FREE →'}
       </button>
       <p style={{ textAlign: 'center', fontSize: 12, color: '#64748b' }}>No spam. No credit card. 100% Free.</p>
     </form>
@@ -153,7 +153,7 @@ export default function WorkshopPage() {
 
       {/* ── Sticky urgency bar ── */}
       <div style={{ position: 'sticky', top: 0, zIndex: 100, background: 'linear-gradient(90deg,#dc2626,#b91c1c)', padding: '10px 24px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}>
-        <span style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>🔥 Limited partnership slots!</span>
+        <span style={{ fontSize: 13, fontWeight: 600, color: '#fff' }}>🔥 Limited slots for 2026-27!</span>
         <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: 13 }}>|</span>
         <span style={{ fontSize: 13, color: '#fff' }}>Workshop ends in:</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -403,9 +403,9 @@ export default function WorkshopPage() {
 
       {/* Sticky bottom bar */}
       <div style={{position:"fixed",bottom:0,left:0,right:0,zIndex:99,background:"linear-gradient(90deg,#dc2626,#b91c1c)",padding:"12px 24px",display:"flex",alignItems:"center",justifyContent:"center",gap:16,flexWrap:"wrap",boxShadow:"0 -4px 24px rgba(220,38,38,0.4)"}}>
-        <span style={{fontSize:14,fontWeight:600,color:"#fff"}}>Limited partnership slots!</span>
+        <span style={{fontSize:14,fontWeight:600,color:"#fff"}}>Limited slots — 2026-27!</span>
         <button onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} style={{padding:"10px 24px",borderRadius:8,background:"#fff",color:"#dc2626",fontFamily:"Poppins, sans-serif",fontWeight:800,fontSize:14,border:"none",cursor:"pointer"}}>
-          PARTNER WITH US NOW
+          JOIN NOW — REGISTER FREE
         </button>
       </div>
 

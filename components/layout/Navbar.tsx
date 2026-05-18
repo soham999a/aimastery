@@ -37,8 +37,9 @@ const LogoIcon = () => (
 const NAV_LINKS = [
   { label: "Courses", href: "/courses" },
   { label: "Workshop", href: "/workshop" },
-  { label: "Pricing", href: "/#pricing" },
-  { label: "About", href: "/#about" },
+  { label: "Blog", href: "/blog" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -160,6 +161,14 @@ export default function Navbar() {
               <>
                 <Link href="/login" style={{ padding: "7px 14px", borderRadius: 8, fontSize: 14, fontWeight: 500, color: textColor, textDecoration: "none" }}>
                   Login
+                </Link>
+                <Link href="/workshop" style={{
+                  padding: "8px 16px", borderRadius: 8, fontSize: 13, fontWeight: 600,
+                  background: "rgba(185,28,28,0.15)", color: "#f87171", textDecoration: "none",
+                  border: "1px solid rgba(185,28,28,0.3)",
+                  transition: "all 0.18s",
+                }}>
+                  Workshop
                 </Link>
                 <Link href="/signup" style={{
                   padding: "8px 18px", borderRadius: 8, fontSize: 14, fontWeight: 700,

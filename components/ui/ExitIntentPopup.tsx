@@ -18,13 +18,13 @@ export default function ExitIntentPopup() {
       }
     };
 
-    // Also show after 45 seconds
+    // Also show after 36 seconds
     const timer = setTimeout(() => {
       if (!dismissed) {
         setShow(true);
         sessionStorage.setItem("exit_popup_seen", "1");
       }
-    }, 45000);
+    }, 36000);
 
     document.addEventListener("mouseleave", handleMouseLeave);
     return () => {

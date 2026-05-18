@@ -4,7 +4,9 @@ import Hero from "@/components/landing/Hero";
 import Features from "@/components/landing/Features";
 import WorkshopBanner from "@/components/landing/WorkshopBanner";
 import FeaturedCourses from "@/components/landing/FeaturedCourses";
+import AITools from "@/components/landing/AITools";
 import Testimonials from "@/components/landing/Testimonials";
+import Community from "@/components/landing/Community";
 import Pricing from "@/components/landing/Pricing";
 import ChatWidget from "@/components/chatbot/ChatWidget";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
@@ -19,7 +21,9 @@ export default function HomePage() {
         <Features />
         <WorkshopBanner />
         <FeaturedCourses />
+        <AITools />
         <Testimonials />
+        <Community />
         <Pricing />
       </main>
       <Footer />

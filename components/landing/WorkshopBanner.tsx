@@ -46,7 +46,7 @@ export default function WorkshopBanner() {
               ))}
             </div>
             <Link href="/workshop" style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "12px 24px", borderRadius: 10, background: "#fff", color: "#b91c1c", fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: 14, textDecoration: "none", boxShadow: "0 8px 24px rgba(0,0,0,0.2)" }}>
-              Partner With Us →
+              Join Now — Register →
             </Link>
           </div>
         </div>

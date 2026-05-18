@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const TEAM = [
-  { name: "Somnath Banerjee", role: "Founder & CEO", initials: "SB", grad: ["#1e3a8a", "#2563eb"], bio: "Visionary behind YesDo Edutech. Building India's most practical AI education platform from Kolkata." },
+  { name: "Debopriya Ghoshal", role: "Founder & CEO", initials: "DG", grad: ["#1e3a8a", "#2563eb"], bio: "Visionary behind YesDo Edutech. Building India's most practical AI education platform from Kolkata." },
   { name: "YesDo Faculty", role: "AI & Industry Experts", initials: "YF", grad: ["#065f46", "#0891b2"], bio: "Industry practitioners from leading tech companies. Real-world experience, practical curriculum." },
 ];
 

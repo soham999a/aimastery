@@ -16,7 +16,7 @@ const ENROLLED = [
   {id:"ai-ml-bootcamp",title:"AI and ML Bootcamp",instructor:"Prof. Raj Patel",progress:30,total:48,done:14,gFrom:"#3b0764",gTo:"#831843",next:"Deep Learning Neural Networks Part 2"},
 ];
 const RECOMMENDED = [
-  {id:"generative-ai",title:"Generative YesDo Edutech",level:"Advanced",price:5999},
+  {id:"generative-ai",title:"Generative AI Mastery",level:"Advanced",price:5999},
   {id:"computer-vision",title:"Computer Vision with OpenCV",level:"Intermediate",price:3999},
 ];
 

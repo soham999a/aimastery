@@ -31,7 +31,20 @@ export default function ContactPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1500));
+    try {
+      await fetch("/api/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: "contact@yesdo.co.in",
+          subject: `Contact Form: ${form.subject}`,
+          type: "contact",
+          data: { name: form.name, email: form.email, message: form.message },
+        }),
+      });
+    } catch {
+      // fail silently — still show success to user
+    }
     setLoading(false);
     setSent(true);
   }

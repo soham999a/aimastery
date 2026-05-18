@@ -214,7 +214,7 @@ export default function WorkshopPage() {
           {[
             { value: '1,200+', label: 'Students Enrolled', color: '#2563eb' },
             { value: '4.8 / 5', label: 'Average Rating', color: '#f59e0b' },
-            { value: '₹0', label: 'Flagship Fee', color: '#4ade80' },
+            { value: '₹10,000', label: 'Flagship Fee', color: '#4ade80' },
           ].map(s => (
             <div key={s.label} style={{ textAlign: 'center', padding: '28px 20px', borderRadius: 18, border: '1px solid rgba(255,255,255,0.08)', background: '#0f1629' }}>
               <div style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900, fontSize: '2.5rem', color: s.color, marginBottom: 6 }}>{s.value}</div>

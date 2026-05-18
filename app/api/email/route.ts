@@ -23,6 +23,12 @@ export async function POST(req: NextRequest) {
         <p style="color:#94a3b8;font-size:16px;line-height:1.6">Hi ${data?.name ?? "there"}, your spot for the FREE AI Workshop is confirmed.</p>
         <p style="color:#94a3b8;font-size:16px;line-height:1.6">We will send you the workshop link 30 minutes before it starts.</p>
       </div>`,
+      contact: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:40px 24px;background:#060912;color:#f1f5f9">
+        <h1 style="color:#2563eb;font-size:24px;margin-bottom:8px">New Contact Form Message</h1>
+        <p style="color:#94a3b8;font-size:15px;line-height:1.6"><strong style="color:#f1f5f9">From:</strong> ${data?.name ?? "Unknown"} (${data?.email ?? "no email"})</p>
+        <p style="color:#94a3b8;font-size:15px;line-height:1.6"><strong style="color:#f1f5f9">Message:</strong></p>
+        <p style="color:#cbd5e1;font-size:15px;line-height:1.7;padding:16px;background:#0f1629;border-radius:10px;border:1px solid rgba(255,255,255,0.08)">${data?.message ?? ""}</p>
+      </div>`,
     };
 
     const html = templates[type] ?? templates.welcome;

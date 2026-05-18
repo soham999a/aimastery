@@ -13,33 +13,36 @@ const ChevronUp = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="no
 
 // ── Data ──
 const LEARN_ITEMS = [
-  'Use AI tools to 10x your productivity at work',
-  'Automate repetitive tasks with ChatGPT and Gemini',
-  'Build AI-powered workflows for research and analysis',
-  'Create professional content in minutes, not hours',
+  'Build real ML models from scratch using Python & Scikit-learn',
+  'Master Deep Learning with TensorFlow and PyTorch',
+  'Use ChatGPT, Claude & Gemini to 10x your productivity',
+  'Automate workflows with n8n, Make, and AI Agents',
+  'Create AI-powered dashboards with Power BI & Excel',
+  'Deploy ML models to production and build a portfolio',
   'Master prompt engineering for real business results',
-  'Get certified and stand out in the job market',
+  'Get certified and stand out in the AI job market',
 ];
 
 const FOR_YOU = [
-  'Working professionals who want to save 2+ hours daily',
-  'Students preparing for AI-driven job market',
-  'Entrepreneurs who want to build faster with AI',
-  'Managers who want to lead AI-ready teams',
-  'Anyone curious about AI but unsure where to start',
+  'Students who want to break into AI & ML careers',
+  'Professionals looking to upskill with real ML tools',
+  'Developers who want to add AI/ML to their skillset',
+  'Entrepreneurs who want to build AI-powered products',
+  'Anyone serious about learning Python, ML & Deep Learning',
+  'School & college students preparing for the AI job market',
 ];
 
 const NOT_FOR_YOU = [
-  'People who already use AI tools daily at expert level',
-  'Those looking for deep ML/coding courses',
-  'People not willing to implement what they learn',
+  'People looking for a quick shortcut with no effort',
+  'Those who already work as senior ML engineers daily',
+  'People not willing to practice and build real projects',
 ];
 
 const BONUSES = [
-  { title: 'AI Prompt Bible', desc: '500+ proven prompts for every use case', value: 4999 },
-  { title: 'AI Tools Cheatsheet', desc: 'Top 50 AI tools with use cases and links', value: 2999 },
-  { title: 'Career Acceleration Guide', desc: 'How to position yourself as an AI expert', value: 3999 },
-  { title: 'Private Community Access', desc: 'Lifetime access to our AI professionals network', value: 3499 },
+  { title: 'ML Project Starter Kit', desc: '10 ready-to-use ML project templates with datasets', value: 4999 },
+  { title: 'Top 100 AI Tools Cheatsheet', desc: 'The definitive guide to AI & ML tools used by industry pros', value: 2999 },
+  { title: 'Python for ML Crash Course', desc: 'Fast-track Python guide specifically for ML beginners', value: 3999 },
+  { title: 'Private AI Community Access', desc: 'Lifetime access to our AI & ML professionals network', value: 3499 },
 ];
 
 const MENTORS = [
@@ -48,12 +51,12 @@ const MENTORS = [
 ];
 
 const TESTIMONIALS = [
-  { name: 'Amit Verma', role: 'Marketing Manager, TCS', rating: 5, text: 'This workshop changed how I work. I now complete in 2 hours what used to take me a full day. The AI workflows are practical and immediately usable.' },
-  { name: 'Sneha Patel', role: 'MBA Student, IIM Ahmedabad', rating: 5, text: 'As a student, I was skeptical. But the workshop gave me real skills I could put on my resume. Got 3 interview calls mentioning my AI skills.' },
-  { name: 'Rajesh Kumar', role: 'Software Engineer, Infosys', rating: 5, text: 'The prompt engineering section alone was worth it. My code review time dropped by 60%. Highly recommend to every developer.' },
-  { name: 'Divya Menon', role: 'Content Creator', rating: 5, text: 'I create 5x more content now with the same effort. The AI content workflows are gold. My YouTube channel grew 40% in 2 months after this.' },
-  { name: 'Karan Singh', role: 'Startup Founder', rating: 5, text: 'Used the AI automation workflows to replace 3 freelancers. Saved Rs. 60,000/month. Best investment I made for my business.' },
-  { name: 'Meera Iyer', role: 'HR Manager, Wipro', rating: 5, text: 'The workshop is incredibly well-structured. Went from zero AI knowledge to confidently using 10+ tools in just 3 hours.' },
+  { name: 'Amit Verma', role: 'Data Scientist, TCS', rating: 5, text: 'The ML curriculum is incredibly well-structured. I went from knowing basic Python to building and deploying real models. Got placed at TCS within 3 months of completing the course.' },
+  { name: 'Sneha Patel', role: 'B.Tech CSE, IIT Kharagpur', rating: 5, text: 'Best AI & ML course I have taken. The Deep Learning modules with TensorFlow are gold. My final year project got selected for a national competition because of what I learned here.' },
+  { name: 'Rajesh Kumar', role: 'Software Engineer, Infosys', rating: 5, text: 'The Python + ML track is exactly what I needed to transition into AI roles. The hands-on projects and live sessions made all the difference. Highly recommend.' },
+  { name: 'Divya Menon', role: 'ML Intern, Flipkart', rating: 5, text: 'I landed my ML internship at Flipkart directly because of the portfolio I built during this course. The instructors are real practitioners, not just teachers.' },
+  { name: 'Karan Singh', role: 'AI Startup Founder', rating: 5, text: 'Used the AI automation and ML modules to build the core of my startup product. Saved months of learning time. The community support is also exceptional.' },
+  { name: 'Meera Iyer', role: 'Business Analyst, Wipro', rating: 5, text: 'The Power BI + Python for data analysis combination is perfect for my role. I now build dashboards and ML-powered reports that my entire team relies on.' },
 ];
 
 const FAQS = [
@@ -181,7 +184,7 @@ export default function WorkshopPage() {
           </h1>
 
           <p style={{ fontSize: '1.1rem', color: '#94a3b8', maxWidth: 620, margin: '0 auto 12px', lineHeight: 1.7 }}>
-            A complete, hands-on AI education programme designed exclusively for students. We bring the future into your classroom — no infrastructure needed.
+            India's most practical AI & ML education — Python, Deep Learning, AI Tools, Automation, and more. 27 modules, 5000+ learning minutes, 100% hands-on.
           </p>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, marginBottom: 32 }}>
@@ -214,7 +217,7 @@ export default function WorkshopPage() {
           {[
             { value: '1,200+', label: 'Students Enrolled', color: '#2563eb' },
             { value: '4.8 / 5', label: 'Average Rating', color: '#f59e0b' },
-            { value: '₹10,000', label: 'Flagship Fee', color: '#4ade80' },
+            { value: '₹0', label: 'Workshop Fee', color: '#4ade80' },
           ].map(s => (
             <div key={s.label} style={{ textAlign: 'center', padding: '28px 20px', borderRadius: 18, border: '1px solid rgba(255,255,255,0.08)', background: '#0f1629' }}>
               <div style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900, fontSize: '2.5rem', color: s.color, marginBottom: 6 }}>{s.value}</div>

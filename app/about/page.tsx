@@ -20,12 +20,12 @@ const TEAM = [
 ];
 
 const VALUES = [
-  { emoji: "🎯", title: "100% Practical", desc: "No theory overload. Every module is hands-on with real tools and real projects." },
-  { emoji: "🏆", title: "Learn from the Best", desc: "Our instructors are industry practitioners, not just academics. They've built real AI systems." },
-  { emoji: "🤝", title: "Community First", desc: "Lifetime access to our AI professionals network. You grow with your peers." },
-  { emoji: "🏫", title: "School Partnerships", desc: "We bring AI education directly to schools and colleges. Zero infrastructure needed." },
-  { emoji: "📜", title: "Certified Learning", desc: "Industry-recognized certificates that actually matter to employers." },
-  { emoji: "💰", title: "Accessible Pricing", desc: "Premium education at a fraction of market price. EMI from ₹2,000/month." },
+  { Icon: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>, title: "100% Practical", desc: "No theory overload. Every module is hands-on with real tools and real projects." },
+  { Icon: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>, title: "Learn from the Best", desc: "Our instructors are industry practitioners, not just academics. They've built real AI systems." },
+  { Icon: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>, title: "Community First", desc: "Lifetime access to our AI professionals network. You grow with your peers." },
+  { Icon: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>, title: "School Partnerships", desc: "We bring AI education directly to schools and colleges. Zero infrastructure needed." },
+  { Icon: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>, title: "Certified Learning", desc: "Industry-recognized certificates that actually matter to employers." },
+  { Icon: () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>, title: "Accessible Pricing", desc: "Premium education at a fraction of market price. EMI from ₹2,000/month." },
 ];
 
 const STATS = [
@@ -94,7 +94,7 @@ export default function AboutPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 20 }}>
             {VALUES.map((v) => (
               <div key={v.title} style={{ padding: "24px", borderRadius: 16, border: "1px solid var(--border-card)", background: "var(--bg-card)" }}>
-                <div style={{ fontSize: 28, marginBottom: 12 }}>{v.emoji}</div>
+                <div style={{ width: 44, height: 44, borderRadius: 10, background: "rgba(37,99,235,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 12 }}><v.Icon /></div>
                 <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1rem", color: "var(--text-h)", marginBottom: 8 }}>{v.title}</h3>
                 <p style={{ fontSize: "0.875rem", color: "var(--text-body)", lineHeight: 1.65 }}>{v.desc}</p>
               </div>
@@ -127,7 +127,9 @@ export default function AboutPage() {
         <div id="certifications" style={{ maxWidth: 900, margin: "0 auto", padding: "64px 24px" }}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 24 }}>
             <div style={{ padding: "36px", borderRadius: 20, border: "1px solid rgba(250,204,21,0.2)", background: "rgba(250,204,21,0.04)" }}>
-              <div style={{ fontSize: 32, marginBottom: 16 }}>📜</div>
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(250,204,21,0.15)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#facc15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+              </div>
               <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1.2rem", color: "var(--text-h)", marginBottom: 12 }}>Industry Certifications</h3>
               <p style={{ fontSize: "0.9rem", color: "var(--text-body)", lineHeight: 1.7, marginBottom: 16 }}>
                 Complete any course and earn a YesDo Edutech certificate recognized by top companies. Our certificates are backed by real project work, not just attendance.
@@ -141,7 +143,9 @@ export default function AboutPage() {
               </ul>
             </div>
             <div id="community" style={{ padding: "36px", borderRadius: 20, border: "1px solid rgba(37,99,235,0.2)", background: "rgba(37,99,235,0.04)" }}>
-              <div style={{ fontSize: 32, marginBottom: 16 }}>🌐</div>
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(37,99,235,0.15)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
               <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1.2rem", color: "var(--text-h)", marginBottom: 12 }}>Live Community Access</h3>
               <p style={{ fontSize: "0.9rem", color: "var(--text-body)", lineHeight: 1.7, marginBottom: 16 }}>
                 Every enrolled student gets lifetime access to our private AI professionals community — live sessions, peer support, job opportunities, and more.

@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const PERKS = [
-  { emoji: "💬", title: "Private Community", desc: "Join our WhatsApp & Discord group with 1,200+ AI learners." },
-  { emoji: "🎥", title: "Weekly Live Sessions", desc: "Live Q&A with instructors every week. Ask anything." },
-  { emoji: "📜", title: "Industry Certificate", desc: "Earn a certificate backed by real project work, shareable on LinkedIn." },
-  { emoji: "💼", title: "Job Board", desc: "Exclusive AI job opportunities shared only with our community." },
+  { Icon: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>, title: "Private Community", desc: "Join our WhatsApp & Discord group with 1,200+ AI learners." },
+  { Icon: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>, title: "Weekly Live Sessions", desc: "Live Q&A with instructors every week. Ask anything." },
+  { Icon: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>, title: "Industry Certificate", desc: "Earn a certificate backed by real project work, shareable on LinkedIn." },
+  { Icon: () => <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>, title: "Job Board", desc: "Exclusive AI job opportunities shared only with our community." },
 ];
 
 export default function Community() {
@@ -26,7 +26,7 @@ export default function Community() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20, marginBottom: 48 }}>
           {PERKS.map((p) => (
             <div key={p.title} style={{ padding: "28px 24px", borderRadius: 18, border: "1px solid var(--border-card)", background: "var(--bg-card)" }}>
-              <div style={{ fontSize: 32, marginBottom: 14 }}>{p.emoji}</div>
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(37,99,235,0.1)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14 }}><p.Icon /></div>
               <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1rem", color: "var(--text-h)", marginBottom: 8 }}>{p.title}</h3>
               <p style={{ fontSize: "0.875rem", color: "var(--text-body)", lineHeight: 1.65 }}>{p.desc}</p>
             </div>

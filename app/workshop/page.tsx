@@ -115,7 +115,9 @@ function RegForm({ compact = false }: { compact?: boolean }) {
 
   if (done) return (
     <div style={{ textAlign: 'center', padding: compact ? '24px' : '40px', borderRadius: 16, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)' }}>
-      <div style={{ fontSize: 48, marginBottom: 12 }}>🎉</div>
+      <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'rgba(74,222,128,0.15)', border: '1px solid rgba(74,222,128,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 12px' }}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
       <h3 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 700, fontSize: '1.3rem', color: '#4ade80', marginBottom: 8 }}>You are registered!</h3>
       <p style={{ color: '#94a3b8', fontSize: 14 }}>Check your email for workshop details. See you there!</p>
     </div>

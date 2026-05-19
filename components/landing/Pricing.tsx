@@ -55,7 +55,9 @@ function SchoolModal({ onClose }: { onClose: () => void }) {
 
         {sent ? (
           <div style={{ textAlign: "center", padding: "24px 0" }}>
-            <div style={{ fontSize: 48, marginBottom: 12 }}>🎉</div>
+          <div style={{ width: 64, height: 64, borderRadius: "50%", background: "rgba(16,185,129,0.1)", border: "1px solid rgba(16,185,129,0.25)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px" }}>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
             <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.3rem", color: "var(--text-h)", marginBottom: 8 }}>
               Your brochure is downloading!
             </h3>
@@ -65,15 +67,19 @@ function SchoolModal({ onClose }: { onClose: () => void }) {
             <a
               href="/yesdo-school-brochure.pdf"
               download="YesDo-Edutech-School-Partnership-Brochure.pdf"
-              style={{ display: "inline-block", padding: "11px 24px", borderRadius: 10, background: "#b91c1c", color: "#fff", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14, textDecoration: "none" }}
+              style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "11px 24px", borderRadius: 10, background: "#b91c1c", color: "#fff", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14, textDecoration: "none" }}
             >
-              📄 Download Brochure
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+              Download Brochure
             </a>
           </div>
         ) : (
           <>
             <div style={{ marginBottom: 24 }}>
-              <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 999, background: "rgba(185,28,28,0.1)", border: "1px solid rgba(185,28,28,0.3)", color: "#f87171", fontSize: 12, fontWeight: 600, marginBottom: 12 }}>🏫 School / Workshop Partnership</div>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 999, background: "rgba(185,28,28,0.1)", border: "1px solid rgba(185,28,28,0.3)", color: "#f87171", fontSize: 12, fontWeight: 600, marginBottom: 12 }}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#f87171" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                School / Workshop Partnership
+              </div>
               <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.3rem", color: "var(--text-h)", marginBottom: 6 }}>Get Our Brochure & Enrol</h3>
               <p style={{ fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>Fill in your details and the brochure will download automatically. Our team will also reach out within 24 hours.</p>
             </div>
@@ -129,7 +135,12 @@ export default function Pricing() {
 
               <div style={{ height: 160, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", background: `linear-gradient(135deg,${course.gradientFrom},${course.gradientTo})` }}>
                 <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 30% 40%,rgba(255,255,255,0.12) 0%,transparent 65%)" }} />
-                <span style={{ fontSize: 52, position: "relative", zIndex: 1 }}>{course.emoji}</span>
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ position: "relative", zIndex: 1 }}>
+                  {course.category === "AI" && <><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></>}
+                  {course.category === "Data" && <><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></>}
+                  {course.category === "Dev" && <><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></>}
+                  {course.category === "Cert" && <><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></>}
+                </svg>
                 {course.tag && (
                   <span style={{ position: "absolute", top: 12, left: 12, fontSize: 10, fontWeight: 700, padding: "3px 9px", borderRadius: 999, background: "rgba(0,0,0,0.4)", color: "#fff", backdropFilter: "blur(8px)" }}>
                     {course.tag}
@@ -187,7 +198,7 @@ export default function Pricing() {
           >
             <div style={{ height: 160, display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(135deg,#7f1d1d,#b91c1c)", position: "relative" }}>
               <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 30% 40%,rgba(255,255,255,0.1) 0%,transparent 65%)" }} />
-              <span style={{ fontSize: 52, position: "relative", zIndex: 1 }}>🏫</span>
+              <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ position: "relative", zIndex: 1 }}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
               <span style={{ position: "absolute", top: 12, left: 12, fontSize: 10, fontWeight: 700, padding: "3px 9px", borderRadius: 999, background: "rgba(0,0,0,0.4)", color: "#fca5a5", backdropFilter: "blur(8px)" }}>Partnership</span>
             </div>
             <div style={{ padding: "20px 20px 24px", display: "flex", flexDirection: "column", flex: 1 }}>

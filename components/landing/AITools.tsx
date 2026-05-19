@@ -30,9 +30,6 @@ export default function AITools() {
               Our curriculum covers the top 100 AI tools used by industry professionals. From automation to analytics to generative AI.
             </p>
           </div>
-          <Link href="/blog/top-100-ai-tools-2026" style={{ display: "flex", alignItems: "center", gap: 6, color: "#2563eb", fontWeight: 600, fontSize: 14, textDecoration: "none", whiteSpace: "nowrap" }}>
-            See full list →
-          </Link>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 12 }}>
@@ -56,7 +53,7 @@ export default function AITools() {
 
         <div style={{ marginTop: 40, padding: "24px 28px", borderRadius: 16, background: "rgba(37,99,235,0.06)", border: "1px solid rgba(37,99,235,0.15)", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
           <div>
-            <p style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1rem", color: "var(--text-h)", marginBottom: 4 }}>Learn all 100 tools in our Flagship Course</p>
+            <p style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1rem", color: "var(--text-h)", marginBottom: 4 }}>Learn all 100 tools in our AI Mastery Complete Course</p>
             <p style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>27 modules · 5000+ learning minutes · Industry certificate</p>
           </div>
           <Link href="/courses/ai-mastery-complete" style={{ padding: "11px 22px", borderRadius: 10, background: "#2563eb", color: "#fff", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14, textDecoration: "none", whiteSpace: "nowrap", boxShadow: "0 4px 14px rgba(37,99,235,0.35)" }}>

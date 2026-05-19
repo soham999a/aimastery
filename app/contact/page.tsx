@@ -17,10 +17,10 @@ const CONTACT_INFO = [
 ];
 
 const SOCIALS = [
-  { label: "LinkedIn", href: "https://linkedin.com/company/yesdoedutech" },
-  { label: "YouTube", href: "https://youtube.com/@yesdoedutech" },
-  { label: "Instagram", href: "https://instagram.com/yesdoedutech" },
-  { label: "Twitter", href: "https://twitter.com/yesdoedutech" },
+  { label: "YouTube", href: "https://www.youtube.com/channel/UCqkZX3JjtZH2NH5c4lxjHCA" },
+  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61590283730641" },
+  { label: "Instagram", href: "https://www.instagram.com/yesdoedutech/" },
+  { label: "Twitter / X", href: "https://x.com/yesdoedutech" },
 ];
 
 export default function ContactPage() {

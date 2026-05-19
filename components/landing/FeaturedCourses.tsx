@@ -54,7 +54,7 @@ export default function FeaturedCourses() {
             <p style={{ color: "var(--text-body)", marginTop: 8, fontSize: "0.9rem" }}>Curated by industry experts. Practical, project-based learning.</p>
           </div>
           <Link href="/courses" style={{ display: "flex", alignItems: "center", gap: 6, color: "#2563eb", fontWeight: 600, fontSize: 14, textDecoration: "none" }}>
-            View all 200+ courses <ArrowRight />
+            View all courses <ArrowRight />
           </Link>
         </div>
 

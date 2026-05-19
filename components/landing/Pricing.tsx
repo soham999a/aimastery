@@ -9,20 +9,95 @@ const StarIcon = () => <svg width="12" height="12" viewBox="0 0 24 24" fill="#fa
 const ClockIcon = () => <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
 const UsersIcon = () => <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
 const CrownIcon = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/><line x1="5" y1="20" x2="19" y2="20"/></svg>;
-const SchoolIcon = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>;
-const ZapIcon = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+const XIcon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
 
-type Audience = "students" | "professionals";
+const COURSE_IDS = ["ai-mastery-complete", "data-analytics", "learn-ai-python"];
 
-const STUDENT_IDS = ["ai-mastery-complete", "data-analytics", "learn-ai-python"];
-const PRO_IDS = ["ai-mastery-complete", "python-fullstack", "microsoft-certification", "alteryx-certification"];
+// School/Workshop enroll modal
+function SchoolModal({ onClose }: { onClose: () => void }) {
+  const [form, setForm] = useState({ name: "", email: "", phone: "", school: "" });
+  const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setLoading(true);
+    // Save lead to email API
+    try {
+      await fetch("/api/email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: "contact@yesdo.co.in",
+          subject: `School Partnership Enquiry — ${form.school}`,
+          type: "contact",
+          data: { name: form.name, email: form.email, message: `Phone: ${form.phone}\nSchool/Org: ${form.school}` },
+        }),
+      });
+    } catch { /* fail silently */ }
+    setLoading(false);
+    setSent(true);
+    // Auto-download brochure
+    const a = document.createElement("a");
+    a.href = "/YesDo Edutech School  College brochure (1).pdf";
+    a.download = "YesDo-Edutech-School-Partnership-Brochure.pdf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  const inp = { width: "100%", padding: "10px 14px", borderRadius: 10, border: "1px solid var(--border)", background: "var(--bg-input)", color: "var(--text-h)", fontSize: 14, outline: "none", fontFamily: "inherit", boxSizing: "border-box" as const };
+
+  return (
+    <div style={{ position: "fixed", inset: 0, zIndex: 10000, display: "flex", alignItems: "center", justifyContent: "center", padding: 24, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(4px)" }} onClick={onClose}>
+      <div style={{ maxWidth: 480, width: "100%", borderRadius: 24, background: "var(--bg-card)", border: "1px solid var(--border)", padding: "36px 32px", position: "relative" }} onClick={e => e.stopPropagation()}>
+        <button onClick={onClose} style={{ position: "absolute", top: 16, right: 16, background: "none", border: "none", cursor: "pointer", color: "var(--text-muted)" }}><XIcon /></button>
+
+        {sent ? (
+          <div style={{ textAlign: "center", padding: "24px 0" }}>
+            <div style={{ fontSize: 48, marginBottom: 12 }}>🎉</div>
+            <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.3rem", color: "var(--text-h)", marginBottom: 8 }}>
+              Your brochure is downloading!
+            </h3>
+            <p style={{ color: "var(--text-muted)", fontSize: 14, marginBottom: 20 }}>
+              Our team will also reach out within 24 hours. If the download didn't start automatically, click below.
+            </p>
+            <a
+              href="/YesDo Edutech School  College brochure (1).pdf"
+              download="YesDo-Edutech-School-Partnership-Brochure.pdf"
+              style={{ display: "inline-block", padding: "11px 24px", borderRadius: 10, background: "#b91c1c", color: "#fff", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14, textDecoration: "none" }}
+            >
+              📄 Download Brochure
+            </a>
+          </div>
+        ) : (
+          <>
+            <div style={{ marginBottom: 24 }}>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "4px 12px", borderRadius: 999, background: "rgba(185,28,28,0.1)", border: "1px solid rgba(185,28,28,0.3)", color: "#f87171", fontSize: 12, fontWeight: 600, marginBottom: 12 }}>🏫 School / Workshop Partnership</div>
+              <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.3rem", color: "var(--text-h)", marginBottom: 6 }}>Get Our Brochure & Enrol</h3>
+              <p style={{ fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>Fill in your details and the brochure will download automatically. Our team will also reach out within 24 hours.</p>
+            </div>
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              <input required placeholder="Your Name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} style={inp} />
+              <input required type="email" placeholder="Email Address" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} style={inp} />
+              <input required type="tel" placeholder="Phone Number" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} style={inp} />
+              <input required placeholder="School / College / Organisation Name" value={form.school} onChange={e => setForm({ ...form, school: e.target.value })} style={inp} />
+              <button type="submit" disabled={loading} style={{ padding: "13px", borderRadius: 10, background: "#b91c1c", color: "#fff", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14, border: "none", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, marginTop: 4 }}>
+                {loading ? "Sending..." : "Get Brochure & Enrol →"}
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function Pricing() {
-  const [audience, setAudience] = useState<Audience>("students");
   const [modalPlan, setModalPlan] = useState<{ name: string; price: number } | null>(null);
+  const [showSchoolModal, setShowSchoolModal] = useState(false);
 
-  const ids = audience === "students" ? STUDENT_IDS : PRO_IDS;
-  const courses = ids.map((id) => ALL_COURSES.find((c) => c.id === id)!).filter(Boolean);
+  const courses = COURSE_IDS.map((id) => ALL_COURSES.find((c) => c.id === id)!).filter(Boolean);
 
   return (
     <section id="pricing" style={{ background: "var(--bg-surface)", padding: "96px 0" }}>
@@ -36,24 +111,9 @@ export default function Pricing() {
           <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "2.25rem", fontWeight: 800, color: "var(--text-h)", marginBottom: 12 }}>
             Invest in your <span style={{ background: "linear-gradient(135deg,#7c3aed,#a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>future</span>
           </h2>
-          <p style={{ color: "var(--text-body)", maxWidth: 480, margin: "0 auto 32px", fontSize: "0.95rem" }}>
+          <p style={{ color: "var(--text-body)", maxWidth: 480, margin: "0 auto", fontSize: "0.95rem" }}>
             Premium quality education at a fraction of market price. Easy EMI from ₹2,000/month. All prices + GST.
           </p>
-
-          {/* Students / Professionals toggle */}
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 4, padding: 5, borderRadius: 12, background: "var(--bg-input)", border: "1px solid var(--border)" }}>
-            {([
-              { key: "students" as Audience, label: "Students", Icon: SchoolIcon },
-              { key: "professionals" as Audience, label: "Professionals", Icon: ZapIcon },
-            ]).map(({ key, label, Icon }) => {
-              const active = audience === key;
-              return (
-                <button key={key} onClick={() => setAudience(key)} style={{ display: "flex", alignItems: "center", gap: 8, padding: "9px 20px", borderRadius: 9, fontSize: 14, fontWeight: 600, background: active ? "var(--bg-card)" : "transparent", color: active ? "var(--text-h)" : "var(--text-muted)", border: "none", cursor: "pointer", boxShadow: active ? "0 1px 6px rgba(0,0,0,0.15)" : "none", transition: "all 0.2s" }}>
-                  <Icon /> {label}
-                </button>
-              );
-            })}
-          </div>
         </div>
 
         {/* Course cards */}
@@ -61,14 +121,12 @@ export default function Pricing() {
           {courses.map((course) => (
             <div key={course.id} style={{ display: "flex", flexDirection: "column", borderRadius: 20, overflow: "hidden", border: course.isFlagship ? "2px solid #2563eb" : "1px solid var(--border-card)", background: "var(--bg-card)", position: "relative", boxShadow: course.isFlagship ? "0 0 32px rgba(37,99,235,0.18)" : "none" }}>
 
-              {/* Flagship badge */}
               {course.isFlagship && (
                 <div style={{ position: "absolute", top: 12, right: 12, zIndex: 2, display: "flex", alignItems: "center", gap: 5, padding: "4px 12px", borderRadius: 999, background: "#2563eb", color: "#fff", fontSize: 11, fontWeight: 700, boxShadow: "0 4px 12px rgba(37,99,235,0.4)" }}>
-                  ⚡ Most Popular
+                  ⚡ Best in the Market
                 </div>
               )}
 
-              {/* Thumbnail */}
               <div style={{ height: 160, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", background: `linear-gradient(135deg,${course.gradientFrom},${course.gradientTo})` }}>
                 <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 30% 40%,rgba(255,255,255,0.12) 0%,transparent 65%)" }} />
                 <span style={{ fontSize: 52, position: "relative", zIndex: 1 }}>{course.emoji}</span>
@@ -79,7 +137,6 @@ export default function Pricing() {
                 )}
               </div>
 
-              {/* Content */}
               <div style={{ padding: "20px 20px 24px", display: "flex", flexDirection: "column", flex: 1 }}>
                 <div style={{ display: "flex", gap: 6, marginBottom: 10 }}>
                   <span style={{ fontSize: 10, fontWeight: 600, padding: "2px 8px", borderRadius: 999, background: "rgba(37,99,235,0.1)", color: "#2563eb", border: "1px solid rgba(37,99,235,0.2)" }}>{course.level}</span>
@@ -95,7 +152,6 @@ export default function Pricing() {
                   <span style={{ display: "flex", alignItems: "center", gap: 4 }}><UsersIcon />{course.students.toLocaleString()}</span>
                 </div>
 
-                {/* Price + EMI */}
                 <div style={{ marginBottom: 16 }}>
                   <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
                     <span style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.5rem", color: "var(--text-h)" }}>₹{course.price.toLocaleString()}</span>
@@ -109,7 +165,6 @@ export default function Pricing() {
                   </p>
                 </div>
 
-                {/* Buttons */}
                 <div style={{ display: "flex", gap: 8, marginTop: "auto" }}>
                   <button
                     onClick={() => setModalPlan({ name: course.title, price: course.price })}
@@ -125,8 +180,11 @@ export default function Pricing() {
             </div>
           ))}
 
-          {/* School / Workshop card */}
-          <div style={{ display: "flex", flexDirection: "column", borderRadius: 20, overflow: "hidden", border: "1px solid var(--border-card)", background: "var(--bg-card)" }}>
+          {/* School / Workshop card — opens brochure+enroll modal */}
+          <div
+            onClick={() => setShowSchoolModal(true)}
+            style={{ display: "flex", flexDirection: "column", borderRadius: 20, overflow: "hidden", border: "1px solid var(--border-card)", background: "var(--bg-card)", cursor: "pointer" }}
+          >
             <div style={{ height: 160, display: "flex", alignItems: "center", justifyContent: "center", background: "linear-gradient(135deg,#7f1d1d,#b91c1c)", position: "relative" }}>
               <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 30% 40%,rgba(255,255,255,0.1) 0%,transparent 65%)" }} />
               <span style={{ fontSize: 52, position: "relative", zIndex: 1 }}>🏫</span>
@@ -146,9 +204,9 @@ export default function Pricing() {
                 <span style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.5rem", color: "var(--text-h)" }}>Custom</span>
                 <p style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 2 }}>Special introductory rates</p>
               </div>
-              <Link href="/contact" style={{ display: "block", textAlign: "center", padding: "11px", borderRadius: 10, border: "1px solid rgba(185,28,28,0.4)", color: "#f87171", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 13, textDecoration: "none" }}>
-                Partner With Us
-              </Link>
+              <div style={{ display: "block", textAlign: "center", padding: "11px", borderRadius: 10, border: "1px solid rgba(185,28,28,0.4)", color: "#f87171", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 13 }}>
+                Get Brochure & Enrol →
+              </div>
             </div>
           </div>
         </div>
@@ -159,13 +217,9 @@ export default function Pricing() {
       </div>
 
       {modalPlan && (
-        <PaymentModal
-          isOpen={!!modalPlan}
-          onClose={() => setModalPlan(null)}
-          courseName={modalPlan.name}
-          price={modalPlan.price}
-        />
+        <PaymentModal isOpen={!!modalPlan} onClose={() => setModalPlan(null)} courseName={modalPlan.name} price={modalPlan.price} />
       )}
+      {showSchoolModal && <SchoolModal onClose={() => setShowSchoolModal(false)} />}
     </section>
   );
 }

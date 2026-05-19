@@ -65,7 +65,6 @@ const FAQS = [
   { q: 'How long is the workshop?', a: 'The live workshop is 3 hours. We cover AI tools, practical workflows, and a live Q&A session. Recordings are available for 48 hours after.' },
   { q: 'What AI tools will be covered?', a: 'ChatGPT, Gemini, Claude, Midjourney, Perplexity, Notion AI, and 10+ more. All tools have free tiers so you can start immediately.' },
   { q: 'Will I get a certificate?', a: 'Yes! All attendees who complete the workshop receive a verified digital certificate they can share on LinkedIn.' },
-  { q: 'What if I miss the live session?', a: 'Registered participants get access to the recording for 48 hours. However, live attendees get exclusive bonuses worth Rs. 15,000.' },
 ];
 
 // ── Countdown Timer ──
@@ -199,7 +198,7 @@ export default function WorkshopPage() {
         <div style={{ maxWidth: 860, margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '6px 16px', borderRadius: 999, background: 'rgba(220,38,38,0.15)', border: '1px solid rgba(220,38,38,0.4)', marginBottom: 24 }}>
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#4ade80', display: 'inline-block', boxShadow: '0 0 8px #4ade80' }} />
-            <span style={{ fontSize: 13, fontWeight: 600, color: '#fca5a5' }}>School / College Partnership · 2026-27</span>
+            <span style={{ fontSize: 13, fontWeight: 600, color: '#fca5a5' }}>Free AI & ML Workshop — Register Now</span>
           </div>
 
           <h1 style={{ fontFamily: 'Poppins, sans-serif', fontWeight: 900, fontSize: 'clamp(2rem,5vw,3.5rem)', lineHeight: 1.1, letterSpacing: '-0.03em', marginBottom: 20 }}>
@@ -332,50 +331,6 @@ export default function WorkshopPage() {
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                   <span style={{ fontSize: 13, color: '#64748b', textDecoration: 'line-through' }}>₹{b.value.toLocaleString()}</span>
                   <span style={{ fontSize: 14, fontWeight: 700, color: '#4ade80' }}>FREE</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Mentors */}
-      <section style={{padding:"64px 24px"}}>
-        <div style={{maxWidth:900,margin:"0 auto"}}>
-          <h2 style={{fontFamily:"Poppins, sans-serif",fontWeight:800,fontSize:"2rem",textAlign:"center",color:"#f1f5f9",marginBottom:8}}>
-            Learn From The Best
-          </h2>
-          <p style={{textAlign:"center",color:"#64748b",fontSize:14,marginBottom:36}}>IIT alumni with years of real-world AI experience</p>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(300px,1fr))",gap:24}}>
-            {MENTORS.map((m,i)=>(
-              <div key={i} style={{padding:28,borderRadius:18,border:"1px solid rgba(255,255,255,0.08)",background:"#0f1629",display:"flex",flexDirection:"column",gap:16}}>
-                <div style={{display:"flex",alignItems:"center",gap:16}}>
-                  <div style={{width:64,height:64,borderRadius:"50%",background:"linear-gradient(135deg,#1e3a8a,#2563eb)",display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:22,fontWeight:700,flexShrink:0}}>{m.initials}</div>
-                  <div>
-                    <div style={{fontFamily:"Poppins, sans-serif",fontWeight:700,fontSize:"1.05rem",color:"#f1f5f9"}}>{m.name}</div>
-                    <div style={{fontSize:13,color:"#2563eb",marginTop:2}}>{m.title}</div>
-                  </div>
-                </div>
-                <p style={{fontSize:14,color:"#64748b",lineHeight:1.65}}>{m.bio}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section style={{padding:"64px 24px",background:"#0a0d1a"}}>
-        <div style={{maxWidth:1100,margin:"0 auto"}}>
-          <h2 style={{fontFamily:"Poppins, sans-serif",fontWeight:800,fontSize:"2rem",textAlign:"center",color:"#f1f5f9",marginBottom:8}}>Real Results From Real People</h2>
-          <p style={{textAlign:"center",color:"#64748b",fontSize:14,marginBottom:36}}>Join thousands of professionals who transformed their careers</p>
-          <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:18}}>
-            {TESTIMONIALS.map((t,i)=>(
-              <div key={i} style={{padding:24,borderRadius:16,border:"1px solid rgba(255,255,255,0.07)",background:"#0f1629",display:"flex",flexDirection:"column",gap:12}}>
-                <div style={{display:"flex",gap:2}}>{[1,2,3,4,5].map(s=><Star key={s}/>)}</div>
-                <p style={{fontSize:14,color:"#94a3b8",lineHeight:1.65,flex:1}}>"{t.text}"</p>
-                <div style={{paddingTop:12,borderTop:"1px solid rgba(255,255,255,0.06)"}}>
-                  <div style={{fontWeight:600,fontSize:14,color:"#f1f5f9"}}>{t.name}</div>
-                  <div style={{fontSize:12,color:"#475569"}}>{t.role}</div>
                 </div>
               </div>
             ))}

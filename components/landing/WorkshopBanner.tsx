@@ -34,7 +34,7 @@ export default function WorkshopBanner() {
               <span style={{ fontSize: 12, fontWeight: 600, color: "#fca5a5" }}>FREE Live Workshop</span>
             </div>
             <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.5rem", color: "#fff", marginBottom: 6 }}>
-              School / College Partnership — 2026-27
+              Join Our AI & ML Programme
             </h3>
             <p style={{ color: "rgba(255,255,255,0.7)", fontSize: 14 }}>Zero infrastructure. Expert delivery. Strong student outcomes. Early partners get priority scheduling.</p>
           </div>

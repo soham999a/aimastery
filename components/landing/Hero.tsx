@@ -181,12 +181,9 @@ export default function Hero() {
         <p style={{
           fontSize: "1.05rem",
           color: isDark ? "#94a3b8" : "#475569",
-          maxWidth: 600, margin: "0 auto 8px", lineHeight: 1.75,
+          maxWidth: 600, margin: "0 auto 16px", lineHeight: 1.75,
         }}>
           India's most practical AI education — 27 modules, 5000+ learning minutes, 100% hands-on. For students, professionals, and schools.
-        </p>
-        <p style={{ fontSize: "0.9rem", color: isDark ? "#64748b" : "#94a3b8", marginBottom: 16 }}>
-          School &amp; College Partnership Programme · 2026-27
         </p>
 
         {/* Subject pills */}

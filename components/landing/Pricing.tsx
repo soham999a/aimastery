@@ -39,7 +39,7 @@ function SchoolModal({ onClose }: { onClose: () => void }) {
     setSent(true);
     // Auto-download brochure
     const a = document.createElement("a");
-    a.href = "/YesDo Edutech School  College brochure (1).pdf";
+    a.href = "/yesdo-school-brochure.pdf";
     a.download = "YesDo-Edutech-School-Partnership-Brochure.pdf";
     document.body.appendChild(a);
     a.click();
@@ -63,7 +63,7 @@ function SchoolModal({ onClose }: { onClose: () => void }) {
               Our team will also reach out within 24 hours. If the download didn't start automatically, click below.
             </p>
             <a
-              href="/YesDo Edutech School  College brochure (1).pdf"
+              href="/yesdo-school-brochure.pdf"
               download="YesDo-Edutech-School-Partnership-Brochure.pdf"
               style={{ display: "inline-block", padding: "11px 24px", borderRadius: 10, background: "#b91c1c", color: "#fff", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14, textDecoration: "none" }}
             >

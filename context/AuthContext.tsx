@@ -54,7 +54,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       createdAt: new Date().toISOString(),
       enrolledCourses: [],
       subscriptionTier: "free",
-      referralCode: "AIM" + user.uid.slice(0, 6).toUpperCase(),
+      referralCode: "YDO" + user.uid.slice(0, 6).toUpperCase(),
       referralCount: 0,
       ...(referredBy ? { referredBy } : {}),
     });

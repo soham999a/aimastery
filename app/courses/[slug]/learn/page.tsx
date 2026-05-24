@@ -14,12 +14,14 @@ const AwardIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="no
 
 // YouTube video IDs per course (demo videos - replace with real ones)
 const COURSE_VIDEOS: Record<string, string[]> = {
-  "ar-fundamentals": ["dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ"],
-  "ai-ml-bootcamp": ["dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ"],
-  "generative-ai": ["dQw4w9WgXcQ","dQw4w9WgXcQ","dQw4w9WgXcQ"],
-  "unity-ar": ["dQw4w9WgXcQ","dQw4w9WgXcQ"],
-  "computer-vision": ["dQw4w9WgXcQ","dQw4w9WgXcQ"],
-  "webar-dev": ["dQw4w9WgXcQ","dQw4w9WgXcQ"],
+  // Add your YouTube video IDs here after uploading to YouTube (Unlisted)
+  // Format: "course-id": ["videoId_lesson1", "videoId_lesson2", ...]
+  "ai-mastery-complete": [],
+  "learn-ai-python": [],
+  "data-analytics": [],
+  "python-fullstack": [],
+  "microsoft-certification": [],
+  "alteryx-certification": [],
 };
 
 async function generateCertificate(userName: string, courseName: string, instructorName: string) {
@@ -76,7 +78,7 @@ async function generateCertificate(userName: string, courseName: string, instruc
   doc.setFont("helvetica", "normal");
   doc.text(`Issued on ${date}`, 50, 165);
   doc.text(`Instructor: ${instructorName}`, W/2, 165, { align: "center" });
-  doc.text("AI Mastery | aimastery.vercel.app", W-50, 165, { align: "right" });
+  doc.text("YesDo Edutech | yesdo.co.in", W-50, 165, { align: "right" });
 
   // Line
   doc.setDrawColor(37, 99, 235);
@@ -253,7 +255,9 @@ export default function LearnPage({ params }: { params: Promise<{ slug: string }
 
             {isComplete && (
               <div style={{ padding: 24, borderRadius: 14, border: "1px solid rgba(74,222,128,0.3)", background: "rgba(74,222,128,0.06)", textAlign: "center" }}>
-                <div style={{ fontSize: 36, marginBottom: 8 }}>🎉</div>
+                <div style={{ width: 52, height: 52, borderRadius: "50%", background: "rgba(74,222,128,0.15)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 12px" }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ade80" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
                 <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1.1rem", color: "#4ade80", marginBottom: 4 }}>Course Complete!</h3>
                 <p style={{ fontSize: 14, color: "var(--text-muted)", marginBottom: 16 }}>Congratulations! Download your certificate now.</p>
                 <button onClick={handleCertificate} disabled={genCert} style={{ padding: "10px 24px", borderRadius: 10, background: "#4ade80", color: "#052e16", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14, border: "none", cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 8 }}>

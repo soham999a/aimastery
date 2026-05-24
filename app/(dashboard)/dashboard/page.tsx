@@ -2,18 +2,28 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection, addDoc, onSnapshot, query, orderBy, limit } from "firebase/firestore";
 import { updateProfile } from "firebase/auth";
 import { db, auth } from "@/lib/firebase";
 import { useAuth } from "@/context/AuthContext";
 import ReferralWidget from "@/components/ui/ReferralWidget";
 
 interface UserData { name:string; email:string; enrolledCourses:string[]; subscriptionTier:string; createdAt:string; isDemo?:boolean; }
-type Tab = "overview"|"courses"|"profile"|"settings";
+type Tab = "overview"|"courses"|"community"|"profile"|"settings";
+
+interface Message {
+  id: string;
+  userId: string;
+  userName: string;
+  text: string;
+  timestamp: string;
+  userTier?: string;
+}
 
 const ENROLLED = [
   {id:"ar-fundamentals",title:"AR Fundamentals",instructor:"Dr. Sarah Chen",progress:65,total:28,done:18,gFrom:"#1e3a8a",gTo:"#0e7490",next:"Advanced AR Techniques Part 3"},
   {id:"ai-ml-bootcamp",title:"AI and ML Bootcamp",instructor:"Prof. Raj Patel",progress:30,total:48,done:14,gFrom:"#3b0764",gTo:"#831843",next:"Deep Learning Neural Networks Part 2"},
+  {id:"ai-prompting-foundations",title:"AI Foundations & Prompting",instructor:"YesDo AI Faculty",progress:100,total:10,done:10,gFrom:"#047857",gTo:"#065f46",next:"All modules completed!"},
 ];
 const RECOMMENDED = [
   {id:"generative-ai",title:"Generative AI Mastery",level:"Advanced",price:5999},
@@ -152,7 +162,15 @@ function OverviewTab({firstName, userData}:{firstName:string; userData: UserData
   );
 }
 
-function CoursesTab() {
+function CoursesTab({
+  handleDownloadCert,
+  downloadingCert,
+  certLoadingId
+}: {
+  handleDownloadCert: (courseId: string, courseTitle: string) => void;
+  downloadingCert: boolean;
+  certLoadingId: string;
+}) {
   return (
     <div>
       <h2 style={{color:'var(--text-h)',fontSize:20,fontWeight:700,marginBottom:24}}>My Courses</h2>
@@ -175,11 +193,47 @@ function CoursesTab() {
                 <p style={{color:'var(--text-faint)',fontSize:11,marginBottom:2}}>Up next</p>
                 <p style={{color:'var(--text-body)',fontSize:12}}>{c.next}</p>
               </div>
-              <Link href={'/courses/'+c.id+'/learn'} style={{textDecoration:'none'}}>
-                <button style={{width:'100%',padding:'10px',borderRadius:10,background:'var(--brand)',color:'#fff',border:'none',cursor:'pointer',fontSize:13,fontWeight:600,display:'flex',alignItems:'center',justifyContent:'center',gap:8}}>
-                  <PlaySvg/> Resume Course
+              {c.progress === 100 ? (
+                <button
+                  onClick={() => handleDownloadCert(c.id, c.title)}
+                  disabled={downloadingCert}
+                  style={{
+                    width: '100%',
+                    padding: '10px',
+                    borderRadius: 10,
+                    background: 'linear-gradient(135deg, #d97706, #b45309)',
+                    color: '#fff',
+                    border: 'none',
+                    cursor: downloadingCert ? 'not-allowed' : 'pointer',
+                    fontSize: 13,
+                    fontWeight: 700,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 8,
+                    boxShadow: '0 4px 12px rgba(217,119,6,0.35)',
+                    transition: 'opacity 0.2s'
+                  }}
+                >
+                  {downloadingCert && certLoadingId === c.id ? (
+                    <>
+                      <div style={{ width: 14, height: 14, borderRadius: '50%', border: '2px solid #fff', borderTopColor: 'transparent', animation: 'spin 0.6s linear infinite' }} />
+                      Generating PDF...
+                    </>
+                  ) : (
+                    <>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+                      Claim Certificate
+                    </>
+                  )}
                 </button>
-              </Link>
+              ) : (
+                <Link href={'/courses/'+c.id+'/learn'} style={{textDecoration:'none'}}>
+                  <button style={{width:'100%',padding:'10px',borderRadius:10,background:'var(--brand)',color:'#fff',border:'none',cursor:'pointer',fontSize:13,fontWeight:600,display:'flex',alignItems:'center',justifyContent:'center',gap:8}}>
+                    <PlaySvg/> Resume Course
+                  </button>
+                </Link>
+              )}
               <Link href={'/courses/'+c.id+'/classroom'} style={{textDecoration:'none',marginTop:8,display:'block'}}>
                 <button style={{width:'100%',padding:'9px',borderRadius:10,background:'rgba(26,115,232,0.1)',color:'#1a73e8',border:'1px solid rgba(26,115,232,0.3)',cursor:'pointer',fontSize:12,fontWeight:600,display:'flex',alignItems:'center',justifyContent:'center',gap:6}}>
                   <svg width='13' height='13' viewBox='0 0 48 48' fill='none'><path d='M24 12L36 18V30L24 36L12 30V18L24 12Z' stroke='#1a73e8' strokeWidth='2.5' fill='none'/><circle cx='24' cy='24' r='4' fill='#1a73e8'/></svg>
@@ -189,6 +243,157 @@ function CoursesTab() {
             </div>
           </div>
         ))}
+      </div>
+    </div>
+  );
+}
+
+function MsgSvg() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </svg>
+  );
+}
+
+function CommunityTab({
+  messages,
+  msgText,
+  setMsgText,
+  handleSendMsg,
+  sendingMsg,
+  currentUser
+}: {
+  messages: Message[];
+  msgText: string;
+  setMsgText: (t: string) => void;
+  handleSendMsg: () => void;
+  sendingMsg: boolean;
+  currentUser: any;
+}) {
+  return (
+    <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 20, display: 'flex', flexDirection: 'column', height: 'calc(100vh - 240px)', overflow: 'hidden' }}>
+      <div style={{ padding: '16px 24px', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div>
+          <h3 style={{ color: 'var(--text-h)', fontSize: 16, fontWeight: 600 }}>Community Chat</h3>
+          <p style={{ color: 'var(--text-muted)', fontSize: 12 }}>Connect, collaborate, and share with your fellow peers</p>
+        </div>
+        <span style={{ fontSize: 12, color: 'var(--brand)', background: 'rgba(37,99,235,0.1)', padding: '4px 10px', borderRadius: 99, fontWeight: 600 }}>
+          {messages.length} messages
+        </span>
+      </div>
+
+      <div style={{ flex: 1, padding: 24, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 16 }}>
+        {messages.length === 0 ? (
+          <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', color: 'var(--text-muted)', gap: 10 }}>
+            <MsgSvg />
+            <p style={{ fontSize: 14 }}>No messages yet. Be the first to start the conversation!</p>
+          </div>
+        ) : (
+          messages.map((m) => {
+            const isMe = m.userId === currentUser?.uid;
+            const initials = getInitials(m.userName || 'U');
+            const tierColor = m.userTier === 'pro' ? '#60a5fa' : m.userTier === 'enterprise' ? '#a78bfa' : '#94a3b8';
+            
+            return (
+              <div key={m.id} style={{ display: 'flex', gap: 12, flexDirection: isMe ? 'row-reverse' : 'row', alignItems: 'flex-start' }}>
+                <div style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: '50%',
+                  background: isMe ? 'var(--brand)' : 'linear-gradient(135deg, #1e3a8a, #7c3aed)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#fff',
+                  fontSize: 12,
+                  fontWeight: 700,
+                  flexShrink: 0
+                }}>
+                  {initials}
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: isMe ? 'flex-end' : 'flex-start', maxWidth: '70%' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                    <span style={{ color: 'var(--text-h)', fontSize: 12, fontWeight: 600 }}>{m.userName}</span>
+                    {m.userTier && m.userTier !== "free" && (
+                      <span style={{ fontSize: 9, padding: '1px 6px', borderRadius: 4, background: tierColor + '22', border: '1px solid ' + tierColor + '44', color: tierColor, fontWeight: 700, textTransform: 'capitalize' }}>
+                        {m.userTier}
+                      </span>
+                    )}
+                    <span style={{ color: 'var(--text-faint)', fontSize: 10 }}>
+                      {m.timestamp ? new Date(m.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ""}
+                    </span>
+                  </div>
+                  <div style={{
+                    background: isMe ? 'var(--brand)' : 'var(--bg-surface)',
+                    border: '1px solid ' + (isMe ? 'transparent' : 'var(--border)'),
+                    color: isMe ? '#fff' : 'var(--text-body)',
+                    padding: '10px 14px',
+                    borderRadius: isMe ? '16px 4px 16px 16px' : '4px 16px 16px 16px',
+                    fontSize: 13,
+                    lineHeight: 1.4,
+                    wordBreak: 'break-word'
+                  }}>
+                    {m.text}
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        )}
+        <div id="community-chat-end" />
+      </div>
+
+      <div style={{ padding: 20, borderTop: '1px solid var(--border)', background: 'var(--bg-surface)' }}>
+        <div style={{ display: 'flex', gap: 10 }}>
+          <input
+            value={msgText}
+            onChange={(e) => setMsgText(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSendMsg();
+              }
+            }}
+            placeholder="Share an update or say hi to the community..."
+            disabled={sendingMsg}
+            style={{
+              flex: 1,
+              padding: '12px 16px',
+              borderRadius: 12,
+              border: '1px solid var(--border)',
+              background: 'var(--bg-card)',
+              color: 'var(--text-h)',
+              fontSize: 14,
+              outline: 'none',
+              fontFamily: 'inherit',
+              transition: 'border-color 0.2s'
+            }}
+          />
+          <button
+            onClick={handleSendMsg}
+            disabled={sendingMsg || !msgText.trim()}
+            style={{
+              padding: '0 20px',
+              borderRadius: 12,
+              background: 'var(--brand)',
+              color: '#fff',
+              border: 'none',
+              cursor: (sendingMsg || !msgText.trim()) ? 'not-allowed' : 'pointer',
+              fontSize: 13,
+              fontWeight: 600,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+              opacity: (sendingMsg || !msgText.trim()) ? 0.6 : 1,
+              transition: 'background 0.2s'
+            }}
+          >
+            {sendingMsg ? "Sending..." : "Send"}
+          </button>
+        </div>
       </div>
     </div>
   );
@@ -305,6 +510,16 @@ export default function DashboardPage() {
   const [userData,setUserData] = useState<UserData|null>(null);
   const [fetching,setFetching] = useState(true);
 
+  // Community Chat States
+  const [msgText, setMsgText] = useState("");
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [sendingMsg, setSendingMsg] = useState(false);
+
+  // Certificate Download States
+  const [downloadingCert, setDownloadingCert] = useState(false);
+  const [certLoadingId, setCertLoadingId] = useState("");
+  const [certData, setCertData] = useState({ name: "", title: "", id: "", date: "" });
+
   useEffect(()=>{
     if(!loading&&!user) router.replace('/login');
   },[user,loading,router]);
@@ -316,6 +531,36 @@ export default function DashboardPage() {
       if(snap.exists()) setUserData(snap.data() as UserData);
     }).finally(()=>setFetching(false));
   },[user]);
+
+  // Subscribe to real-time chat messages when community tab is open
+  useEffect(() => {
+    if (tab !== "community" || !user) return;
+    const q = query(
+      collection(db, "community_messages"),
+      orderBy("timestamp", "asc"),
+      limit(50)
+    );
+    const unsubscribe = onSnapshot(q, (snap) => {
+      const msgs: Message[] = [];
+      snap.forEach((doc) => {
+        msgs.push({ id: doc.id, ...doc.data() } as Message);
+      });
+      setMessages(msgs);
+      setTimeout(() => {
+        const el = document.getElementById("community-chat-end");
+        el?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    });
+    return unsubscribe;
+  }, [tab, user]);
+
+  // Auto-scroll on new messages
+  useEffect(() => {
+    if (tab === "community") {
+      const el = document.getElementById("community-chat-end");
+      el?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, tab]);
 
   if(loading||fetching) return (
     <div style={{minHeight:'100vh',background:'var(--bg-base)',display:'flex',alignItems:'center',justifyContent:'center'}}>
@@ -329,9 +574,76 @@ export default function DashboardPage() {
   const firstName = displayName.split(' ')[0];
   const initials = getInitials(displayName);
 
+  async function handleSendMsg() {
+    if (!msgText.trim() || !user) return;
+    setSendingMsg(true);
+    try {
+      await addDoc(collection(db, "community_messages"), {
+        userId: user.uid,
+        userName: displayName,
+        text: msgText.trim(),
+        timestamp: new Date().toISOString(),
+        userTier: userData?.subscriptionTier || "free"
+      });
+      setMsgText("");
+    } catch (err) {
+      console.error("Error sending message:", err);
+    } finally {
+      setSendingMsg(false);
+    }
+  }
+
+  async function handleDownloadCert(courseId: string, courseTitle: string) {
+    setDownloadingCert(true);
+    setCertLoadingId(courseId);
+    
+    const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const shortId = (user!.uid.slice(0, 6) + courseId.slice(0, 4)).toUpperCase();
+    
+    setCertData({
+      name: displayName,
+      title: courseTitle,
+      id: shortId,
+      date: dateStr
+    });
+
+    setTimeout(async () => {
+      try {
+        const html2canvas = (await import("html2canvas")).default;
+        const { jsPDF } = await import("jspdf");
+        
+        const element = document.getElementById("yesdo-certificate-template");
+        if (!element) throw new Error("Certificate element not found");
+        
+        const canvas = await html2canvas(element, {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#060912'
+        });
+        
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF({
+          orientation: "landscape",
+          unit: "px",
+          format: [1000, 700]
+        });
+        
+        pdf.addImage(imgData, "PNG", 0, 0, 1000, 700);
+        pdf.save(`yesdo-certificate-${courseId}.pdf`);
+      } catch (err) {
+        console.error("Certificate download error:", err);
+        alert("Failed to download certificate. Please try again.");
+      } finally {
+        setDownloadingCert(false);
+        setCertLoadingId("");
+      }
+    }, 500);
+  }
+
   const navItems:{id:Tab;label:string;icon:React.ReactNode}[] = [
     {id:'overview',label:'Overview',icon:<GridSvg/>},
     {id:'courses',label:'My Courses',icon:<BookSvg/>},
+    {id:'community',label:'Community',icon:<MsgSvg/>},
     {id:'profile',label:'Profile',icon:<UserSvg/>},
     {id:'settings',label:'Settings',icon:<GearSvg/>},
   ];
@@ -339,6 +651,7 @@ export default function DashboardPage() {
   const tabTitles:{[k in Tab]:string} = {
     overview:'Your learning at a glance',
     courses:'Track and continue your enrolled courses',
+    community:'Real-time interactive peer discussion board',
     profile:'Manage your personal information',
     settings:'Customize your experience',
   };
@@ -346,6 +659,86 @@ export default function DashboardPage() {
   return (
     <div style={{display:'flex',minHeight:'100vh',background:'var(--bg-base)'}}>
       <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+
+      {/* Hidden Certificate Template for html2canvas to capture */}
+      <div id="yesdo-certificate-template" style={{
+        position: 'absolute',
+        top: '-9999px',
+        left: '-9999px',
+        width: '1000px',
+        height: '700px',
+        background: '#060912',
+        color: '#f1f5f9',
+        fontFamily: '"Poppins", sans-serif',
+        boxSizing: 'border-box'
+      }}>
+        <div style={{
+          width: '100%',
+          height: '100%',
+          border: '8px double #d97706',
+          borderRadius: '16px',
+          padding: '40px',
+          boxSizing: 'border-box',
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: 'radial-gradient(circle, #0b1124 0%, #060912 100%)'
+        }}>
+          {/* Decorative corners */}
+          <div style={{ position: 'absolute', top: 20, left: 20, width: 40, height: 40, borderTop: '4px solid #d97706', borderLeft: '4px solid #d97706' }} />
+          <div style={{ position: 'absolute', top: 20, right: 20, width: 40, height: 40, borderTop: '4px solid #d97706', borderRight: '4px solid #d97706' }} />
+          <div style={{ position: 'absolute', bottom: 20, left: 20, width: 40, height: 40, borderBottom: '4px solid #d97706', borderLeft: '4px solid #d97706' }} />
+          <div style={{ position: 'absolute', bottom: 20, right: 20, width: 40, height: 40, borderBottom: '4px solid #d97706', borderRight: '4px solid #d97706' }} />
+
+          {/* Logo */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 24 }}>
+            <span style={{ fontSize: 24, fontWeight: 800, color: '#f1f5f9', letterSpacing: '-0.5px' }}>YesDo Edutech</span>
+          </div>
+
+          <h2 style={{ fontSize: 32, fontWeight: 700, textTransform: 'uppercase', color: '#d97706', letterSpacing: '3px', marginBottom: 12 }}>Certificate of Achievement</h2>
+          <p style={{ fontSize: 14, color: '#94a3b8', fontStyle: 'italic', marginBottom: 20 }}>This is proudly presented to</p>
+          
+          <h1 style={{ fontSize: 40, fontWeight: 700, color: '#fff', borderBottom: '2px solid rgba(217,119,6,0.3)', paddingBottom: 10, width: '80%', textAlign: 'center', marginBottom: 20 }}>
+            {certData.name}
+          </h1>
+
+          <p style={{ fontSize: 14, color: '#94a3b8', maxWidth: '600px', textAlign: 'center', lineHeight: 1.6, marginBottom: 28 }}>
+            for successfully completing the rigorous online training program and curriculum for the professional course
+          </p>
+
+          <h3 style={{ fontSize: 22, fontWeight: 700, color: '#3b82f6', marginBottom: 35 }}>
+            {certData.title}
+          </h3>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', width: '90%', alignItems: 'flex-end', marginTop: 10 }}>
+            <div style={{ textAlign: 'center', width: 200 }}>
+              <p style={{ fontFamily: 'monospace', color: '#cbd5e1', fontSize: 14, marginBottom: 4 }}>YDO-AI-FACULTY</p>
+              <div style={{ height: '1px', background: 'rgba(255,255,255,0.2)', marginBottom: 6 }} />
+              <p style={{ fontSize: 10, color: '#64748b', fontWeight: 600 }}>COURSE INSTRUCTOR</p>
+            </div>
+
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ width: 64, height: 64, borderRadius: '50%', border: '2px dashed #d97706', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#d97706', fontWeight: 700, fontSize: 10, background: 'rgba(217,119,6,0.05)' }}>
+                SEAL
+              </div>
+            </div>
+
+            <div style={{ textAlign: 'center', width: 200 }}>
+              <p style={{ fontFamily: 'monospace', color: '#cbd5e1', fontSize: 14, marginBottom: 4 }}>YesDo Director</p>
+              <div style={{ height: '1px', background: 'rgba(255,255,255,0.2)', marginBottom: 6 }} />
+              <p style={{ fontSize: 10, color: '#64748b', fontWeight: 600 }}>DIRECTOR, YESDO EDUTECH</p>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', width: '95%', position: 'absolute', bottom: 20, fontSize: 9, color: '#64748b' }}>
+            <span>Verification ID: YDO-CERT-{certData.id}</span>
+            <span>Date of Issue: {certData.date}</span>
+          </div>
+        </div>
+      </div>
+
       <aside style={{width:240,flexShrink:0,position:'fixed',top:0,left:0,height:'100vh',background:'var(--bg-surface)',borderRight:'1px solid var(--border)',display:'flex',flexDirection:'column',zIndex:50,overflowY:'auto'}}>
         <div style={{padding:'22px 20px 18px',borderBottom:'1px solid var(--border)'}}>
           <Link href='/' style={{textDecoration:'none',display:'flex',alignItems:'center',gap:10}}>
@@ -386,7 +779,8 @@ export default function DashboardPage() {
           <p style={{color:'var(--text-muted)',fontSize:13}}>{tabTitles[tab]}</p>
         </div>
         {tab==='overview'&&<OverviewTab firstName={firstName} userData={userData}/>}
-        {tab==='courses'&&<CoursesTab/>}
+        {tab==='courses'&&<CoursesTab handleDownloadCert={handleDownloadCert} downloadingCert={downloadingCert} certLoadingId={certLoadingId}/>}
+        {tab==='community'&&<CommunityTab messages={messages} msgText={msgText} setMsgText={setMsgText} handleSendMsg={handleSendMsg} sendingMsg={sendingMsg} currentUser={user}/>}
         {tab==='profile'&&<ProfileTab userData={userData} user={user}/>}
         {tab==='settings'&&<SettingsTab/>}
       </main>

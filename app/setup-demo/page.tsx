@@ -134,7 +134,7 @@ export default function SetupDemoPage() {
         )}
 
         <p style={{ fontSize: 11, color: "var(--text-faint)", marginTop: 20 }}>
-          This page is for setup only. Remove it before going to production.
+          IMPORTANT: Remove this page before going to production. This page is only for demo setup.
         </p>
       </div>
     </div>

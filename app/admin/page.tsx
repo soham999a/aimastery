@@ -39,10 +39,20 @@ export default function AdminPage() {
     </div>
   );
 
+  const ADMIN_EMAILS = ["contact@yesdo.co.in", "admin@yesdo.co.in"];
+
   if (!user) return (
     <div style={{ minHeight: "100vh", background: "var(--bg-base)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
       <p style={{ color: "var(--text-h)", fontSize: 18, fontFamily: "Poppins, sans-serif", fontWeight: 600 }}>Please log in to access admin</p>
       <Link href="/login" style={{ padding: "10px 24px", borderRadius: 10, background: "var(--brand)", color: "#fff", textDecoration: "none", fontWeight: 600 }}>Login</Link>
+    </div>
+  );
+
+  if (!ADMIN_EMAILS.includes(user.email ?? "")) return (
+    <div style={{ minHeight: "100vh", background: "var(--bg-base)", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 16 }}>
+      <p style={{ color: "#f87171", fontSize: 18, fontFamily: "Poppins, sans-serif", fontWeight: 600 }}>Access Denied</p>
+      <p style={{ color: "var(--text-muted)", fontSize: 14 }}>You do not have permission to access this page.</p>
+      <Link href="/" style={{ padding: "10px 24px", borderRadius: 10, background: "var(--brand)", color: "#fff", textDecoration: "none", fontWeight: 600 }}>Go Home</Link>
     </div>
   );
 

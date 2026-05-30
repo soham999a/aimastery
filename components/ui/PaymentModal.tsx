@@ -72,24 +72,20 @@ export default function PaymentModal({ isOpen, onClose, courseName, price }: Pay
           </button>
 
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
-            {/* PhonePe logo pill */}
             <div style={{
               display: "flex", alignItems: "center", gap: 8,
               background: "rgba(255,255,255,0.15)",
               borderRadius: 999, padding: "6px 14px",
               backdropFilter: "blur(4px)",
             }}>
-              <svg width="18" height="18" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="20" fill="#fff"/>
-                <text x="50%" y="55%" dominantBaseline="middle" textAnchor="middle" fontSize="18" fontWeight="bold" fill="#5b21b6">₱</text>
-              </svg>
-              <span style={{ color: "#fff", fontWeight: 700, fontSize: 14 }}>PhonePe</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+              <span style={{ color: "#fff", fontWeight: 700, fontSize: 14 }}>UPI</span>
             </div>
             <span style={{
               fontSize: 11, fontWeight: 700, padding: "3px 10px",
               borderRadius: 999, background: "rgba(255,255,255,0.2)",
               color: "#fff", letterSpacing: "0.05em",
-            }}>ACCEPTED HERE</span>
+            }}>ALL UPI APPS</span>
           </div>
 
           <h2 style={{
@@ -158,7 +154,7 @@ export default function PaymentModal({ isOpen, onClose, courseName, price }: Pay
             }} />
 
             <p style={{ fontSize: 12, color: "var(--text-muted)", marginBottom: 14, fontWeight: 500 }}>
-              Scan & Pay Using PhonePe App
+              Scan & Pay Using Any UPI App
             </p>
 
             {/* QR Image */}
@@ -170,25 +166,15 @@ export default function PaymentModal({ isOpen, onClose, courseName, price }: Pay
               padding: 8,
             }}>
               <img
-                src="/phonepe-qr.png"
-                alt="PhonePe QR Code - Scan to pay"
+                src="/Yesdo%20Qr.png"
+                alt="QR Code - Scan to pay"
                 width={200}
                 height={200}
                 style={{ display: "block", borderRadius: 8, width: 200, height: 200, objectFit: "contain" }}
               />
             </div>
 
-            <div style={{ marginTop: 14, textAlign: "center" }}>
-              <p style={{
-                fontFamily: "Poppins, sans-serif", fontWeight: 700,
-                fontSize: "0.95rem", color: "var(--text-h)", letterSpacing: "0.05em",
-              }}>
-                SOMNATH BANERJEE
-              </p>
-              <p style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 2 }}>
-                UPI · PhonePe
-              </p>
-            </div>
+
           </div>
 
           {/* Amount reminder */}

@@ -56,7 +56,7 @@ export default function CoursesPage() {
         <div style={{ background: "var(--bg-surface)", borderBottom: "1px solid var(--border)" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 24px" }}>
             <h1 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "2rem", color: "var(--text-h)", marginBottom: 4 }}>Course Catalog</h1>
-            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginBottom: 20 }}>{ALL_COURSES.length} expert-led courses in AI & tech</p>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.9rem", marginBottom: 20 }}>{ALL_COURSES.length} expert-led course in AI & tech</p>
             <div style={{ position: "relative", maxWidth: 520 }}>
               <span style={{ position: "absolute", left: 14, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)" }}><SearchIcon /></span>
               <input

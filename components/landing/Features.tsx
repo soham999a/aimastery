@@ -29,7 +29,7 @@ export default function Features() {
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "7px 16px", borderRadius: 999, border: "1px solid rgba(37,99,235,0.3)", background: "rgba(37,99,235,0.06)", color: "#60a5fa", fontSize: 13, fontWeight: 500, marginBottom: 16 }}>
             <ZapSm /> Our Differentiators
           </div>
-          <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "2.25rem", fontWeight: 800, color: "var(--text-h)", marginBottom: 12 }}>
+          <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "clamp(1.5rem,5vw,2.25rem)", fontWeight: 800, color: "var(--text-h)", marginBottom: 12 }}>
             What Makes YesDo <span className="gt-blue">Unique</span>
           </h2>
           <p style={{ color: "var(--text-body)", maxWidth: 460, margin: "0 auto", fontSize: "0.95rem", lineHeight: 1.7 }}>

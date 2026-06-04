@@ -123,7 +123,7 @@ export default function AITools() {
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 48, flexWrap: "wrap", gap: 16 }}>
           <div>
             <p style={{ color: "#2563eb", fontWeight: 600, fontSize: 12, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 }}>Top Industry AI</p>
-            <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "2.25rem", fontWeight: 800, color: "var(--text-h)", lineHeight: 1.2 }}>
+            <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "clamp(1.5rem,5vw,2.25rem)", fontWeight: 800, color: "var(--text-h)", lineHeight: 1.2 }}>
               100+ AI Tools You'll <span style={{ background: "linear-gradient(135deg,#2563eb,#7c3aed)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Master</span>
             </h2>
             <p style={{ color: "var(--text-body)", marginTop: 8, fontSize: "0.9rem", maxWidth: 480 }}>
@@ -156,8 +156,8 @@ export default function AITools() {
 
         <div style={{ marginTop: 40, padding: "24px 28px", borderRadius: 16, background: "rgba(37,99,235,0.06)", border: "1px solid rgba(37,99,235,0.15)", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
           <div>
-            <p style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1rem", color: "var(--text-h)", marginBottom: 4 }}>Master all 100+ tools in our AI Mastery Complete Course</p>
-            <p style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>27 modules · 5000+ learning minutes · 100+ AI tools · Industry certificate</p>
+            <p style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1rem", color: "var(--text-h)", marginBottom: 4 }}>Master all 100+ tools in our AI Mastery Flagship Course — Beginner to Advanced</p>
+            <p style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>27 modules · 5000+ learning minutes · Beginner to Advanced · Industry certificate</p>
           </div>
           <Link href="/courses/ai-mastery-complete" style={{ padding: "11px 22px", borderRadius: 10, background: "#2563eb", color: "#fff", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14, textDecoration: "none", whiteSpace: "nowrap", boxShadow: "0 4px 14px rgba(37,99,235,0.35)" }}>
             Enroll — ₹10,000

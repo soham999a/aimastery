@@ -32,7 +32,7 @@ export default function Community() {
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             Certificates & Community
           </div>
-          <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "2.25rem", fontWeight: 800, color: "var(--text-h)", marginBottom: 12 }}>
+          <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "clamp(1.5rem,5vw,2.25rem)", fontWeight: 800, color: "var(--text-h)", marginBottom: 12 }}>
             You don't just learn — you <span style={{ background: "linear-gradient(135deg,#10b981,#2563eb)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>get certified</span>
           </h2>
           <p style={{ color: "var(--text-body)", maxWidth: 480, margin: "0 auto", fontSize: "0.95rem" }}>
@@ -40,7 +40,7 @@ export default function Community() {
           </p>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, alignItems: "start" }}>
+        <div className="r-split" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, alignItems: "start" }}>
 
           {/* LEFT — Certificate preview */}
           <FadeIn direction="left">
@@ -59,7 +59,7 @@ export default function Community() {
                       </div>
                     </div>
                     <p style={{ fontSize: 11, color: "#64748b", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.1em" }}>Certificate of Completion</p>
-                    <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.1rem", color: "#f1f5f9", marginBottom: 4 }}>AI Mastery Complete Course</h3>
+                    <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.1rem", color: "#f1f5f9", marginBottom: 4 }}>AI Mastery Flagship Course — Beginner to Advanced</h3>
                     <p style={{ fontSize: 13, color: "#94a3b8", marginBottom: 16 }}>Awarded to <span style={{ color: "#f1f5f9", fontWeight: 600 }}>Your Name</span></p>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                       <div>

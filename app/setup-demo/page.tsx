@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const DEMO_EMAIL = "demo@aimastery.in";
 const DEMO_PASSWORD = "Demo@2025";
-const ALL_COURSES = ["ar-fundamentals","ai-ml-bootcamp","generative-ai","unity-ar","computer-vision","webar-dev"];
+const ALL_COURSES = ["ai-mastery-complete"];
 
 export default function SetupDemoPage() {
   const [status, setStatus] = useState<"idle"|"running"|"done"|"error">("idle");

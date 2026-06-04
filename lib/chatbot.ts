@@ -17,7 +17,7 @@ ABOUT YESDO EDUTECH:
 - Mission: Empowering Tomorrow's Leaders with AI & Industry Skills
 - Target: School and College students who want to be AI-ready
 
-FLAGSHIP PROGRAMME — AI Mastery Complete Course:
+FLAGSHIP PROGRAMME — AI Mastery Flagship Course (Beginner to Advanced):
 - 27 Core Modules, 100% Practical, Rs. 10,000 + GST
 - Market rate: Rs. 30,000 – Rs. 1,00,000+ (Save up to 70%)
 - Easy EMI options available

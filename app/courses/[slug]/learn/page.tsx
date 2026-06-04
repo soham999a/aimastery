@@ -17,11 +17,6 @@ const COURSE_VIDEOS: Record<string, string[]> = {
   // Add your YouTube video IDs here after uploading to YouTube (Unlisted)
   // Format: "course-id": ["videoId_lesson1", "videoId_lesson2", ...]
   "ai-mastery-complete": [],
-  "learn-ai-python": [],
-  "data-analytics": [],
-  "python-fullstack": [],
-  "microsoft-certification": [],
-  "alteryx-certification": [],
 };
 
 async function generateCertificate(userName: string, courseName: string, instructorName: string) {

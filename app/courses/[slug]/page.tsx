@@ -97,7 +97,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
 
         {/* Content */}
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "40px 24px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: 32, alignItems: "start" }}>
+          <div className="r-sidebar" style={{ display: "grid", gridTemplateColumns: "1fr 340px", gap: 32, alignItems: "start" }}>
 
             {/* Left: main content */}
             <div style={{ display: "flex", flexDirection: "column", gap: 32, minWidth: 0 }}>
@@ -107,7 +107,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                 <h2 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1.1rem", color: "var(--text-h)", marginBottom: 20 }}>
                   What you'll learn
                 </h2>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div className="r-2col" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
                   {course.outcomes.map((o) => (
                     <div key={o} style={{ display: "flex", alignItems: "flex-start", gap: 10, fontSize: 14, color: "var(--text-body)" }}>
                       <span style={{ flexShrink: 0, marginTop: 2 }}><CheckIcon /></span>
@@ -199,7 +199,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                     onClick={handleEnroll}
                     style={{ width: "100%", padding: "13px", borderRadius: 12, background: "linear-gradient(135deg, #7c3aed, #4f46e5)", color: "#fff", border: "none", cursor: "pointer", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14, marginBottom: 10, boxShadow: "0 8px 24px rgba(124,58,237,0.35)", transition: "opacity 0.2s" }}
                   >
-                    Enroll Now — Pay via UPI
+                    Enroll Now — UPI / Card / Net Banking
                   </button>
                   <Link href={`/courses/${course.id}/learn`} style={{ display: "block", textAlign: "center", padding: "11px", borderRadius: 12, border: "1px solid var(--border)", color: "var(--text-body)", textDecoration: "none", fontSize: 13, fontWeight: 500, marginBottom: 10 }}>
                     Preview Course
@@ -261,6 +261,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
         onClose={() => setShowPayment(false)}
         courseName={course.title}
         price={course.price}
+        courseId={course.id}
       />
     </>
   );

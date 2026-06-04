@@ -3,14 +3,18 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 function useCountdown() {
-  const [time, setTime] = useState({ h: 0, m: 0, s: 0 });
+  const [time, setTime] = useState({ d: 0, h: 0, m: 0, s: 0 });
   useEffect(() => {
+    const target = new Date("2026-06-07T18:00:00+05:30");
     const tick = () => {
       const now = new Date();
-      const midnight = new Date();
-      midnight.setHours(23, 59, 59, 999);
-      const diff = Math.max(0, midnight.getTime() - now.getTime());
-      setTime({ h: Math.floor(diff/3600000), m: Math.floor((diff%3600000)/60000), s: Math.floor((diff%60000)/1000) });
+      const diff = Math.max(0, target.getTime() - now.getTime());
+      setTime({
+        d: Math.floor(diff / 86400000),
+        h: Math.floor((diff % 86400000) / 3600000),
+        m: Math.floor((diff % 3600000) / 60000),
+        s: Math.floor((diff % 60000) / 1000),
+      });
     };
     tick();
     const id = setInterval(tick, 1000);
@@ -41,6 +45,7 @@ export default function WorkshopBanner() {
           <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 12 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span style={{ fontSize: 13, color: "rgba(255,255,255,0.7)" }}>Ends in:</span>
+              {time.d > 0 && <div style={{background:"rgba(0,0,0,0.3)",borderRadius:8,padding:"6px 10px",fontFamily:"Poppins, sans-serif",fontWeight:700,fontSize:16,color:"#fff",minWidth:44,textAlign:"center"}}>{pad(time.d)}<span style={{fontSize:10,marginLeft:2}}>d</span></div>}
               {[pad(time.h)+"h", pad(time.m)+"m", pad(time.s)+"s"].map((t, i) => (
                 <div key={i} style={{ background: "rgba(0,0,0,0.3)", borderRadius: 8, padding: "6px 10px", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 16, color: "#fff", minWidth: 44, textAlign: "center" }}>{t}</div>
               ))}

@@ -11,7 +11,7 @@ const UsersIcon = () => <svg width="12" height="12" viewBox="0 0 24 24" fill="no
 const CrownIcon = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/><line x1="5" y1="20" x2="19" y2="20"/></svg>;
 const XIcon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
 
-const COURSE_IDS = ["ai-mastery-complete", "data-analytics", "learn-ai-python"];
+const COURSE_IDS = ["ai-mastery-complete"];
 
 // School/Workshop enroll modal
 function SchoolModal({ onClose }: { onClose: () => void }) {
@@ -100,7 +100,7 @@ function SchoolModal({ onClose }: { onClose: () => void }) {
 }
 
 export default function Pricing() {
-  const [modalPlan, setModalPlan] = useState<{ name: string; price: number } | null>(null);
+  const [modalPlan, setModalPlan] = useState<{ name: string; price: number; courseId: string } | null>(null);
   const [showSchoolModal, setShowSchoolModal] = useState(false);
 
   const courses = COURSE_IDS.map((id) => ALL_COURSES.find((c) => c.id === id)!).filter(Boolean);
@@ -114,7 +114,7 @@ export default function Pricing() {
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "7px 16px", borderRadius: 999, border: "1px solid rgba(124,58,237,0.3)", background: "rgba(124,58,237,0.06)", color: "#a78bfa", fontSize: 13, fontWeight: 500, marginBottom: 16 }}>
             <CrownIcon /> Pricing Plans
           </div>
-          <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "2.25rem", fontWeight: 800, color: "var(--text-h)", marginBottom: 12 }}>
+          <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "clamp(1.5rem,5vw,2.25rem)", fontWeight: 800, color: "var(--text-h)", marginBottom: 12 }}>
             Invest in your <span style={{ background: "linear-gradient(135deg,#7c3aed,#a78bfa)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>future</span>
           </h2>
           <p style={{ color: "var(--text-body)", maxWidth: 480, margin: "0 auto", fontSize: "0.95rem" }}>
@@ -129,7 +129,7 @@ export default function Pricing() {
 
               {course.isFlagship && (
                 <div style={{ position: "absolute", top: 12, right: 12, zIndex: 2, display: "flex", alignItems: "center", gap: 5, padding: "4px 12px", borderRadius: 999, background: "#2563eb", color: "#fff", fontSize: 11, fontWeight: 700, boxShadow: "0 4px 12px rgba(37,99,235,0.4)" }}>
-                  ⚡ Best in the Market
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg> Best in the Market
                 </div>
               )}
 
@@ -178,7 +178,7 @@ export default function Pricing() {
 
                 <div style={{ display: "flex", gap: 8, marginTop: "auto" }}>
                   <button
-                    onClick={() => setModalPlan({ name: course.title, price: course.price })}
+                    onClick={() => setModalPlan({ name: course.title, price: course.price, courseId: course.id })}
                     style={{ flex: 1, padding: "11px", borderRadius: 10, background: course.isFlagship ? "#2563eb" : "transparent", color: course.isFlagship ? "#fff" : "var(--text-body)", border: course.isFlagship ? "none" : "1px solid var(--border)", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 13, cursor: "pointer", boxShadow: course.isFlagship ? "0 4px 14px rgba(37,99,235,0.35)" : "none" }}
                   >
                     Enroll Now
@@ -228,7 +228,7 @@ export default function Pricing() {
       </div>
 
       {modalPlan && (
-        <PaymentModal isOpen={!!modalPlan} onClose={() => setModalPlan(null)} courseName={modalPlan.name} price={modalPlan.price} />
+        <PaymentModal isOpen={!!modalPlan} onClose={() => setModalPlan(null)} courseName={modalPlan.name} price={modalPlan.price} courseId={modalPlan.courseId} />
       )}
       {showSchoolModal && <SchoolModal onClose={() => setShowSchoolModal(false)} />}
     </section>

@@ -16,29 +16,8 @@ const AIIcon = () => (
     })}
   </svg>
 );
-const MLIcon = () => (
-  <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
-    {[[16,32],[32,16],[48,32],[32,48],[24,24],[40,24],[40,40],[24,40]].map(([x,y],i) => (
-      <circle key={i} cx={x} cy={y} r="4" fill="rgba(255,255,255,0.7)"/>
-    ))}
-    <line x1="16" y1="32" x2="32" y2="16" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5"/>
-    <line x1="32" y1="16" x2="48" y2="32" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5"/>
-    <line x1="48" y1="32" x2="32" y2="48" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5"/>
-    <line x1="32" y1="48" x2="16" y2="32" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5"/>
-    <line x1="24" y1="24" x2="40" y2="40" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>
-    <line x1="40" y1="24" x2="24" y2="40" stroke="rgba(255,255,255,0.3)" strokeWidth="1"/>
-  </svg>
-);
-const GenAIIcon = () => (
-  <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
-    <path d="M32 12L37 27H52L40 36L45 51L32 42L19 51L24 36L12 27H27L32 12Z" fill="rgba(255,255,255,0.8)"/>
-  </svg>
-);
-
 const COURSES = [
-  { id: "ai-mastery-complete", title: "AI Mastery Complete Course — 27 Modules", instructor: "YesDo Edutech Faculty", level: "Beginner", duration: "27 modules", students: 1200, rating: 4.9, price: 10000, tag: "Flagship", tagColor: "#d97706", gradFrom: "#1e3a8a", gradTo: "#d97706", Icon: AIIcon },
-  { id: "learn-ai-python", title: "Learn AI using Python", instructor: "YesDo Edutech Faculty", level: "Intermediate", duration: "40 hours", students: 480, rating: 4.8, price: 8000, tag: "Popular", tagColor: "#a78bfa", gradFrom: "#065f46", gradTo: "#1d4ed8", Icon: MLIcon },
-  { id: "data-analytics", title: "Data Analytics + Business Analytics", instructor: "YesDo Edutech Faculty", level: "Beginner", duration: "35 hours", students: 620, rating: 4.8, price: 7500, tag: "In Demand", tagColor: "#34d399", gradFrom: "#7c3aed", gradTo: "#0891b2", Icon: GenAIIcon },
+  { id: "ai-mastery-complete", title: "AI Mastery Flagship Course — 27 Modules", instructor: "YesDo Edutech Faculty", level: "Beginner to Advanced", duration: "27 modules", students: 1200, rating: 4.9, price: 10000, tag: "Flagship", tagColor: "#d97706", gradFrom: "#1e3a8a", gradTo: "#d97706", Icon: AIIcon },
 ];
 
 export default function FeaturedCourses() {
@@ -48,7 +27,7 @@ export default function FeaturedCourses() {
         <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 48, flexWrap: "wrap", gap: 16 }}>
           <div>
             <p style={{ color: "#2563eb", fontWeight: 600, fontSize: 12, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 }}>Featured Courses</p>
-            <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "2.25rem", fontWeight: 800, color: "var(--text-h)", lineHeight: 1.2 }}>
+            <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "clamp(1.5rem,5vw,2.25rem)", fontWeight: 800, color: "var(--text-h)", lineHeight: 1.2 }}>
               Start with the <span className="gt-blue">best</span>
             </h2>
             <p style={{ color: "var(--text-body)", marginTop: 8, fontSize: "0.9rem" }}>Curated by industry experts. Practical, project-based learning.</p>

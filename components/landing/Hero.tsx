@@ -170,7 +170,7 @@ export default function Hero() {
         {/* Headline */}
         <h1 style={{
           fontFamily: "Poppins, sans-serif", fontWeight: 800,
-          fontSize: "3.5rem", lineHeight: 1.1, letterSpacing: "-0.03em",
+          fontSize: "clamp(2rem,5vw,3.5rem)", lineHeight: 1.1, letterSpacing: "-0.03em",
           color: isDark ? "#ffffff" : "#0f172a",
           margin: "0 auto 20px", maxWidth: 820,
         }}>
@@ -178,7 +178,7 @@ export default function Hero() {
           <span className="gt-blue">Build Your Future Today.</span>
         </h1>
 
-        <p style={{
+        <p className="r-hero-sub" style={{
           fontSize: "1.05rem",
           color: isDark ? "#94a3b8" : "#475569",
           maxWidth: 600, margin: "0 auto 16px", lineHeight: 1.75,
@@ -187,7 +187,7 @@ export default function Hero() {
         </p>
 
         {/* Subject pills */}
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8, maxWidth: 700, margin: "0 auto 40px" }}>
+        <div className="r-pill-scroll" style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 8, maxWidth: 700, margin: "0 auto 40px" }}>
           {SUBJECTS.map((s) => (
             <span key={s} style={{
               display: "inline-flex", alignItems: "center", gap: 6,
@@ -226,7 +226,7 @@ export default function Hero() {
         </div>
 
         {/* Stats */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14, maxWidth: 480, margin: "0 auto 48px" }}>
+        <div className="r-3col" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 14, maxWidth: 480, margin: "0 auto 48px" }}>
           {STATS.map(({ Icon, value, label }) => (
             <div key={label} style={{
               display: "flex", flexDirection: "column", alignItems: "center", gap: 6,

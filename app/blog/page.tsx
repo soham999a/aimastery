@@ -109,7 +109,7 @@ export default function BlogPage() {
         <div style={{ background: "var(--bg-surface)", borderBottom: "1px solid var(--border)", padding: "56px 24px 40px" }}>
           <div style={{ maxWidth: 900, margin: "0 auto" }}>
             <p style={{ color: "#2563eb", fontWeight: 600, fontSize: 12, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 8 }}>YesDo Blog</p>
-            <h1 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "2.25rem", color: "var(--text-h)", marginBottom: 8 }}>
+            <h1 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "clamp(1.5rem,5vw,2.25rem)", color: "var(--text-h)", marginBottom: 8 }}>
               AI Tips, Tutorials & Insights
             </h1>
             <p style={{ color: "var(--text-muted)", fontSize: "0.95rem", marginBottom: 24 }}>Stay ahead in the AI revolution. Practical guides from our team.</p>

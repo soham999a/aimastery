@@ -45,9 +45,9 @@ export default function AboutPage() {
         <div style={{ background: "var(--bg-surface)", borderBottom: "1px solid var(--border)", padding: "80px 24px 64px" }}>
           <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 16px", borderRadius: 999, border: "1px solid rgba(37,99,235,0.3)", background: "rgba(37,99,235,0.06)", color: "#60a5fa", fontSize: 13, fontWeight: 500, marginBottom: 20 }}>
-              🇮🇳 Made in Kolkata, India
+              Made in Kolkata, India
             </div>
-            <h1 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "2.75rem", color: "var(--text-h)", lineHeight: 1.15, marginBottom: 20 }}>
+            <h1 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "clamp(1.75rem,5vw,2.75rem)", color: "var(--text-h)", lineHeight: 1.15, marginBottom: 20 }}>
               We believe every student deserves<br />
               <span style={{ background: "linear-gradient(135deg,#2563eb,#7c3aed)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>world-class AI education</span>
             </h1>

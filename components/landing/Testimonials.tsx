@@ -26,7 +26,7 @@ export default function Testimonials() {
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "7px 16px", borderRadius: 999, border: "1px solid rgba(250,204,21,0.3)", background: "rgba(250,204,21,0.05)", color: "#fbbf24", fontSize: 13, fontWeight: 500, marginBottom: 16 }}>
             <StarSm /> Student Stories
           </div>
-          <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "2.25rem", fontWeight: 800, color: "var(--text-h)", marginBottom: 12 }}>
+          <h2 style={{ fontFamily: "Poppins, sans-serif", fontSize: "clamp(1.5rem,5vw,2.25rem)", fontWeight: 800, color: "var(--text-h)", marginBottom: 12 }}>
             What Our <span className="gt-blue">Students Say</span>
           </h2>
           <p style={{ color: "var(--text-body)", maxWidth: 440, margin: "0 auto", fontSize: "0.95rem" }}>Real outcomes from real students across Kolkata and beyond.</p>

@@ -67,9 +67,9 @@ export default function ContactPage() {
         <div style={{ background: "var(--bg-surface)", borderBottom: "1px solid var(--border)", padding: "56px 24px 48px" }}>
           <div style={{ maxWidth: 600, margin: "0 auto", textAlign: "center" }}>
             <div style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "6px 16px", borderRadius: 999, border: "1px solid rgba(37,99,235,0.3)", background: "rgba(37,99,235,0.06)", color: "#60a5fa", fontSize: 13, fontWeight: 500, marginBottom: 20 }}>
-              💬 Get in Touch
+              Get in Touch
             </div>
-            <h1 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "2.5rem", color: "var(--text-h)", marginBottom: 12, lineHeight: 1.2 }}>
+            <h1 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "clamp(1.75rem,5vw,2.5rem)", color: "var(--text-h)", marginBottom: 12, lineHeight: 1.2 }}>
               We'd love to hear from you
             </h1>
             <p style={{ color: "var(--text-body)", fontSize: "0.95rem", lineHeight: 1.7 }}>
@@ -79,7 +79,7 @@ export default function ContactPage() {
         </div>
 
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "56px 24px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 32, alignItems: "start" }}>
+          <div className="r-split" style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 32, alignItems: "start" }}>
 
             {/* Left — contact info */}
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -143,7 +143,7 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
                   <h2 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: "1.1rem", color: "var(--text-h)", marginBottom: 4 }}>Send us a message</h2>
 
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                  <div className="r-form-row" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                     <div>
                       <label style={labelStyle}>Full Name</label>
                       <input type="text" required placeholder="Your name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} style={inputStyle} />

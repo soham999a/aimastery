@@ -21,14 +21,9 @@ interface Message {
 }
 
 const ENROLLED = [
-  {id:"ar-fundamentals",title:"AR Fundamentals",instructor:"Dr. Sarah Chen",progress:65,total:28,done:18,gFrom:"#1e3a8a",gTo:"#0e7490",next:"Advanced AR Techniques Part 3"},
-  {id:"ai-ml-bootcamp",title:"AI and ML Bootcamp",instructor:"Prof. Raj Patel",progress:30,total:48,done:14,gFrom:"#3b0764",gTo:"#831843",next:"Deep Learning Neural Networks Part 2"},
-  {id:"ai-prompting-foundations",title:"AI Foundations & Prompting",instructor:"YesDo AI Faculty",progress:100,total:10,done:10,gFrom:"#047857",gTo:"#065f46",next:"All modules completed!"},
+  {id:"ai-mastery-complete",title:"AI Mastery Flagship Course — Beginner to Advanced",instructor:"YesDo Edutech Faculty",progress:65,total:27,done:18,gFrom:"#1e3a8a",gTo:"#d97706",next:"Data Analysis with AI + Excel"},
 ];
-const RECOMMENDED = [
-  {id:"generative-ai",title:"Generative AI Mastery",level:"Advanced",price:5999},
-  {id:"computer-vision",title:"Computer Vision with OpenCV",level:"Intermediate",price:3999},
-];
+const RECOMMENDED: {id:string;title:string;level:string;price:number}[] = [];
 
 function getInitials(n:string){return n.split(" ").map((x:string)=>x[0]).join("").toUpperCase().slice(0,2);}
 
@@ -73,7 +68,7 @@ function OverviewTab({firstName, userData}:{firstName:string; userData: UserData
     {label:'Day Streak',value:'7',icon:<FlameSvg/>,color:'#ea580c'},
   ];
   return (
-    <div style={{display:'flex',gap:24,alignItems:'flex-start'}}>
+    <div className="r-stack" style={{display:'flex',gap:24,alignItems:'flex-start'}}>
       <div style={{flex:1,minWidth:0,display:'flex',flexDirection:'column',gap:20}}>
         <div style={{borderRadius:20,background:'linear-gradient(135deg,#1e3a8a 0%,#312e81 50%,#1e1b4b 100%)',padding:'28px 32px',position:'relative',overflow:'hidden',border:'1px solid rgba(99,102,241,0.3)'}}>
           {userData?.isDemo && (
@@ -91,7 +86,7 @@ function OverviewTab({firstName, userData}:{firstName:string; userData: UserData
             <span style={{color:'rgba(199,210,254,0.9)',fontSize:13,fontWeight:600}}>{avg}% avg</span>
           </div>
         </div>
-        <div style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:14}}>
+        <div className="r-4col" style={{display:'grid',gridTemplateColumns:'repeat(4,1fr)',gap:14}}>
           {stats.map(s=>(
             <div key={s.label} style={{background:'var(--bg-card)',border:'1px solid var(--border)',borderRadius:16,padding:'18px 16px',display:'flex',flexDirection:'column',gap:10}}>
               <div style={{width:38,height:38,borderRadius:10,background:s.color+'22',display:'flex',alignItems:'center',justifyContent:'center',color:s.color}}>{s.icon}</div>
@@ -657,7 +652,7 @@ export default function DashboardPage() {
   };
 
   return (
-    <div style={{display:'flex',minHeight:'100vh',background:'var(--bg-base)'}}>
+    <div className="dashboard-layout" style={{display:'flex',minHeight:'100vh',background:'var(--bg-base)'}}>
       <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
 
       {/* Hidden Certificate Template for html2canvas to capture */}
@@ -739,7 +734,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <aside style={{width:240,flexShrink:0,position:'fixed',top:0,left:0,height:'100vh',background:'var(--bg-surface)',borderRight:'1px solid var(--border)',display:'flex',flexDirection:'column',zIndex:50,overflowY:'auto'}}>
+      <aside className="dashboard-sidebar" style={{width:240,flexShrink:0,position:'fixed',top:0,left:0,height:'100vh',background:'var(--bg-surface)',borderRight:'1px solid var(--border)',display:'flex',flexDirection:'column',zIndex:50,overflowY:'auto'}}>
         <div style={{padding:'22px 20px 18px',borderBottom:'1px solid var(--border)'}}>
           <Link href='/' style={{textDecoration:'none',display:'flex',alignItems:'center',gap:10}}>
             <div style={{width:30,height:30,borderRadius:8,background:'transparent',display:'flex',alignItems:'center',justifyContent:'center',flexShrink:0}}>
@@ -773,7 +768,7 @@ export default function DashboardPage() {
           </button>
         </div>
       </aside>
-      <main style={{marginLeft:240,flex:1,minHeight:'100vh',padding:'32px 32px 64px',overflowY:'auto'}}>
+      <main className="dashboard-main" style={{marginLeft:240,flex:1,minHeight:'100vh',padding:'32px 32px 64px',overflowY:'auto'}}>
         <div style={{marginBottom:24}}>
           <h1 style={{color:'var(--text-h)',fontSize:22,fontWeight:700,marginBottom:2}}>{navItems.find(n=>n.id===tab)?.label}</h1>
           <p style={{color:'var(--text-muted)',fontSize:13}}>{tabTitles[tab]}</p>

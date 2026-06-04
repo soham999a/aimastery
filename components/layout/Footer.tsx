@@ -66,15 +66,15 @@ export default function Footer() {
   return (
     <footer style={{ background: "var(--bg-surface)", borderTop: "1px solid var(--border)" }}>      {/* CTA Banner */}
       <div style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-        <div className="container" style={{ padding: "64px 24px" }}>
+        <div className="container" style={{ padding: "clamp(32px, 6vw, 64px) 24px" }}>
           <div style={{
-            position: "relative", borderRadius: 24, padding: "48px 40px", overflow: "hidden",
+            position: "relative", borderRadius: 24, padding: "clamp(28px, 4vw, 48px) clamp(20px, 4vw, 40px)", overflow: "hidden",
             background: "linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #4f46e5 100%)",
           }}>
             <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 75% 50%, rgba(255,255,255,0.08) 0%, transparent 60%)" }} />
-            <div style={{ position: "relative", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
+            <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 20 }}>
               <div>
-                <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "1.75rem", color: "#fff", marginBottom: 8 }}>
+                <h3 style={{ fontFamily: "Poppins, sans-serif", fontWeight: 800, fontSize: "clamp(1.25rem, 5vw, 1.75rem)", color: "#fff", marginBottom: 8 }}>
                   Ready to start your journey?
                 </h3>
                 <p style={{ color: "rgba(255,255,255,0.65)", fontSize: "0.95rem" }}>
@@ -96,8 +96,8 @@ export default function Footer() {
       </div>
 
       {/* Main footer */}
-      <div className="container" style={{ padding: "56px 24px 32px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: 40, marginBottom: 48 }}>
+      <div className="container" style={{ padding: "clamp(40px, 5vw, 56px) 24px clamp(24px, 3vw, 32px)" }}>
+        <div className="r-stack" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gap: 40, marginBottom: 48 }}>
           {/* Brand */}
           <div>
             <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: 10, textDecoration: "none", marginBottom: 16 }}>
@@ -106,10 +106,13 @@ export default function Footer() {
                 YesDo <span className="gt-blue">Edutech</span>
               </span>
             </Link>
-            <p style={{ fontSize: "0.875rem", color: "var(--text-body)", lineHeight: 1.7, maxWidth: 280, marginBottom: 24 }}>
-              India's premier AI & Industry Skills Training platform for school and college students. Based in Kolkata, West Bengal. contact@yesdo.co.in | +91 78900 18776
+            <p style={{ fontSize: "0.875rem", color: "var(--text-body)", lineHeight: 1.7, maxWidth: 320, marginBottom: 24 }}>
+              India's premier AI & Industry Skills Training platform for school and college students. Based in Kolkata, West Bengal.
             </p>
-            <div style={{ display: "flex", gap: 8 }}>
+            <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginBottom: 24 }}>
+              contact@yesdo.co.in | +91 78900 18776
+            </p>
+            <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               {SOCIALS.map(({ label, Icon, href }) => (
                 <a key={label} href={href} aria-label={label} style={{
                   width: 36, height: 36, borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center",
@@ -131,7 +134,7 @@ export default function Footer() {
               <ul style={{ listStyle: "none", padding: 0, display: "flex", flexDirection: "column", gap: 12 }}>
                 {items.map((item) => (
                   <li key={item.label}>
-                    <Link href={item.href} style={{ fontSize: "0.875rem", color: "var(--text-muted)", textDecoration: "none" }}>
+                    <Link href={item.href} style={{ fontSize: "0.875rem", color: "var(--text-muted)", textDecoration: "none", display: "inline-flex", padding: "4px 0" }}>
                       {item.label}
                     </Link>
                   </li>
@@ -141,7 +144,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 24, display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 24, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", gap: 8 }}>
           <p style={{ fontSize: 12, color: "var(--text-faint)" }}>© 2026 YesDo Edutech Pvt Ltd. All rights reserved.</p>
           <p style={{ fontSize: 12, color: "var(--text-faint)" }}>Empowering India's next generation with AI & Industry Skills.</p>
         </div>

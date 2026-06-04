@@ -6,18 +6,8 @@ const ClockIcon = () => <svg width="12" height="12" viewBox="0 0 24 24" fill="no
 const UsersIcon = () => <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
 const ArrowRight = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
 
-const AIIcon = () => (
-  <svg width="48" height="48" viewBox="0 0 64 64" fill="none">
-    <circle cx="32" cy="32" r="12" stroke="rgba(255,255,255,0.6)" strokeWidth="2" fill="none"/>
-    <circle cx="32" cy="32" r="5" fill="rgba(255,255,255,0.9)"/>
-    {[0,60,120,180,240,300].map((deg,i) => {
-      const r = 22, x = 32 + r*Math.cos(deg*Math.PI/180), y = 32 + r*Math.sin(deg*Math.PI/180);
-      return <circle key={i} cx={x} cy={y} r="3" fill="rgba(255,255,255,0.5)"/>;
-    })}
-  </svg>
-);
 const COURSES = [
-  { id: "ai-mastery-complete", title: "AI Mastery Flagship Course — 27 Modules", instructor: "YesDo Edutech Faculty", level: "Beginner to Advanced", duration: "27 modules", students: 1200, rating: 4.9, price: 10000, tag: "Flagship", tagColor: "#d97706", gradFrom: "#1e3a8a", gradTo: "#d97706", Icon: AIIcon },
+  { id: "ai-mastery-complete", title: "AI Mastery Flagship Course — 27 Modules", instructor: "YesDo Edutech Faculty", level: "Beginner to Advanced", duration: "27 modules", students: 1200, rating: 4.9, price: 10000, tag: "Flagship", tagColor: "#d97706" },
 ];
 
 export default function FeaturedCourses() {
@@ -41,9 +31,12 @@ export default function FeaturedCourses() {
           {COURSES.map((course, i) => (
             <FadeIn key={course.id} delay={i * 0.1} direction="up">
               <Link href={`/courses/${course.id}`} className="card" style={{ display: "flex", flexDirection: "column", borderRadius: 20, overflow: "hidden", border: "1px solid var(--border-card)", background: "var(--bg-card)", textDecoration: "none", height: "100%" }}>
-                <div style={{ height: 180, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", background: `linear-gradient(135deg,${course.gradFrom},${course.gradTo})` }}>
-                  <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 30% 40%,rgba(255,255,255,0.1) 0%,transparent 65%)" }} />
-                  <course.Icon />
+                <div style={{ height: 180, position: "relative", overflow: "hidden", background: "#0a0f1e" }}>
+                  <img
+                    src="/AI%20mastery%20flagship%20course%20banner.png"
+                    alt="AI Mastery Flagship Course"
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
                   <span style={{ position: "absolute", top: 12, left: 12, fontSize: 11, fontWeight: 700, padding: "4px 10px", borderRadius: 999, background: "rgba(0,0,0,0.4)", color: course.tagColor, backdropFilter: "blur(8px)", border: `1px solid ${course.tagColor}40` }}>
                     {course.tag}
                   </span>

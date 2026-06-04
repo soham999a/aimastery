@@ -79,10 +79,10 @@ const MODULES = [
 const FAQS = [
   { q: "Is this workshop really free?", a: "Yes, 100% free. No hidden charges. We believe in giving value first. You only pay if you choose to enroll in our advanced courses after the workshop." },
   { q: "Do I need any technical background?", a: "Absolutely not. This workshop is designed for non-technical professionals. If you can use a smartphone, you can follow along." },
-  { q: "How long is the workshop?", a: "The live workshop is 3 hours. We cover AI tools, practical workflows, and a live Q&A session. Recordings are available for 48 hours after." },
+  { q: "How long is the workshop?", a: "The live workshop is 2 hours (6:00 PM - 8:00 PM). We cover AI tools, practical workflows, and a live Q&A session. Recordings are available for 48 hours after." },
   { q: "What AI tools will be covered?", a: "ChatGPT, Gemini, Claude, Midjourney, Perplexity, Notion AI, and 10+ more. All tools have free tiers so you can start immediately." },
   { q: "Will I get a certificate?", a: "Yes! All attendees who complete the workshop receive a verified digital certificate they can share on LinkedIn." },
-  { q: "What is the batch date and time?", a: "The workshop starts on 7th June, Sunday at 6:00 PM. The session is fully online and the recording will be available for 48 hours." },
+  { q: "What is the batch date and time?", a: "The workshop starts on 7th June, Sunday at 6:00 PM - 8:00 PM. The session is fully online and the recording will be available for 48 hours." },
 ];
 
 function useCountdown() {
@@ -204,7 +204,7 @@ export default function WorkshopPage() {
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, color: "#cbd5e1" }}>
                   <span style={{ width: 30, height: 30, borderRadius: 8, background: "rgba(37,99,235,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><ClockIcon /></span>
-                  <span><span style={{ color: "#94a3b8" }}>Time:</span> <strong style={{ color: "#f1f5f9" }}>6:00 PM</strong></span>
+                  <span><span style={{ color: "#94a3b8" }}>Time:</span> <strong style={{ color: "#f1f5f9" }}>6:00 PM - 8:00 PM</strong></span>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 14, color: "#cbd5e1" }}>
                   <span style={{ width: 30, height: 30, borderRadius: 8, background: "rgba(37,99,235,0.15)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}><MonitorIcon /></span>

@@ -46,8 +46,8 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
       <main style={{ minHeight: "100vh", paddingTop: 64, background: "var(--bg-base)" }}>
         {/* Hero banner */}
         <div style={{ background: "var(--bg-surface)", borderBottom: "1px solid var(--border)" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px" }}>
-            <div style={{ maxWidth: 720 }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px", display: "flex", alignItems: "center", gap: 40 }}>
+            <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
                 <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 999, background: "rgba(37,99,235,0.15)", color: "#60a5fa", border: "1px solid rgba(37,99,235,0.3)" }}>
                   {course.level}
@@ -91,6 +91,13 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                 {" · "}
                 <span>{course.instructorTitle}</span>
               </p>
+            </div>
+            <div style={{ flexShrink: 0, width: 400, display: "block" }}>
+              <img
+                src="/AI%20mastery%20flagship%20course%20banner.png"
+                alt="AI Mastery Flagship Course"
+                style={{ width: "100%", height: "auto", borderRadius: 16, boxShadow: "0 8px 32px rgba(0,0,0,0.15)" }}
+              />
             </div>
           </div>
         </div>

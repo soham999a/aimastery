@@ -46,8 +46,8 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
       <main style={{ minHeight: "100vh", paddingTop: 64, background: "var(--bg-base)" }}>
         {/* Hero banner */}
         <div style={{ background: "var(--bg-surface)", borderBottom: "1px solid var(--border)" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px", display: "flex", alignItems: "center", gap: 40 }}>
-            <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto", padding: "48px 24px", display: "flex", alignItems: "center", gap: 40, flexWrap: "wrap" }}>
+            <div style={{ flex: "1 1 300px", minWidth: 280 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
                 <span style={{ fontSize: 11, fontWeight: 600, padding: "3px 10px", borderRadius: 999, background: "rgba(37,99,235,0.15)", color: "#60a5fa", border: "1px solid rgba(37,99,235,0.3)" }}>
                   {course.level}
@@ -92,7 +92,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                 <span>{course.instructorTitle}</span>
               </p>
             </div>
-            <div style={{ flexShrink: 0, width: 400, display: "block" }}>
+            <div style={{ flex: "1 1 280px", minWidth: 260, maxWidth: 420 }}>
               <img
                 src="/AI%20mastery%20flagship%20course%20banner.png"
                 alt="AI Mastery Flagship Course"
@@ -141,14 +141,14 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
                           transition: "background 0.15s",
                         }}
                       >
-                        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: 12, flex: 1, minWidth: 0 }}>
                           <div style={{ width: 28, height: 28, borderRadius: 8, background: "rgba(37,99,235,0.15)", color: "#60a5fa", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, flexShrink: 0 }}>
                             {i + 1}
                           </div>
-                          <span style={{ fontSize: 14, fontWeight: 500, color: "var(--text-h)" }}>{section.section}</span>
+                          <span style={{ fontSize: 14, fontWeight: 500, color: "var(--text-h)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{section.section}</span>
                         </div>
                         <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 12, color: "var(--text-muted)", flexShrink: 0 }}>
-                          <span>{section.lessons} lessons · {section.duration}</span>
+                          <span style={{ whiteSpace: "nowrap" }}>{section.lessons} lessons · {section.duration}</span>
                           {openSection === i ? <ChevronUpIcon /> : <ChevronDownIcon />}
                         </div>
                       </button>
@@ -189,11 +189,12 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
             <div style={{ position: "sticky", top: 80 }}>
               <div style={{ borderRadius: 20, border: "1px solid var(--border)", background: "var(--bg-card)", boxShadow: "0 24px 64px rgba(0,0,0,0.2)", overflow: "hidden" }}>
                 {/* Thumbnail */}
-                <div style={{ height: 160, background: `linear-gradient(135deg, ${course.gradientFrom}, ${course.gradientTo})`, display: "flex", alignItems: "center", justifyContent: "center", position: "relative" }}>
-                  <div style={{ position: "absolute", inset: 0, background: "radial-gradient(circle at 30% 50%, rgba(255,255,255,0.12) 0%, transparent 60%)" }} />
-                  <div style={{ color: "rgba(255,255,255,0.3)", transform: "scale(3)" }}>
-                    <BookIcon />
-                  </div>
+                <div style={{ height: 160, background: "#0a0f1e", position: "relative", overflow: "hidden" }}>
+                  <img
+                    src="/AI%20mastery%20flagship%20course%20banner.png"
+                    alt="AI Mastery Flagship Course"
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  />
                 </div>
 
                 <div style={{ padding: 24 }}>

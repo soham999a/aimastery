@@ -36,7 +36,7 @@ export default function CourseDetailPage({ params }: { params: Promise<{ slug: s
   if (!course) return notFound();
 
   function handleEnroll() {
-    if (!user) return router.push("/signup");
+    if (!user) return router.push("/signup?redirect=" + encodeURIComponent(window.location.pathname));
     setShowPayment(true);
   }
 

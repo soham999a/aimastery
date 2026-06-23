@@ -12,12 +12,12 @@ export async function POST(req: NextRequest) {
     const Razorpay = (await import("razorpay")).default;
     const razorpay = new Razorpay({ key_id: keyId, key_secret: keySecret });
 
-    const { amount, currency = "INR", courseId, courseName } = await req.json();
+    const { amount, currency = "INR", courseId, courseName, userId } = await req.json();
 
     const order = await razorpay.orders.create({
       amount: amount * 100,
       currency,
-      notes: { courseId, courseName },
+      notes: { courseId, courseName, userId },
     });
 
     return NextResponse.json(order);

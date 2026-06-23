@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { ALL_COURSES } from "@/lib/courses";
+import { useAuth } from "@/context/AuthContext";
 import PaymentModal from "@/components/ui/PaymentModal";
 
 const StarIcon = () => <svg width="12" height="12" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" strokeWidth="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
@@ -100,6 +102,8 @@ function SchoolModal({ onClose }: { onClose: () => void }) {
 }
 
 export default function Pricing() {
+  const { user } = useAuth();
+  const router = useRouter();
   const [modalPlan, setModalPlan] = useState<{ name: string; price: number; courseId: string } | null>(null);
   const [showSchoolModal, setShowSchoolModal] = useState(false);
 
@@ -176,7 +180,10 @@ export default function Pricing() {
 
                 <div style={{ display: "flex", gap: 8, marginTop: "auto" }}>
                   <button
-                    onClick={() => setModalPlan({ name: course.title, price: course.price, courseId: course.id })}
+                    onClick={() => {
+                      if (!user) return router.push("/login?redirect=" + encodeURIComponent("/#pricing"));
+                      setModalPlan({ name: course.title, price: course.price, courseId: course.id });
+                    }}
                     style={{ flex: 1, padding: "11px", borderRadius: 10, background: course.isFlagship ? "#2563eb" : "transparent", color: course.isFlagship ? "#fff" : "var(--text-body)", border: course.isFlagship ? "none" : "1px solid var(--border)", fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 13, cursor: "pointer", boxShadow: course.isFlagship ? "0 4px 14px rgba(37,99,235,0.35)" : "none" }}
                   >
                     Enroll Now

@@ -68,10 +68,10 @@ export const ALL_COURSES: Course[] = [
       { section: "Build Your Own AI Employee", lessons: 2, duration: "4h" },
       { section: "Job Hunting, Interview Prep & Capstone", lessons: 4, duration: "6h" },
     ],
-    classroomLink: "https://classroom.google.com/c/REPLACE_AI_MASTERY_COMPLETE",
-    classroomCode: "REPLACE_CODE",
+    classroomLink: "https://classroom.google.com/c/NzEyNTcyNzUyNjU4",
+    classroomCode: "ai-mastery-2026",
     nextLiveSession: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString(),
-    liveSessionLink: "https://meet.google.com/replace-ai-mastery",
+    liveSessionLink: "https://meet.google.com/aim-astery-2026",
   },
 
 ];

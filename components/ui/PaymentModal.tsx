@@ -44,7 +44,16 @@ export default function PaymentModal({ isOpen, onClose, courseName, price, cours
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMsg}`;
 
   async function handleRazorpayPayment() {
-    if (!user || !courseId) return;
+    if (!user) {
+      setRzpError("Please sign in to enroll. Close this modal and log in first.");
+      setRzpState("error");
+      return;
+    }
+    if (!courseId) {
+      setRzpError("Course ID missing. Please contact support.");
+      setRzpState("error");
+      return;
+    }
     setRzpState("loading");
     setRzpError("");
 
@@ -57,6 +66,7 @@ export default function PaymentModal({ isOpen, onClose, courseName, price, cours
           currency: "INR",
           courseId,
           courseName,
+          userId: user.uid,
         }),
       });
 
@@ -98,6 +108,18 @@ export default function PaymentModal({ isOpen, onClose, courseName, price, cours
               enrolledCourses: arrayUnion(courseId),
             });
           }
+
+          // Send enrollment confirmation email
+          fetch("/api/email", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              to: user.email,
+              subject: `Enrolled: ${courseName}`,
+              type: "enrollment",
+              data: { courseName, name: user.displayName },
+            }),
+          }).catch(() => {});
 
           setRzpState("success");
         }
@@ -395,14 +417,14 @@ export default function PaymentModal({ isOpen, onClose, courseName, price, cours
                       display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
                       width: "100%", padding: "14px",
                       borderRadius: 12,
-                      background: rzpState === "loading" || rzpState === "processing"
+                      background: rzpState === "loading" || rzpState === "processing" || !courseId || !user
                         ? "var(--border)" : "linear-gradient(135deg, #0d9488, #2563eb)",
-                      color: "#fff", border: "none", cursor: rzpState === "loading" || rzpState === "processing" ? "not-allowed" : "pointer",
+                      color: "#fff", border: "none", cursor: rzpState === "loading" || rzpState === "processing" || !courseId || !user ? "not-allowed" : "pointer",
                       fontFamily: "Poppins, sans-serif", fontWeight: 700, fontSize: 14,
-                      boxShadow: rzpState === "loading" || rzpState === "processing"
+                      boxShadow: rzpState === "loading" || rzpState === "processing" || !courseId || !user
                         ? "none" : "0 8px 24px rgba(13,148,136,0.35)",
                       transition: "opacity 0.15s",
-                      opacity: rzpState === "loading" || rzpState === "processing" ? 0.6 : 1,
+                      opacity: rzpState === "loading" || rzpState === "processing" || !courseId || !user ? 0.6 : 1,
                     }}
                   >
                     {rzpState === "loading" && (

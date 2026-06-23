@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ from: "AI Mastery <noreply@aimastery.in>", to, subject, html }),
+      body: JSON.stringify({ from: "AR AI Mastery <noreply@aimastery.in>", to, subject, html }),
     });
 
     if (!res.ok) throw new Error(await res.text());

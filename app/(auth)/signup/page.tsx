@@ -25,6 +25,7 @@ export default function SignupPage() {
   const { signUp, signInWithGoogle } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/dashboard";
   const [name, setName] = useState("");
 
   // Capture referral code from URL
@@ -45,7 +46,7 @@ export default function SignupPage() {
     setLoading(true);
     try {
       await signUp(email, password, name);
-      router.push("/dashboard");
+      router.push(redirectTo);
     } catch (err: any) {
       setError(err.message ?? "Sign up failed. Please try again.");
     } finally {
@@ -57,7 +58,7 @@ export default function SignupPage() {
     setError("");
     try {
       await signInWithGoogle();
-      router.push("/dashboard");
+      router.push(redirectTo);
     } catch {
       setError("Google sign-in failed. Please try again.");
     }

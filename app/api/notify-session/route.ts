@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { adminDb, adminInitialized } from "@/lib/firebase-admin";
 
 export async function POST(req: NextRequest) {
   try {
@@ -6,8 +7,6 @@ export async function POST(req: NextRequest) {
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) return NextResponse.json({ error: "Email not configured" }, { status: 503 });
 
-    // In production: fetch enrolled users from Firestore and email each one
-    // For now, return success with the notification data
     const sessionDate = new Date(sessionTime).toLocaleString("en-IN", {
       weekday: "long", day: "numeric", month: "long",
       hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kolkata"
@@ -29,22 +28,38 @@ export async function POST(req: NextRequest) {
         <a href="${meetLink}" style="display:inline-block;padding:14px 28px;background:#dc2626;color:#fff;border-radius:10px;text-decoration:none;font-weight:700;font-size:15px;margin-bottom:16px">
           Join Google Meet Now
         </a>
-        <p style="color:#64748b;font-size:13px">Can not attend live? The recording will be available in your Google Classroom within 24 hours.</p>
+        <p style="color:#64748b;font-size:13px">Cannot attend live? The recording will be available in your Google Classroom within 24 hours.</p>
       </div>
     `;
+
+    // Fetch enrolled users from Firestore
+    let emails: string[] = [];
+    if (adminInitialized && adminDb && courseId) {
+      const snapshot = await adminDb.collection("users")
+        .where("enrolledCourses", "array-contains", courseId)
+        .get();
+
+      emails = snapshot.docs
+        .map((d) => d.data().email)
+        .filter(Boolean);
+    }
+
+    if (emails.length === 0) {
+      return NextResponse.json({ success: false, error: "No enrolled users found" }, { status: 404 });
+    }
 
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json" },
       body: JSON.stringify({
-        from: "AI Mastery <noreply@aimastery.in>",
-        to: ["test@example.com"], // Replace with actual enrolled user emails
+        from: "AR AI Mastery <noreply@aimastery.in>",
+        to: emails,
         subject: `Live Session Starting Soon: ${courseName}`,
         html,
       }),
     });
 
-    return NextResponse.json({ success: res.ok, sessionDate, meetLink });
+    return NextResponse.json({ success: res.ok, notified: emails.length, sessionDate, meetLink });
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 });
   }

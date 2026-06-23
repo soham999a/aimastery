@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 
 const DEMO_EMAIL = "demo@aimastery.in";
@@ -38,9 +38,11 @@ const SpinIcon = () => (
   </svg>
 );
 
-export default function LoginPage() {
+function LoginForm() {
   const { signIn, signInWithGoogle } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/dashboard";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
@@ -53,13 +55,12 @@ export default function LoginPage() {
     setError("");
     try {
       await signIn(DEMO_EMAIL, DEMO_PASSWORD);
-      router.push("/dashboard");
+      router.push(redirectTo);
     } catch {
-      // Demo account might not exist yet, try to create it first
       try {
         await fetch("/api/setup-demo", { method: "POST" });
         await signIn(DEMO_EMAIL, DEMO_PASSWORD);
-        router.push("/dashboard");
+        router.push(redirectTo);
       } catch {
         setError("Demo account unavailable. Please try again.");
       }
@@ -74,7 +75,7 @@ export default function LoginPage() {
     setLoading(true);
     try {
       await signIn(email, password);
-      router.push("/dashboard");
+      router.push(redirectTo);
     } catch {
       setError("Invalid email or password. Please try again.");
     } finally {
@@ -86,7 +87,7 @@ export default function LoginPage() {
     setError("");
     try {
       await signInWithGoogle();
-      router.push("/dashboard");
+      router.push(redirectTo);
     } catch {
       setError("Google sign-in failed. Please try again.");
     }
@@ -96,14 +97,12 @@ export default function LoginPage() {
     <>
       <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
       <div className="auth-page">
-        {/* Orbs */}
         <div style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" }}>
           <div style={{ position: "absolute", top: "10%", left: "5%", width: 320, height: 320, borderRadius: "50%", background: "rgba(37,99,235,0.08)", filter: "blur(80px)" }} />
           <div style={{ position: "absolute", bottom: "10%", right: "5%", width: 280, height: 280, borderRadius: "50%", background: "rgba(124,58,237,0.07)", filter: "blur(80px)" }} />
         </div>
 
         <div style={{ position: "relative", width: "100%", maxWidth: 440 }}>
-          {/* Logo */}
           <div style={{ textAlign: "center", marginBottom: 32 }}>
             <Link href="/" style={{ display: "inline-flex", alignItems: "center", gap: 10, textDecoration: "none", marginBottom: 20 }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -123,7 +122,6 @@ export default function LoginPage() {
             {error && <div className="auth-error">{error}</div>}
 
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              {/* Email */}
               <div>
                 <label className="auth-label">Email address</label>
                 <div style={{ position: "relative" }}>
@@ -134,7 +132,6 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              {/* Password */}
               <div>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
                   <label className="auth-label" style={{ margin: 0 }}>Password</label>
@@ -169,7 +166,6 @@ export default function LoginPage() {
               Continue with Google
             </button>
 
-            {/* Demo Account Button */}
             <div style={{ position: "relative", margin: "16px 0 0" }}>
               <div style={{ height: 1, background: "var(--border)", marginBottom: 16 }} />
               <button
@@ -203,5 +199,13 @@ export default function LoginPage() {
         </div>
       </div>
     </>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginForm />
+    </Suspense>
   );
 }
